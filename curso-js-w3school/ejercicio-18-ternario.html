@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Operador Ternario ? :</h2>
+
+<input type="number" id="edadTernario" placeholder="Edad" value="16">
+<input type="checkbox" id="miembro"> ¿Miembro?
+<button onclick="pruebaTernario()">Probar ternario</button>
+
+<p id="demo"></p>
+
+<script>
+function pruebaTernario() {
+  let edad = parseInt(document.getElementById("edadTernario").value);
+  let esMiembro = document.getElementById("miembro").checked;
+  
+  // Ternario básico edad
+  let texto = (edad < 18) ? "Menor" : "Adulto";
+  
+  // Ternario descuento
+  let descuento = esMiembro ? 0.2 : 0;
+  
+  // Múltiples ternarios
+  let categoria = (edad < 13) ? "Niño" : 
+                  (edad < 18) ? "Adolescente" : "Adulto";
+  
+  document.getElementById("demo").innerHTML = 
+    `Edad ${edad}: ${texto}<br>
+    Descuento: ${descuento}<br>
+    Categoría: ${categoria}`;
+}
+</script>
+
+</body>
+</html>

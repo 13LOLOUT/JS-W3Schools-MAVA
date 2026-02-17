@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Búsqueda en Strings</h2>
+
+<button onclick="indexSearch()">indexOf lastIndexOf</button>
+<button onclick="searchMatch()">search match</button>
+<button onclick="includesEtc()">includes start end</button>
+
+<p id="demo"></p>
+
+<script>
+let texto = "Please locate where 'locate' occurs! John locate";
+
+function indexSearch() {
+  document.getElementById("demo").innerHTML = 
+    `indexOf("locate"): ${texto.indexOf("locate")}<br>
+    lastIndexOf("locate"): ${texto.lastIndexOf("locate")}<br>
+    indexOf("locate",15): ${texto.indexOf("locate",15)}<br>
+    lastIndexOf("John"): ${texto.lastIndexOf("John")}`;
+}
+
+function searchMatch() {
+  document.getElementById("demo").innerHTML = 
+    `search("locate"): ${texto.search("locate")}<br>
+    search(/locate/): ${texto.search(/locate/)}<br>
+    match("locate"): ${JSON.stringify(texto.match("locate"))}<br>
+    match(/locate/g): ${JSON.stringify(texto.match(/locate/g))}`;
+}
+
+function includesEtc() {
+  document.getElementById("demo").innerHTML = 
+    `includes("world"): ${"Hello world".includes("world")}<br>
+    startsWith("Hello"): ${"Hello world".startsWith("Hello")}<br>
+    endsWith("world"): ${"Hello world".endsWith("world")}<br>
+    startsWith("world",6): ${"Hello world".startsWith("world",6)}`;
+}
+</script>
+
+</body>
+</html>

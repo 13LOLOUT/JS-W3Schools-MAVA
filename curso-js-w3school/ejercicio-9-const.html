@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Const JS</h2>
+
+<button onclick="pruebaConstBasico()">Const básico</button>
+<button onclick="constArray()">Array const</button>
+<button onclick="constObjeto()">Objeto const</button>
+<button onclick="blockScope()">Block scope</button>
+
+<p id="demo"></p>
+<p id="demo2">Abre F12 consola pa errores</p>
+
+<script>
+// Const básico (NO se puede cambiar)
+const PI = 3.14159;
+// PI = 3; // ERROR!
+
+const nombre = "Miguel";
+// nombre = "Luis"; // ERROR!
+
+function pruebaConstBasico() {
+  document.getElementById("demo").innerHTML = 
+    `PI: ${PI}<br>Nombre: ${nombre}`;
+}
+
+// Array const (SÍ cambiar elementos)
+const carros = ["Mazda", "Honda", "Nissan"];
+function constArray() {
+  carros[0] = "Toyota";  // OK
+  carros.push("Audi");   // OK
+  // carros = ["new"];  // ERROR!
+  document.getElementById("demo2").innerHTML = "Array: " + carros;
+}
+
+// Objeto const (SÍ cambiar propiedades)
+const miCarro = {marca: "VW", modelo: "Jetta", color: "azul"};
+function constObjeto() {
+  miCarro.color = "rojo";     // OK
+  miCarro.owner = "Yo";       // OK
+  // miCarro = {};           // ERROR!
+  document.getElementById("demo").innerHTML += "<br>Carro: " + JSON.stringify(miCarro);
+}
+
+// Block scope
+function blockScope() {
+  const x = 10;
+  console.log("Fuera1 x:", x);
+  
+  {
+    const x = 2;
+    console.log("Dentro x:", x);
+  }
+  
+  console.log("Fuera2 x:", x); // Sigue siendo 10
+}
+</script>
+
+</body>
+</html>

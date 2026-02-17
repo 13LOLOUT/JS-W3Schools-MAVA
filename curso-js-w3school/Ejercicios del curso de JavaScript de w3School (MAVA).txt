@@ -1,5 +1,5 @@
 Nombre: VERDUGO ALVAREZ MARIO ALEJANDRO
-Nnumero de Cuenta: 20189184
+Numero de Cuenta: 20189184
 Grupo: 3-01
 Materia: Introducción al Desarrollo Web
 Maestro: Dr. Herman Geovany Ayala Zúñiga.

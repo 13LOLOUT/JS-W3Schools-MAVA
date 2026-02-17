@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Temporal Math - ejemplos</h2>
+
+<button onclick="addSubtract()">add() / subtract()</button>
+<button onclick="sinceUntil()">since() / until()</button>
+<button onclick="withMethod()">with()</button>
+<button onclick="durationString()">Duration string</button>
+<button onclick="compareEquals()">compare() / equals()</button>
+
+<p id="demo" style="font-family:monospace; white-space:pre-line"></p>
+
+<script>
+try {
+  const myDate = Temporal.PlainDate.from('2026-05-01');
+  const today = Temporal.Now.plainDateISO();
+  const wedding = Temporal.PlainDate.from('2026-05-01');
+  
+  function addSubtractDemo() {
+    const subtract7 = myDate.subtract({ days: 7 });
+    const add10 = myDate.add({ days: 10 });
+    const nextWeek = today.add({ days: 7 });
+    const multi = today.add({ years: 1, months: 2, days: 15 });
+    return `subtract 7 días: ${subtract7}
+add 10 días: ${add10}
+next week: ${nextWeek}
++1y 2m 15d: ${multi}`;
+  }
+  
+  function sinceUntilDemo() {
+    const sinceWedding = today.since(wedding, {largestUnit: 'years'});
+    const untilWedding = today.until(wedding);
+    return `today.since(wedding): ${sinceWedding}
+today.until(wedding): ${untilWedding}`;
+  }
+  
+  function withMethodDemo() {
+    const custom = myDate.with({ month: 12, day: 25 });
+    return `with({month:12,day:25}): ${custom}`;
+  }
+  
+  function durationStringDemo() {
+    const dur = Temporal.Duration.from('P3Y6M4DT12H30M5S');
+    return `Duration "P3Y6M...": ${dur}`;
+  }
+  
+  function compareEqualsDemo() {
+    const date1 = Temporal.PlainDate.from("2026-05-01");
+    const date2 = Temporal.PlainDate.from("2024-12-25");
+    const date3 = Temporal.PlainDate.from("2026-05-01");
+    
+    const compareRes = Temporal.PlainDate.compare(date1, date2);
+    const equalsRes = date1.equals(date3);
+    
+    const dates = [
+      Temporal.PlainDate.from("2026-05-01"),
+      Temporal.PlainDate.from("2022-01-01"),
+      Temporal.PlainDate.from("2024-12-25")
+    ];
+    dates.sort(Temporal.PlainDate.compare);
+    
+    return `compare(date1,date2): ${compareRes}
+equals(date1,date3): ${equalsRes}
+sorted: ${dates.map(d=>d.toString()).join('\n')}`;
+  }
+  
+  function addSubtract() {
+    document.getElementById("demo").textContent = addSubtractDemo();
+  }
+  
+  function sinceUntil() {
+    document.getElementById("demo").textContent = sinceUntilDemo();
+  }
+  
+  function withMethod() {
+    document.getElementById("demo").textContent = withMethodDemo();
+  }
+  
+  function durationString() {
+    document.getElementById("demo").textContent = durationStringDemo();
+  }
+  
+  function compareEquals() {
+    document.getElementById("demo").textContent = compareEqualsDemo();
+  }
+  
+} catch(e) {
+  document.getElementById("demo").innerHTML = 
+    `<strong>Error:</strong> Temporal no soportado<br>${e.message}`;
+}
+</script>
+
+</body>
+</html>

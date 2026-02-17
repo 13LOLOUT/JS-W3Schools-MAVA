@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Array Methods - ejemplos</h2>
+
+<button onclick="basics()">length toString at join</button>
+<button onclick="popPush()">pop() push()</button>
+<button onclick="shiftUnshift()">shift() unshift()</button>
+<button onclick="spliceSlice()">splice() slice() toSpliced()</button>
+<button onclick="concatCopyFlat()">concat copyWithin flat</button>
+
+<p id="demo"></p>
+
+<script>
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+const fruits2 = ["Lemon", "Kiwi"];
+const months = ["Jan", "Feb", "Mar", "Apr"];
+
+function basics() {
+  document.getElementById("demo").innerHTML = 
+    `length: ${fruits.length}<br>
+    toString(): ${fruits.toString()}<br>
+    at(2): ${fruits.at(2)}<br>
+    join(" * "): ${fruits.join(" * ")}`;
+}
+
+function popPush() {
+  const f = ["Banana", "Orange", "Apple", "Mango"];
+  const popped = f.pop();
+  f.push("Kiwi");
+  document.getElementById("demo").innerHTML = 
+    `pop(): ${popped}<br>
+    push("Kiwi"): ${f.join(", ")}`;
+}
+
+function shiftUnshift() {
+  const f = ["Banana", "Orange", "Apple", "Mango"];
+  const shifted = f.shift();
+  f.unshift("Lemon");
+  document.getElementById("demo").innerHTML = 
+    `shift(): ${shifted}<br>
+    unshift("Lemon"): ${f.join(", ")}`;
+}
+
+function spliceSlice() {
+  const f1 = ["Banana", "Orange", "Apple", "Mango"];
+  f1.splice(2, 0, "Lemon", "Kiwi");
+  
+  const f2 = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+  const sliced = f2.slice(1, 4);
+  
+  const f3 = months.slice();
+  const spliced = f3.toSpliced(0, 1);
+  
+  document.getElementById("demo").innerHTML = 
+    `splice(2,0,Lemon,Kiwi): ${f1.join(", ")}<br>
+    slice(1,4): ${sliced.join(", ")}<br>
+    toSpliced(0,1): ${spliced.join(", ")}`;
+}
+
+function concatCopyFlat() {
+  const girls = ["Cecilie", "Lone"];
+  const boys = ["Emil", "Tobias"];
+  const children = girls.concat(boys, "Peter");
+  
+  const f = ["Banana", "Orange", "Apple", "Mango"];
+  f.copyWithin(2, 0);
+  
+  const nested = [[1,2],[3,4],[5,6]];
+  const flat = nested.flat();
+  
+  document.getElementById("demo").innerHTML = 
+    `concat: ${children.join(", ")}<br>
+    copyWithin(2,0): ${f.join(", ")}<br>
+    flat(): ${flat.join(", ")}`;
+}
+</script>
+
+</body>
+</html>

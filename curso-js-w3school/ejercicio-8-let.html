@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Let vs Var - Block Scope</h2>
+
+<button onclick="pruebaScopes()">Probar Scopes</button>
+<button onclick="pruebaRedeclarar()">Redeclarar</button>
+<button onclick="pruebaHoisting()">Hoisting</button>
+
+<p id="resultado"></p>
+<p id="consolaInfo">Abre F12 Consola</p>
+
+<script>
+// Global let
+let globalX = 10;
+
+// Global var  
+var globalVar = 20;
+
+function pruebaScopes() {
+  document.getElementById("resultado").innerHTML = 
+    `Global let x: ${globalX}<br>
+    Global var: ${globalVar}`;
+  
+  // BLOCK let (NO sale del bloque)
+  {
+    let x = 2;
+    console.log("DENTRO bloque let x:", x);
+  }
+  // console.log(x); // ERROR!
+  
+  // BLOCK var (SÍ sale del bloque)
+  {
+    var x = 3;
+    console.log("DENTRO bloque var x:", x);
+  }
+  console.log("FUERA bloque var x:", x); // Funciona!
+  
+  document.getElementById("consolaInfo").innerHTML = "¡Mira consola F12!";
+}
+
+function pruebaRedeclarar() {
+  let y = 2;   // OK
+  // let y = 3; // ERROR mismo scope
+  
+  {
+    let y = 3; // OK diferente bloque
+  }
+  
+  {
+    var z = 4; // ERROR! var + let mismo scope
+  }
+  
+  document.getElementById("resultado").innerHTML += "<br>Prueba redeclarar: mira errores consola";
+}
+
+function pruebaHoisting() {
+  // let NO inicializado (Temporal Dead Zone)
+  // console.log(carName); // ERROR!
+  let carName = "Mazda";
+  
+  // var SÍ inicializado (undefined)
+  console.log("var antes:", miVar); // undefined
+  var miVar = "Volvo";
+}
+</script>
+
+</body>
+</html>

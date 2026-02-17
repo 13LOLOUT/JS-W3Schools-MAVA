@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Asignación JS</h2>
+
+<button onclick="pruebaAsignacion()">Operadores = += -= etc</button>
+<button onclick="pruebaLogicos()">Lógicos &&= ||= ??=</button>
+<button onclick="strings()">Strings</button>
+<button onclick="spread()">Spread ...</button>
+
+<p id="demo"></p>
+
+<script>
+let x = 10;
+let y = 5;
+let texto = "Hola";
+
+function pruebaAsignacion() {
+  x += y;    // 15
+  x -= 3;    // 12
+  x *= 2;    // 24
+  x /= 4;    // 6
+  x %= 5;    // 1
+  x **= 2;   // 1
+  
+  document.getElementById("demo").innerHTML = 
+    `x final: ${x}<br>+= -=${y} *= /%= **=`;
+}
+
+function pruebaLogicos() {
+  let a = false;
+  let b = null;
+  
+  a ||= 10;     // true (10)
+  b ??= 20;     // true (20)
+  
+  document.getElementById("demo").innerHTML = 
+    `||= ${a}<br>??= ${b}`;
+}
+
+function strings() {
+  texto += " Mundo";  // "Hola Mundo"
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function spread() {
+  let nums = "12345";
+  let minimo = Math.min(...nums);
+  let maximo = Math.max(...nums);
+  
+  document.getElementById("demo").innerHTML += 
+    `<br>Spread: min ${minimo} max ${maximo}`;
+}
+</script>
+
+</body>
+</html>

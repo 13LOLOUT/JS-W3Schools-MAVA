@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ej2 - Donde poner JS</title>
+    <!-- Script en head -->
+    <script>
+    function desdeHead() {
+        document.getElementById("headDemo").innerHTML = "¡Cambiado desde HEAD!";
+    }
+    </script>
+</head>
+<body>
+
+<h2>Script en HEAD y BODY</h2>
+
+<p id="headDemo">Prueba head.</p>
+<button onclick="desdeHead()">Desde Head</button>
+
+<p id="bodyDemo">Prueba body.</p>
+<button onclick="miFuncion()">Desde Body</button>
+
+<!-- Script en body -->
+<script>
+function miFuncion() {
+    document.getElementById("bodyDemo").innerHTML = "¡Cambiado desde BODY!";
+}
+</script>
+
+<!-- External simulado, pero inline pa probar rapido -->
+<script src="https://www.w3schools.com/js/myScript.js"></script> <!-- Este es de ejemplo w3 -->
+
+<p>External de w3schools arriba.</p>
+
+</body>
+</html>

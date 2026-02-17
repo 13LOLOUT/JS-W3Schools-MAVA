@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Continue Statement</h2>
+
+<button onclick="continueFor()">Continue en for</button>
+<button onclick="continueLabeled1()">Continue loop1</button>
+<button onclick="continueLabeled2()">Continue loop2</button>
+
+<p id="demo"></p>
+
+<script>
+function continueFor() {
+  let texto = "";
+  for (let i = 1; i < 10; i++) {
+    if (i === 3) { continue; } // Salta 3
+    texto += "Número " + i + "<br>";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function continueLabeled1() {
+  let texto = "";
+  
+  loop1: for (let j = 1; j < 4; j++) {
+    loop2: for (let i = 1; i < 4; i++) {
+      if (i === 2) { 
+        continue loop1; // Salta a SIGUIENTE j (loop1)
+      }
+      texto += i;
+    }
+    texto += " (j=" + j + ")";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function continueLabeled2() {
+  let texto = "";
+  
+  loop1: for (let j = 1; j < 4; j++) {
+    loop2: for (let i = 1; i < 4; i++) {
+      if (i === 2) { 
+        continue loop2; // Solo salta i=2, sigue loop2
+      }
+      texto += i;
+    }
+    texto += " (j=" + j + ")";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+</script>
+
+</body>
+</html>

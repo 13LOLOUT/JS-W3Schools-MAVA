@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Control Flow JS</h2>
+
+<button onclick="defaultFlow()">Flujo default</button>
+<button onclick="condicionales()">Condicionales</button>
+<button onclick="loops()">Loops</button>
+<button onclick="jumps()">Jump statements</button>
+<button onclick="funcion()">Función</button>
+
+<p id="demo"></p>
+
+<script>
+// Default flow secuencial
+function defaultFlow() {
+  let x = 5;
+  let y = 6; 
+  let z = x + y;
+  document.getElementById("demo").innerHTML = `x=${x}, y=${y}, z=${z}`;
+}
+
+// Condicionales
+function condicionales() {
+  let edad = 20;
+  let texto = "Desconocido";
+  if (edad >= 18) {
+    texto = "Adulto";
+  } else {
+    texto = "Menor";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+// Loops repetición
+function loops() {
+  let texto = "";
+  for (let i = 0; i < 5; i++) {
+    texto += "Número " + i + "<br>";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+// Jump statements
+function jumps() {
+  let texto = "";
+  for (let i = 0; i < 10; i++) {
+    if (i === 3) { break; }
+    texto += "Número " + i + "<br>";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+// Función con return
+function funcion() {
+  function miFuncion(p1, p2) {
+    return p1 * p2;
+  }
+  document.getElementById("demo").innerHTML = `5 * 3 = ${miFuncion(5, 3)}`;
+}
+</script>
+
+</body>
+</html>

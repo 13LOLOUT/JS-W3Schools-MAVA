@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Code Blocks - ejemplos</h2>
+
+<button onclick="functionBlock()">Function block</button>
+<button onclick="ifBlock()">if/else blocks</button>
+<button onclick="loopBlocks()">for/while blocks</button>
+<button onclick="blockScope()">Block scope let</button>
+<button onclick="standaloneBlock()">Standalone block</button>
+
+<p id="demo"></p>
+
+<script>
+// Function block
+function myFunction() {
+  // This is a code block
+  let msg = "Hola desde función";
+}
+
+// if statement block
+function ifDemo() {
+  let time = 20;
+  if (time < 20) {
+    // This is a code block
+    let greeting = "Good day";
+  } else {
+    // This is a code block  
+    let greeting = "Good evening";
+  }
+}
+
+// Loop blocks
+function loopDemo() {
+  for (let i = 0; i < 3; i++) {
+    // This is a code block
+  }
+  
+  let j = 0;
+  while (j < 3) {
+    // This is a code block
+    j++;
+  }
+}
+
+// Block scope let/const
+function scopeDemo() {
+  {
+    let x = 10;
+    // x is accessible here
+  }
+  // x is not accessible here
+}
+
+// Standalone block
+function standaloneDemo() {
+  {
+    let x = 10;
+    let y = 100;
+    let areal = x * y;
+    console.log(areal); // 1000
+  }
+  // x, y no accesibles aquí
+}
+
+function functionBlock() {
+  myFunction();
+  document.getElementById("demo").innerHTML = 
+    "Function block ejecutado";
+}
+
+function ifBlock() {
+  ifDemo();
+  document.getElementById("demo").innerHTML = 
+    "if/else blocks ejecutados";
+}
+
+function loopBlocks() {
+  loopDemo();
+  document.getElementById("demo").innerHTML = 
+    "for/while blocks ejecutados";
+}
+
+function blockScope() {
+  scopeDemo();
+  document.getElementById("demo").innerHTML = 
+    `let x fuera block: ${typeof x}`;
+}
+
+function standaloneBlock() {
+  standaloneDemo();
+  document.getElementById("demo").innerHTML = 
+    "Standalone block ejecutado (x,y limitados)";
+}
+</script>
+
+</body>
+</html>

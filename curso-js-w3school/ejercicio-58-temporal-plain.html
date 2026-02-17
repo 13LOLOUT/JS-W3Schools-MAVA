@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Temporal Plain Dates - ejemplos</h2>
+
+<button onclick="plainDate()">PlainDate</button>
+<button onclick="plainTime()">PlainTime</button>
+<button onclick="plainDateTime()">PlainDateTime</button>
+<button onclick="plainYearMonth()">PlainYearMonth</button>
+<button onclick="plainMonthDay()">PlainMonthDay</button>
+
+<p id="demo" style="font-family:monospace; white-space:pre-line"></p>
+
+<script>
+try {
+  function plainDateDemo() {
+    const date1 = new Temporal.PlainDate(2026, 5, 1);
+    const date2 = Temporal.PlainDate.from('2026-05-01');
+    return `new PlainDate(2026,5,1): ${date1}\n.from('2026-05-01'): ${date2}`;
+  }
+  
+  function plainTimeDemo() {
+    const time = new Temporal.PlainTime(10, 30);
+    return `PlainTime(10,30): ${time}`;
+  }
+  
+  function plainDateTimeDemo() {
+    const dt = new Temporal.PlainDateTime(2026, 5, 1, 10, 0);
+    return `PlainDateTime(2026,5,1,10,0): ${dt}`;
+  }
+  
+  function plainYearMonthDemo() {
+    const ym = new Temporal.PlainYearMonth(2026, 5);
+    return `PlainYearMonth(2026,5): ${ym}`;
+  }
+  
+  function plainMonthDayDemo() {
+    const md = new Temporal.PlainMonthDay(5, 1);
+    return `PlainMonthDay(5,1): ${md}`;
+  }
+  
+  function plainDate() {
+    document.getElementById("demo").textContent = plainDateDemo();
+  }
+  
+  function plainTime() {
+    document.getElementById("demo").textContent = plainTimeDemo();
+  }
+  
+  function plainDateTime() {
+    document.getElementById("demo").textContent = plainDateTimeDemo();
+  }
+  
+  function plainYearMonth() {
+    document.getElementById("demo").textContent = plainYearMonthDemo();
+  }
+  
+  function plainMonthDay() {
+    document.getElementById("demo").textContent = plainMonthDayDemo();
+  }
+  
+} catch(e) {
+  document.getElementById("demo").innerHTML = 
+    `<strong>Error:</strong> Temporal no soportado<br>${e.message}`;
+}
+</script>
+
+</body>
+</html>

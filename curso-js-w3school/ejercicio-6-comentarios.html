@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Comentarios JS</h2>
+
+<h1 id="myH">Título original</h1>
+<p id="myP">Párrafo original</p>
+
+<button onclick="cambiaTodo()">Cambiar todo</button>
+<button onclick="soloParrafo()">Solo párrafo</button>
+<button onclick="nadaComentado()">Nada (comentado)</button>
+
+<script>
+// Cambio título y párrafo con comentarios antes
+// Cambio título:
+function cambiaTodo() {
+  document.getElementById("myH").innerHTML = "Mi Primera Página";
+  document.getElementById("myP").innerHTML = "Mi primer párrafo.";
+}
+
+// Solo párrafo (título comentado)
+//document.getElementById("myH").innerHTML = "My First Page";
+function soloParrafo() {
+  document.getElementById("myP").innerHTML = "Mi primer párrafo.";
+}
+
+/*
+document.getElementById("myH").innerHTML = "My First Page";
+document.getElementById("myP").innerHTML = "My first paragraph.";
+*/
+function nadaComentado() {
+  alert("¡Todo comentado, no pasa nada!");
+}
+
+// Explicando variables con comentarios al final
+let x = 5;        // Declaro x con valor 5
+let y = x + 2;    // y es x más 2 (7)
+let z = y * 3;    // z es y por 3 (21)
+
+console.log("x:", x, "y:", y, "z:", z); // Muestro valores
+</script>
+
+</body>
+</html>

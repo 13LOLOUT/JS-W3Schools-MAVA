@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Scope - ejemplos</h2>
+
+<button onclick="globalScope()">Global Scope</button>
+<button onclick="functionScope()">Function Scope</button>
+<button onclick="blockScope()">Block Scope let/const</button>
+<button onclick="varBlock()">var NO block scope</button>
+<button onclick="autoGlobal()">Auto Global</button>
+<button onclick="windowGlobal()">window object</button>
+
+<p id="demo"></p>
+
+<script>
+// Global scope - accesible desde cualquier lugar
+let globalVar = "GLOBAL";
+var globalVar2 = "GLOBAL var";
+
+// Function scope
+function myFunction() {
+  let carName = "Volvo";  // LOCAL - solo dentro función
+  var carNameVar = "Volvo var";
+}
+
+// Block scope let/const
+function blockDemo() {
+  {
+    let x = 2;  // Solo dentro {}
+    const y = 3;
+  }
+  // x NO accesible aquí
+}
+
+// var NO respeta block scope
+function varBlockDemo() {
+  {
+    var xVar = 2;  // Accesible fuera del block
+  }
+  // xVar SÍ accesible aquí
+}
+
+// Auto global (NO recomendado)
+function autoGlobalDemo() {
+  carNameAuto = "Volvo";  // Se vuelve GLOBAL
+}
+
+function globalScope() {
+  document.getElementById("demo").innerHTML = 
+    `Global: ${globalVar} ${typeof globalVar2}`;
+}
+
+function functionScope() {
+  myFunction();
+  document.getElementById("demo").innerHTML = 
+    `carName fuera función: ${typeof carName}`;
+}
+
+function blockScope() {
+  blockDemo();
+  document.getElementById("demo").innerHTML = 
+    `let/const fuera block: ${typeof x}`;
+}
+
+function varBlock() {
+  varBlockDemo();
+  document.getElementById("demo").innerHTML = 
+    `var fuera block: ${typeof xVar}`;
+}
+
+function autoGlobal() {
+  autoGlobalDemo();
+  document.getElementById("demo").innerHTML = 
+    `Auto global: ${typeof carNameAuto}`;
+}
+
+function windowGlobal() {
+  var windowVar = "var global";
+  let letVar = "let global";
+  document.getElementById("demo").innerHTML = 
+    `window.windowVar: ${typeof window.windowVar}<br>
+    window.letVar: ${typeof window.letVar}`;
+}
+</script>
+
+</body>
+</html>

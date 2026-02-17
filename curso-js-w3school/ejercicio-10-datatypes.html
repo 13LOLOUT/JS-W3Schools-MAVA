@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Tipos de Datos JS</h2>
+
+<button onclick="muestraTodosTipos()">Ver todos tipos</button>
+<button onclick="pruebaTypeof()">Typeof operador</button>
+
+<p id="demo"></p>
+
+<script>
+// String
+let color = "amarillo";
+let nombre = "Pedro";
+
+// Number
+let largo = 16;
+let peso = 7.5;
+let expo = 123e5; // 12300000
+
+// BigInt
+let grande = 1234567890123456789012345n;
+
+// Boolean
+let si = true;
+let no = false;
+
+// Object
+const persona = {nombre: "Luis", edad: 25};
+const autos = ["Mazda", "Honda", "VW"];
+const fecha = new Date("2026-02-16");
+
+// Undefined
+let sinValor;
+
+// Null
+let vacio = null;
+
+// Symbol
+const simbolo1 = Symbol("id1");
+const simbolo2 = Symbol("id2");
+
+function muestraTodosTipos() {
+  document.getElementById("demo").innerHTML = 
+    `String: ${color}<br>
+    Number: ${peso}<br>
+    BigInt: ${grande}<br>
+    Boolean: ${si}<br>
+    Object: ${JSON.stringify(persona)}<br>
+    Array: ${autos}<br>
+    Undefined: ${sinValor}<br>
+    Null: ${vacio}`;
+}
+
+function pruebaTypeof() {
+  console.log("typeof '' =", typeof "");           // string
+  console.log("typeof 0 =", typeof 0);             // number
+  console.log("typeof true =", typeof true);       // boolean
+  console.log("typeof null =", typeof null);       // object (bug!)
+  console.log("typeof undefined =", typeof sinValor); // undefined
+  console.log("typeof Symbol =", typeof simbolo1); // symbol
+  
+  document.getElementById("demo").innerHTML += "<br>Abre F12 - mira typeof en consola";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Comparación JS</h2>
+
+<button onclick="pruebaComparacion()">== === != !== > < etc</button>
+<button onclick="stringsComparacion()">Strings</button>
+<button onclick="tiposDiferentes()">Tipos mixtos</button>
+
+<p id="demo"></p>
+
+<script>
+let x = 5;
+let y = 8;
+let texto1 = "A";
+let texto2 = "B";
+let numStr = "5";
+
+function pruebaComparacion() {
+  document.getElementById("demo").innerHTML = 
+    `x==y ${x==y} (false)<br>
+    x==5 ${x==5} (true)<br>
+    x===5 ${x===5} (true)<br>
+    x==="5" ${x==="5"} (false)<br>
+    x!=8 ${x!=y} (true)<br>
+    x>8 ${x>y} (false)<br>
+    x<=8 ${x<=y} (true)`;
+}
+
+function stringsComparacion() {
+  let res1 = texto1 < texto2; // true (A < B)
+  let num1 = "20";
+  let num2 = "5";
+  let res2 = num1 < num2; // false ("20" > "5")
+  
+  document.getElementById("demo").innerHTML = 
+    `A < B: ${res1}<br>
+    "20" < "5": ${res2}`;
+}
+
+function tiposDiferentes() {
+  let casos = `
+  2 < 12: ${2 < 12} (true)<br>
+  2 < "12": ${2 < "12"} (true)<br>
+  2 < "John": ${2 < "John"} (false)<br>
+  "2" < "12": ${"2" < "12"} (false)<br>
+  "2" > "12": ${"2" > "12"} (true)`;
+  
+  document.getElementById("demo").innerHTML = casos;
+}
+</script>
+
+</body>
+</html>

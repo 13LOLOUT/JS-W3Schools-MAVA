@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Sintaxis JS</h2>
+
+<p id="demo">Aquí muestro todo:</p>
+
+<script>
+// Literales: números y strings
+let x = 10.50;
+let y = 1001;
+let nombre = "Juan Pérez";
+let apellido = 'García';
+
+// Variables y keywords let/const
+let suma = x + y;
+const pi = 3.14;
+
+// Identificadores (case sensitive)
+let lastName = "Doe";
+let lastname = "Peterson"; // Diferentes!
+
+// Operadores aritméticos
+let resta = 10 - 5;
+let multi = 5 * 10;
+let divi = 20 / 4;
+
+// Expresiones
+let expresion = (5 + 6) * 10; // 110
+let texto = "Juan" + " " + "Pérez"; // "Juan Pérez"
+
+// Camel case (estilo recomendado)
+let firstName = "Ana";
+let edadUsuario = 25;
+let totalCompra = 199.99;
+
+document.getElementById("demo").innerHTML = 
+`Suma: ${suma}<br>
+lastName: ${lastName}<br>
+lastname: ${lastname}<br>
+Expresión: ${expresion}<br>
+Texto: ${texto}<br>
+CamelCase: ${firstName} tiene ${edadUsuario} años`;
+</script>
+
+<button onclick="muestraConsola()">Ver en consola</button>
+
+<script>
+function muestraConsola() {
+    console.log("x =", x);
+    console.log("Nombre completo:", nombre + " " + apellido);
+    console.log("Camel case ejemplo:", firstName, edadUsuario);
+}
+</script>
+
+<!-- Comentarios -->
+<!-- Este es un comentario HTML -->
+/* Este es comentario 
+multilínea en JS */
+
+</body>
+</html>

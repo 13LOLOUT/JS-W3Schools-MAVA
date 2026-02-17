@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Date Formats - ejemplos</h2>
+
+<button onclick="isoFormats()">ISO formats</button>
+<button onclick="shortDates()">Short dates</button>
+<button onclick="longDates()">Long dates</button>
+<button onclick="dateParse()">Date.parse()</button>
+
+<p id="demo"></p>
+
+<script>
+// ISO Date "YYYY-MM-DD"
+const iso1 = new Date("2015-03-25");
+const isoYearMonth = new Date("2015-03");
+const isoYear = new Date("2015");
+const isoDateTime = new Date("2015-03-25T12:00:00Z");
+const isoOffset = new Date("2015-03-25T12:00:00-06:30");
+
+// Short Date "MM/DD/YYYY"
+const short1 = new Date("03/25/2015");
+
+// Long Date "MMM DD YYYY"
+const long1 = new Date("Mar 25 2015");
+const long2 = new Date("25 Mar 2015");
+const long3 = new Date("January 25 2015");
+const long4 = new Date("Jan 25 2015");
+const long5 = new Date("JANUARY, 25, 2015");
+
+function isoFormats() {
+  document.getElementById("demo").innerHTML = 
+    `"2015-03-25": ${iso1}<br>
+    "2015-03": ${isoYearMonth}<br>
+    "2015": ${isoYear}<br>
+    "2015-03-25T12:00:00Z": ${isoDateTime}<br>
+    "-06:30 offset": ${isoOffset}`;
+}
+
+function shortDates() {
+  document.getElementById("demo").innerHTML = 
+    `Short "03/25/2015": ${short1}`;
+}
+
+function longDates() {
+  document.getElementById("demo").innerHTML = 
+    `"Mar 25 2015": ${long1}<br>
+    "25 Mar 2015": ${long2}<br>
+    "January 25": ${long3}<br>
+    "Jan 25": ${long4}<br>
+    "JANUARY, 25": ${long5}`;
+}
+
+function dateParse() {
+  let msec = Date.parse("March 21, 2012");
+  const d = new Date(msec);
+  document.getElementById("demo").innerHTML = 
+    `Date.parse("March 21, 2012"): ${msec} ms<br>
+    new Date(msec): ${d}`;
+}
+</script>
+
+</body>
+</html>

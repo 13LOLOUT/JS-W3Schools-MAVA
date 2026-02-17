@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Array Search Methods - ejemplos</h2>
+
+<button onclick="indexOf()">indexOf() lastIndexOf()</button>
+<button onclick="includes()">includes()</button>
+<button onclick="findFindIndex()">find() findIndex()</button>
+<button onclick="findLast()">findLast() findLastIndex()</button>
+
+<p id="demo"></p>
+
+<script>
+const fruits = ["Apple", "Orange", "Apple", "Mango"];
+const numbers = [4, 9, 16, 25, 29];
+const temp = [27, 28, 30, 40, 42, 35, 30];
+
+function indexOf() {
+  const pos1 = fruits.indexOf("Apple") + 1;
+  const pos2 = fruits.lastIndexOf("Apple") + 1;
+  document.getElementById("demo").innerHTML = 
+    `indexOf("Apple"): ${pos1}<br>
+    lastIndexOf("Apple"): ${pos2}`;
+}
+
+function includes() {
+  const hasMango = fruits.includes("Mango");
+  const hasNaN = [1, NaN, 3].includes(NaN);
+  document.getElementById("demo").innerHTML = 
+    `includes("Mango"): ${hasMango}<br>
+    includes(NaN): ${hasNaN}`;
+}
+
+function findFindIndex() {
+  const first = numbers.find(x => x > 18);
+  const firstIndex = numbers.findIndex(x => x > 18);
+  document.getElementById("demo").innerHTML = 
+    `find(>18): ${first}<br>
+    findIndex(>18): ${firstIndex}`;
+}
+
+function findLast() {
+  const high = temp.findLast(x => x > 40);
+  const highIndex = temp.findLastIndex(x => x > 40);
+  document.getElementById("demo").innerHTML = 
+    `findLast(>40): ${high}<br>
+    findLastIndex(>40): ${highIndex}`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Invocación de Funciones</h2>
+
+<button onclick="llamarFuncion()">Llamar sayHello()</button>
+<button onclick="usarRetorno()">Guardar retorno</button>
+<button onclick="variasVeces()">Llamar 3 veces</button>
+<button onclick="referencia()">sayHello vs sayHello()</button>
+
+<p id="demo"></p>
+
+<script>
+// Función definida (NO se ejecuta aún)
+function sayHello() {
+  return "¡Hola Mundo!";
+}
+
+function miCelsius(fahrenheit) {
+  return (5/9) * (fahrenheit-32);
+}
+
+function llamarFuncion() {
+  // Llamada simple (sin usar retorno)
+  sayHello();
+  document.getElementById("demo").innerHTML = "Función ejecutada (ver consola)";
+  console.log("Función llamada!");
+}
+
+function usarRetorno() {
+  // Guardar y mostrar retorno
+  let saludo = sayHello();
+  let celsius = miCelsius(77);
+  document.getElementById("demo").innerHTML = 
+    `Retorno: ${saludo}<br>Celsius: ${celsius.toFixed(2)}°`;
+}
+
+function variasVeces() {
+  let a = sayHello();
+  let b = sayHello(); 
+  let c = sayHello();
+  document.getElementById("demo").innerHTML = 
+    `a: ${a}<br>b: ${b}<br>c: ${c}`;
+}
+
+function referencia() {
+  let funcion = sayHello;   // REFERENCIA (no ejecuta)
+  let resultado = sayHello(); // INVOCACIÓN (ejecuta)
+  
+  document.getElementById("demo").innerHTML = 
+    `sayHello: ${typeof funcion} (función)<br>
+    sayHello(): ${resultado} (string)`;
+}
+
+// Desde otra función
+function showHello() {
+  document.getElementById("demo").innerHTML = sayHello();
+}
+</script>
+
+</body>
+</html>

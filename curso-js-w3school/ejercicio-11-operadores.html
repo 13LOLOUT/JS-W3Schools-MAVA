@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Operadores JS</h2>
+
+<button onclick="pruebaAritmeticos()">Aritméticos</button>
+<button onclick="pruebaAsignacion()">Asignación</button>
+<button onclick="pruebaComparacion()">Comparación</button>
+<button onclick="pruebaLogicos()">Lógicos</button>
+<button onclick="pruebaStrings()">Strings + números</button>
+
+<p id="demo"></p>
+
+<script>
+let x = 10;
+let y = 3;
+
+function pruebaAritmeticos() {
+  let suma = x + y;
+  let multi = x * y;
+  let expo = x ** y;
+  let resto = x % y;
+  let incr = ++x; // 11
+  
+  document.getElementById("demo").innerHTML = 
+    `+ ${suma}<br>* ${multi}<br>** ${expo}<br>% ${resto}<br>++ ${incr}`;
+}
+
+function pruebaAsignacion() {
+  let total = 20;
+  total += 5;  // 25
+  total -= 3;  // 22
+  total *= 2;  // 44
+  total /= 4;  // 11
+  
+  document.getElementById("demo").innerHTML = `Asignación: ${total}`;
+}
+
+function pruebaComparacion() {
+  let igual = (x == 10);     // true
+  let estricto = (x === "10"); // false
+  let mayor = (x > y);       // true
+  
+  let texto1 = "A";
+  let texto2 = "B";
+  let alfa = (texto1 < texto2); // true
+  
+  document.getElementById("demo").innerHTML = 
+    `== ${igual}<br>=== ${estricto}<br>> ${mayor}<br>Strings: ${alfa}`;
+}
+
+function pruebaLogicos() {
+  let a = true;
+  let b = false;
+  
+  document.getElementById("demo").innerHTML = 
+    `&& ${a && b}<br>|| ${a || b}<br>! ${!a}`;
+}
+
+function pruebaStrings() {
+  let numStr = 5 + "5";     // "55"
+  let strNum = "Hello" + 5; // "Hello5"
+  let normal = 5 + 5;       // 10
+  
+  document.getElementById("demo").innerHTML = 
+    `5+"5": ${numStr}<br>"Hello"+5: ${strNum}<br>5+5: ${normal}`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Condicionales JS</h2>
+
+<input type="number" id="edadInput" placeholder="Ingresa edad" value="20">
+<button onclick="verificaEdad()">Verificar edad</button>
+
+<p id="demo"></p>
+
+<script>
+function verificaEdad() {
+  let edad = parseInt(document.getElementById("edadInput").value);
+  
+  // if simple
+  if (edad >= 18) {
+    document.getElementById("demo").innerHTML += "<br>if: Eres mayor de edad";
+  }
+  
+  // if...else
+  if (edad < 18) {
+    document.getElementById("demo").innerHTML += "<br>if-else: Menor, no puedes manejar";
+  } else {
+    document.getElementById("demo").innerHTML += "<br>if-else: Puedes manejar";
+  }
+  
+  // if...else if...else
+  if (edad < 13) {
+    document.getElementById("demo").innerHTML += "<br>if-else if: Niño";
+  } else if (edad < 18) {
+    document.getElementById("demo").innerHTML += "<br>if-else if: Adolescente";
+  } else {
+    document.getElementById("demo").innerHTML += "<br>if-else if: Adulto";
+  }
+  
+  // Switch
+  let dia = 3; // Cambio pa probar
+  switch(dia) {
+    case 1:
+      document.getElementById("demo").innerHTML += "<br>switch: Lunes";
+      break;
+    case 2:
+      document.getElementById("demo").innerHTML += "<br>switch: Martes";
+      break;
+    case 3:
+      document.getElementById("demo").innerHTML += "<br>switch: Miércoles";
+      break;
+    default:
+      document.getElementById("demo").innerHTML += "<br>switch: Otro día";
+  }
+  
+  // Ternario ? :
+  let mensaje = (edad >= 18) ? "Vota Sí" : "Vota No";
+  document.getElementById("demo").innerHTML += "<br>Ternario: " + mensaje;
+}
+</script>
+
+</body>
+</html>

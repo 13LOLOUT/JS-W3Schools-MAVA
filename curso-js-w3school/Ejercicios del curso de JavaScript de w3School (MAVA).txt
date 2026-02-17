@@ -5,4 +5,4 @@ Materia: Introducción al Desarrollo Web
 Maestro: Dr. Herman Geovany Ayala Zúñiga.
 Fecha inicio: 16 de febrero 2026
 
-Link Del Repositorio para ejercicios HTML de W3Schools: 
+Link Del Repositorio para ejercicios HTML de W3Schools: https://github.com/13LOLOUT/JS-W3Schools-MAVA/tree/main/curso-js-w3school

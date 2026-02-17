@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo">Texto original aqui.</p>
+<button onclick="cambiaTexto()">Cambiar texto</button>
+
+<img id="luz" src="https://www.w3schools.com/js/pic_bulboff.gif" width="100" height="100">
+<button onclick="prende()">Prende</button>
+<button onclick="apaga()">Apaga</button>
+
+<p id="estilo">Texto pa estilos.</p>
+<button onclick="estiloGrande()">Grande</button>
+
+<p id="esconder">Este lo escondo.</p>
+<button onclick="esconde()">Esconde</button>
+<button onclick="muestra()">Muestra</button>
+
+<script>
+function cambiaTexto() {
+  document.getElementById('demo').innerHTML = 'Hola JS funciona!';
+}
+
+function prende() {
+  document.getElementById('luz').src = 'https://www.w3schools.com/js/pic_bulbon.gif';
+}
+
+function apaga() {
+  document.getElementById('luz').src = 'https://www.w3schools.com/js/pic_bulboff.gif';
+}
+
+function estiloGrande() {
+  document.getElementById('estilo').style.fontSize = '35px';
+}
+
+function esconde() {
+  document.getElementById('esconder').style.display = 'none';
+}
+
+function muestra() {
+  document.getElementById('esconder').style.display = 'block';
+}
+</script>
+
+</body>
+</html>

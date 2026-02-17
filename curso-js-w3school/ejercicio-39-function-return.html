@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Return en Funciones</h2>
+
+<button onclick="retornoBasico()">Retorno básico</button>
+<button onclick="calculo()">Calcular</button>
+<button onclick="expresion()">En expresión</button>
+<button onclick="sinReturn()">Sin return</button>
+<button onclick="earlyReturn()">Return temprano</button>
+
+<p id="demo"></p>
+
+<script>
+function sayHello() {
+  return "¡Hola Mundo!";
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function fullName(first, last) {
+  return first + " " + last;
+}
+
+function sinRetorno(a, b) {
+  let x = a * b; // No return = undefined
+}
+
+function checkAge(age) {
+  if (age < 18) {
+    return "Muy joven";
+  }
+  return "Acceso OK"; // Para aquí si joven
+}
+
+function retornoBasico() {
+  let mensaje = sayHello();
+  document.getElementById("demo").innerHTML = mensaje;
+}
+
+function calculo() {
+  let resultado = multiply(4, 5);
+  document.getElementById("demo").innerHTML = 
+    `4 * 5 = ${resultado}`;
+}
+
+function expresion() {
+  let total = multiply(2, 3) * 10;
+  document.getElementById("demo").innerHTML = total;
+}
+
+function sinReturn() {
+  let resultado = sinRetorno(4, 3);
+  document.getElementById("demo").innerHTML = 
+    `Sin return: ${resultado} (undefined)`;
+}
+
+function earlyReturn() {
+  document.getElementById("demo").innerHTML = 
+    `checkAge(16): ${checkAge(16)}<br>
+    checkAge(20): ${checkAge(20)}`;
+}
+</script>
+
+</body>
+</html>

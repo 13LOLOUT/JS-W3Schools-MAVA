@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Object Methods - ejemplos</h2>
+
+<button onclick="metodosBasicos()">Métodos básicos</button>
+<button onclick="thisKeyword()">this keyword</button>
+<button onclick="conParentesis()">Con/Sin ()</button>
+<button onclick="agregarMetodo()">Agregar método</button>
+<button onclick="toUpperCase()">toUpperCase()</button>
+
+<p id="demo"></p>
+
+<script>
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+const person2 = {
+  firstName: "John",
+  lastName: "Doe",
+  id: 5566,
+  getId: function() {
+    return this.id;
+  }
+};
+
+function metodosBasicos() {
+  document.getElementById("demo").innerHTML = 
+    `fullName(): ${person.fullName()}`;
+}
+
+function thisKeyword() {
+  document.getElementById("demo").innerHTML = 
+    `getId(): ${person2.getId()}<br>
+    this.id = ${person2.id}`;
+}
+
+function conParentesis() {
+  document.getElementById("demo").innerHTML = 
+    `Con (): ${person.fullName()}<br>
+    Sin (): ${person.fullName}`;
+}
+
+function agregarMetodo() {
+  // Objeto vacío inicial
+  const objVacio = {};
+  objVacio.name = function() {
+    return this.firstName + " " + this.lastName;
+  };
+  objVacio.firstName = "Jane";
+  objVacio.lastName = "Smith";
+  
+  document.getElementById("demo").innerHTML = 
+    `Método agregado: ${objVacio.name()}`;
+}
+
+function toUpperCase() {
+  const obj = {
+    firstName: "John",
+    lastName: "Doe"
+  };
+  obj.name = function() {
+    return (this.firstName + " " + this.lastName).toUpperCase();
+  };
+  
+  document.getElementById("demo").innerHTML = 
+    `toUpperCase(): ${obj.name()}`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Propiedades Number JS</h2>
+
+<button onclick="mostrarPropiedades()">Todas propiedades</button>
+
+<p id="demo"></p>
+
+<script>
+function mostrarPropiedades() {
+  document.getElementById("demo").innerHTML = 
+    `EPSILON: ${Number.EPSILON}<br>
+    MAX_VALUE: ${Number.MAX_VALUE}<br>
+    MIN_VALUE: ${Number.MIN_VALUE}<br>
+    MAX_SAFE_INTEGER: ${Number.MAX_SAFE_INTEGER}<br>
+    MIN_SAFE_INTEGER: ${Number.MIN_SAFE_INTEGER}<br>
+    POSITIVE_INFINITY: ${Number.POSITIVE_INFINITY}<br>
+    NEGATIVE_INFINITY: ${Number.NEGATIVE_INFINITY}<br>
+    NaN: ${Number.NaN}<br><br>
+    
+    Ejemplos:<br>
+    1/0: ${1/0}<br>
+    -1/0: ${-1/0}<br>
+    100/"Apple": ${100/"Apple"}<br>
+    Safe? ${Number.isSafeInteger(Number.MAX_SAFE_INTEGER)}`;
+}
+</script>
+
+</body>
+</html>

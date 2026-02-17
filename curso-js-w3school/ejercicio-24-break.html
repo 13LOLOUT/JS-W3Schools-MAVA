@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Break Statement</h2>
+
+<button onclick="breakFor()">Break en for</button>
+<button onclick="breakSwitch()">Break en switch</button>
+<button onclick="breakLabeled()">Break labeled</button>
+<button onclick="breakBlock()">Break block</button>
+
+<p id="demo"></p>
+
+<script>
+function breakFor() {
+  let texto = "";
+  for (let i = 0; i < 10; i++) {
+    if (i === 3) { break; }
+    texto += "Número " + i + "<br>";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function breakSwitch() {
+  let dia = 2;
+  let texto = "";
+  switch(dia) {
+    case 0:
+      texto = "Domingo";
+      break;
+    case 1:
+      texto = "Lunes";
+      break;
+    case 2:
+      texto += "Martes"; // Sin break FALL-THROUGH
+    case 3:
+      texto += " Miércoles"; // Se ejecuta!
+      break;
+    default:
+      texto = "Otro";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function breakLabeled() {
+  let texto = "";
+  
+  loop1: for (let j = 1; j < 4; j++) {
+    loop2: for (let i = 1; i < 4; i++) {
+      if (i === 2) { 
+        break loop1; // Sale loop1 COMPLETO
+      }
+      texto += i;
+    }
+    texto += " (j=" + j + ")";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function breakBlock() {
+  const autos = ["BMW", "Volvo", "Saab", "Ford"];
+  let texto = "";
+  
+  list: {
+    texto += autos[0] + "<br>";
+    texto += autos[1] + "<br>";
+    break list;
+    texto += autos[2] + "<br>"; // NO llega
+  }
+  
+  document.getElementById("demo").innerHTML = texto;
+}
+</script>
+
+</body>
+</html>

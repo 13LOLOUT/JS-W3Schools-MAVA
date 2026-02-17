@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Switch Statement</h2>
+
+<select id="diaSelect">
+  <option value="0">Domingo</option>
+  <option value="1">Lunes</option>
+  <option value="2">Martes</option>
+  <option value="3">Miércoles</option>
+  <option value="4">Jueves</option>
+  <option value="5">Viernes</option>
+  <option value="6">Sábado</option>
+</select>
+<button onclick="diaSemana()">Qué día</button>
+
+<p id="demo"></p>
+
+<script>
+function diaSemana() {
+  let dia = parseInt(document.getElementById("diaSelect").value);
+  let texto;
+  
+  // Switch completo días
+  switch(dia) {
+    case 0:
+      texto = "Domingo - Descanso";
+      break;
+    case 1:
+      texto = "Lunes - Trabajo";
+      break;
+    case 2:
+      texto = "Martes";
+      break;
+    case 3:
+      texto = "Miércoles";
+      break;
+    case 4:
+    case 5:  // Mismo bloque
+      texto = "Jueves/Viernes - Casi fin semana";
+      break;
+    case 6:
+      texto = "Sábado - ¡Fin!";
+      break;
+    default:
+      texto = "Día inválido";
+  }
+  
+  document.getElementById("demo").innerHTML = texto;
+  
+  // Strict ===
+  let x = "0";
+  switch(x) {
+    case 0:
+      console.log("Match 0"); // NO match
+      break;
+    default:
+      console.log("Strict: No match string vs number");
+  }
+}
+</script>
+
+</body>
+</html>

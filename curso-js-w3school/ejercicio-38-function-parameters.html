@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Parámetros de Funciones</h2>
+
+<button onclick="unParametro()">1 parámetro</button>
+<button onclick="multiParametros()">Múltiples</button>
+<button onclick="parametroDefault()">Default</button>
+<button onclick="errores()">Errores comunes</button>
+
+<p id="demo"></p>
+
+<script>
+// 1 parámetro
+function sayHello(nombre) {
+  return "Hola " + nombre;
+}
+
+// Múltiples parámetros
+function fullName(nombre, apellido) {
+  return nombre + " " + apellido;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+// Parámetro default ES6
+function suma(x, y = 10) {
+  return x + y;
+}
+
+function unParametro() {
+  let saludo = sayHello("Juan");
+  let celsius = toCelsius(77);
+  document.getElementById("demo").innerHTML = 
+    `sayHello("Juan"): ${saludo}<br>
+    toCelsius(77): ${celsius.toFixed(2)}°C`;
+}
+
+function multiParametros() {
+  let nombreCompleto = fullName("Ana", "García");
+  let resultado = multiply(4, 5);
+  document.getElementById("demo").innerHTML = 
+    `fullName("Ana","García"): ${nombreCompleto}<br>
+    multiply(4,5): ${resultado}`;
+}
+
+function parametroDefault() {
+  document.getElementById("demo").innerHTML = 
+    `suma(5): ${suma(5)} (15)<br>
+    suma(5,20): ${suma(5,20)} (25)`;
+}
+
+function errores() {
+  // Error común: sin parámetros
+  let sinParam = toCelsius(); // NaN
+  document.getElementById("demo").innerHTML = 
+    `toCelsius(): ${sinParam} (NaN)<br>
+    JS NO valida tipos ni cantidad`;
+}
+
+function toCelsius(fahrenheit) {
+  return (5/9) * (fahrenheit-32);
+}
+</script>
+
+</body>
+</html>

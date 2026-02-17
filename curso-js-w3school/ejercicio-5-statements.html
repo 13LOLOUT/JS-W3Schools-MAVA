@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Statements JS</h2>
+
+<p id="demo1"></p>
+<p id="demo2"></p>
+<p id="demo3"></p>
+
+<button onclick="ejecutaStatements()">Ejecutar statements</button>
+<button onclick="pruebaBloques()">Bloques funciones</button>
+
+<script>
+// Statements múltiples con ;
+let a, b, c;  // Statement 1
+a = 5;        // 2
+b = 6;        // 3
+c = a + b;    // 4
+
+function ejecutaStatements() {
+  document.getElementById("demo1").innerHTML = "a=5; b=6; c=" + c;
+  
+  // Múltiples en una línea
+  let d=2; let e=3; let f=d+e;
+  document.getElementById("demo2").innerHTML = "d=2; e=3; f=" + f;
+  
+  // Keywords: let, const
+  const nombre = "Luis";
+  document.getElementById("demo3").innerHTML = "Const: " + nombre;
+}
+
+// Code blocks {}
+function pruebaBloques() {
+  // Bloque simple
+  {
+    let temp = "Hola bloque";
+    console.log(temp); // Solo dentro bloque
+  }
+  
+  miFuncionBloque();
+}
+
+function miFuncionBloque() {
+  document.getElementById("demo1").innerHTML = "Función con bloque:";
+  document.getElementById("demo2").innerHTML = "¡Hola desde función!";
+}
+
+// White space y line breaks
+document.getElementById("demo1").innerHTML = 
+  "Línea   larga   rota" +
+  "después de operador";
+
+</script>
+
+</body>
+</html>

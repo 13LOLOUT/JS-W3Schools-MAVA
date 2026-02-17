@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Use Strict - ejemplos</h2>
+
+<button onclick="globalStrict()">Strict global</button>
+<button onclick="functionStrict()">Strict función</button>
+<button onclick="notAllowed()">NO permitido</button>
+<button onclick="thisStrict()">this strict</button>
+
+<p id="demo"></p>
+
+<script>
+// Global strict mode
+function globalStrictDemo() {
+  "use strict";
+  x = 3.14; // ERROR: x no declarada
+}
+
+// Function strict mode
+function functionStrictDemo() {
+  "use strict";
+  y = 3.14; // ERROR: y no declarada
+}
+
+function normalDemo() {
+  z = 3.14; // OK: global automático
+}
+
+// NO permitido en strict
+function notAllowedDemo() {
+  "use strict";
+  
+  // Variable sin declarar
+  undeclared = 5;
+  
+  // Objeto sin declarar  
+  obj = {p1:10, p2:20};
+  
+  // delete variable (not allowed in strict mode)
+  let x = 3.14;
+  // delete x; // ERROR in strict mode
+  
+  // Parámetros duplicados
+  function dupParams(p1, p1) {}
+  
+  // Octal
+  let octal = 0o10;
+  
+  // eval/arguments como variable
+  let evalVar = 3.14;
+}
+
+function thisStrictDemo() {
+  "use strict";
+  function myFunction() {
+    return this; // undefined NO window
+  }
+  document.getElementById("demo").innerHTML = 
+    `this en strict: ${myFunction()}`;
+}
+
+function globalStrict() {
+  try {
+    globalStrictDemo();
+  } catch(e) {
+    document.getElementById("demo").innerHTML = 
+      `Global strict error: ${e.message}`;
+  }
+}
+
+function functionStrict() {
+  try {
+    functionStrictDemo();
+  } catch(e) {
+    document.getElementById("demo").innerHTML = 
+      `Function strict error: ${e.message}`;
+  }
+}
+
+function notAllowed() {
+  try {
+    normalDemo(); // OK
+    document.getElementById("demo").innerHTML = "normal OK";
+  } catch(e) {
+    document.getElementById("demo").innerHTML = `Error: ${e.message}`;
+  }
+}
+
+function thisStrict() {
+  thisStrictDemo();
+}
+</script>
+
+</body>
+</html>

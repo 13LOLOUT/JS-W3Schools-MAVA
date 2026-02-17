@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Display Objects - ejemplos</h2>
+
+<button onclick="objectObject()">[object Object]</button>
+<button onclick="propiedadesDirectas()">Propiedades directas</button>
+<button onclick="forInLoop()">for...in loop</button>
+<button onclick="objectValues()">Object.values()</button>
+<button onclick="objectEntries()">Object.entries()</button>
+<button onclick="jsonStringify()">JSON.stringify()</button>
+
+<p id="demo"></p>
+
+<script>
+// Objeto base
+const person = {
+  name: "John",
+  age: 30,
+  city: "New York"
+};
+
+const fruits = {
+  Bananas: 300,
+  Oranges: 200,
+  Apples: 500
+};
+
+function objectObject() {
+  let text = person;
+  document.getElementById("demo").innerHTML = 
+    `Directo: ${text}`;
+}
+
+function propiedadesDirectas() {
+  let text = person.name + "," + person.age + "," + person.city;
+  document.getElementById("demo").innerHTML = 
+    `Propiedades: ${text}`;
+}
+
+function forInLoop() {
+  let text = "";
+  for (let x in person) {
+    text += person[x] + " ";
+  }
+  document.getElementById("demo").innerHTML = 
+    `for...in: ${text}`;
+}
+
+function objectValues() {
+  const myArray = Object.values(person);
+  let text = myArray.toString();
+  document.getElementById("demo").innerHTML = 
+    `Object.values(): ${text}`;
+}
+
+function objectEntries() {
+  let text = "";
+  for (let [fruit, value] of Object.entries(fruits)) {
+    text += fruit + ": " + value + "<br>";
+  }
+  document.getElementById("demo").innerHTML = text;
+}
+
+function jsonStringify() {
+  let text = JSON.stringify(person);
+  document.getElementById("demo").innerHTML = 
+    `JSON.stringify(): ${text}`;
+}
+</script>
+
+</body>
+</html>

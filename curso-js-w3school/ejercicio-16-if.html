@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>if Statements</h2>
+
+<input type="number" id="edad" placeholder="Edad" value="17">
+<input type="text" id="pais" placeholder="País" value="USA">
+<button onclick="checaManejar()">¿Puedes manejar?</button>
+
+<p id="demo"></p>
+<p id="demo2">Ejemplos fijos abajo</p>
+
+<script>
+function checaManejar() {
+  let edad = parseInt(document.getElementById("edad").value);
+  let pais = document.getElementById("pais").value;
+  let texto = "¡No puedes manejar!";
+  
+  // if simple
+  if (edad >= 18) {
+    texto = "Puedes manejar!";
+  }
+  
+  document.getElementById("demo").innerHTML = texto;
+  
+  // Nested if
+  let texto2 = "No manejes";
+  if (pais == "USA") {
+    if (edad >= 16) {
+      texto2 = "¡Sí puedes en USA!";
+    }
+  }
+  
+  // Mejor: && lógico
+  let texto3 = "No";
+  if (pais == "USA" && edad >= 16) {
+    texto3 = "¡Sí con &&!";
+  }
+  
+  document.getElementById("demo2").innerHTML = 
+    `Nested: ${texto2}<br>&& lógico: ${texto3}`;
+}
+</script>
+
+</body>
+</html>

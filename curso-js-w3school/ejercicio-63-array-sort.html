@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Array Sort - ejemplos</h2>
+
+<button onclick="alphabetic()">Alfabético sort reverse</button>
+<button onclick="numeric()">Numérico asc/desc</button>
+<button onclick="random()">Random sort</button>
+<button onclick="minMax()">Math.min/max</button>
+<button onclick="homeMadeMinMax()">Home made min/max</button>
+<button onclick="sortObjects()">Sort objects</button>
+
+<p id="demo"></p>
+
+<script>
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+const points = [40, 100, 1, 5, 25, 10];
+const cars = [
+  {type:"Volvo", year:2016},
+  {type:"Saab", year:2001},
+  {type:"BMW", year:2010}
+];
+
+function alphabetic() {
+  const f1 = fruits.slice().sort();
+  const f2 = f1.slice().reverse();
+  const months = ["Jan", "Feb", "Mar", "Apr"];
+  const sorted = months.toSorted();
+  const reversed = months.toReversed();
+  
+  document.getElementById("demo").innerHTML = 
+    `sort(): ${f1.join(", ")}<br>
+    reverse(): ${f2.join(", ")}<br>
+    toSorted(): ${sorted.join(", ")}<br>
+    toReversed(): ${reversed.join(", ")}`;
+}
+
+function numeric() {
+  const asc = points.slice().sort((a,b) => a - b);
+  const desc = points.slice().sort((a,b) => b - a);
+  document.getElementById("demo").innerHTML = 
+    `Asc: ${asc.join(", ")}<br>
+    Desc: ${desc.join(", ")}`;
+}
+
+function random() {
+  const rand = points.slice().sort(() => 0.5 - Math.random());
+  // Fisher Yates mejor
+  const fy = points.slice();
+  for (let i = fy.length -1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i+1));
+    [fy[i], fy[j]] = [fy[j], fy[i]];
+  }
+  document.getElementById("demo").innerHTML = 
+    `Random sort: ${rand.join(", ")}<br>
+    Fisher Yates: ${fy.join(", ")}`;
+}
+
+function minMax() {
+  const min = Math.min.apply(null, points);
+  const max = Math.max.apply(null, points);
+  document.getElementById("demo").innerHTML = 
+    `Math.min.apply: ${min}<br>
+    Math.max.apply: ${max}`;
+}
+
+function homeMadeMinMax() {
+  function myArrayMin(arr) {
+    let len = arr.length;
+    let min = Infinity;
+    while (len--) {
+      if (arr[len] < min) min = arr[len];
+    }
+    return min;
+  }
+  
+  function myArrayMax(arr) {
+    let len = arr.length;
+    let max = -Infinity;
+    while (len--) {
+      if (arr[len] > max) max = arr[len];
+    }
+    return max;
+  }
+  
+  document.getElementById("demo").innerHTML = 
+    `Home min: ${myArrayMin(points)}<br>
+    Home max: ${myArrayMax(points)}`;
+}
+
+function sortObjects() {
+  const sortedYear = cars.slice().sort((a,b) => a.year - b.year);
+  const sortedType = cars.slice().sort((a,b) => {
+    let x = a.type.toLowerCase();
+    let y = b.type.toLowerCase();
+    if (x < y) return -1;
+    if (x > y) return 1;
+    return 0;
+  });
+  
+  document.getElementById("demo").innerHTML = 
+    `Sort year: ${sortedYear.map(c=>c.type+'('+c.year+')').join(', ')}<br>
+    Sort type: ${sortedType.map(c=>c.type+'('+c.year+')').join(', ')}`;
+}
+</script>
+
+</body>
+</html>

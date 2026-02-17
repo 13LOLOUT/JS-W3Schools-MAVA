@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Loops JS</h2>
+
+<button onclick="pruebaFor()">For loop</button>
+<button onclick="pruebaWhile()">While loop</button>
+<button onclick="pruebaDoWhile()">Do While</button>
+
+<p id="demo"></p>
+
+<script>
+const carros = ["Mazda", "Honda", "VW", "Toyota", "Ford"];
+
+function pruebaFor() {
+  let texto = "";
+  // For clásico
+  for (let i = 0; i < 5; i++) {
+    texto += "Número: " + i + "<br>";
+  }
+  
+  // For con array
+  texto += "<br>Carros:<br>";
+  for (let i = 0; i < carros.length; i++) {
+    texto += carros[i] + "<br>";
+  }
+  
+  // Scope let (i no sale del loop)
+  let j = 5;
+  for (let j = 0; j < 3; j++) {}
+  texto += "<br>Scope j fuera: " + j; // 5
+  
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function pruebaWhile() {
+  let texto = "";
+  let i = 0;
+  while (i < 5) {
+    texto += "While: " + i + "<br>";
+    i++;
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function pruebaDoWhile() {
+  let texto = "";
+  let i = 5; // Condición falsa desde inicio
+  do {
+    texto += "Do while: " + i + "<br>";
+    i++;
+  } while (i < 5); // Solo corre UNA vez
+  
+  document.getElementById("demo").innerHTML = texto;
+}
+</script>
+
+</body>
+</html>

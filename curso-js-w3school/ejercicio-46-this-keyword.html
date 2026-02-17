@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript this Keyword - ejemplos</h2>
+
+<button onclick="objetoMethod()">this en método</button>
+<button onclick="mismoMetodo()">Mismo método objetos</button>
+<button onclick="thisSolo()">this solo</button>
+<button onclick="thisFuncion()">this en función</button>
+
+<p id="demo"></p>
+
+<script>
+// this en Object Method
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+// Mismo método con diferentes objetos
+const person1 = {
+  name: "John",
+  hello: function() {
+    return "Hello " + this.name;
+  }
+};
+
+const person2 = {
+  name: "Anna",
+  hello: function() {
+    return "Hello " + this.name;
+  }
+};
+
+// Función regular
+function myFunction() {
+  return this;
+}
+
+function objetoMethod() {
+  document.getElementById("demo").innerHTML = 
+    `this en método: ${person.fullName()}<br>
+    this.firstName = ${person.firstName}`;
+}
+
+function mismoMetodo() {
+  document.getElementById("demo").innerHTML = 
+    `person1.hello(): ${person1.hello()}<br>
+    person2.hello(): ${person2.hello()}`;
+}
+
+function thisSolo() {
+  let x = this;
+  document.getElementById("demo").innerHTML = 
+    `this solo: ${x}`;
+}
+
+function thisFuncion() {
+  document.getElementById("demo").innerHTML = 
+    `this en función: ${myFunction()}`;
+}
+</script>
+
+</body>
+</html>

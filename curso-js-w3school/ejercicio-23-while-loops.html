@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>While & Do While</h2>
+
+<button onclick="whileNormal()">While normal</button>
+<button onclick="doWhileFalso()">Do while (falsa inicio)</button>
+<button onclick="whileArray()">While con array</button>
+<button onclick="compararForWhile()">For vs While</button>
+
+<p id="demo"></p>
+
+<script>
+const autos = ["BMW", "Volvo", "Saab", "Ford"];
+
+function whileNormal() {
+  let texto = "";
+  let i = 0;
+  while (i < 5) {
+    texto += "While: " + i + "<br>";
+    i++;
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function doWhileFalso() {
+  let texto = "";
+  let i = 6; // Condición falsa DESDE inicio
+  do {
+    texto += "Do while: " + i + "<br>";
+    i++;
+  } while (i < 5); // CORRE 1 VEZ SOLO
+  
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function whileArray() {
+  let i = 0;
+  let texto = "";
+  while (autos[i]) {
+    texto += autos[i] + "<br>";
+    i++;
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function compararForWhile() {
+  let texto = "For:<br>";
+  let i1 = 0;
+  for (; autos[i1]; i1++) {
+    texto += autos[i1] + "<br>";
+  }
+  
+  texto += "<br>While:<br>";
+  let i2 = 0;
+  while (autos[i2]) {
+    texto += autos[i2] + "<br>";
+    i2++;
+  }
+  
+  document.getElementById("demo").innerHTML = texto;
+}
+</script>
+
+</body>
+</html>

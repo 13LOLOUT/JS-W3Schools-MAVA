@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>else y else if</h2>
+
+<input type="number" id="hora" placeholder="Hora (0-24)" value="14">
+<button onclick="saludoHora()">Saludo por hora</button>
+
+<p id="demo"></p>
+<button onclick="linkRandom()">Link random 50%</button>
+<p id="linkDemo"></p>
+
+<script>
+function saludoHora() {
+  let hora = parseInt(document.getElementById("hora").value);
+  let saludo;
+  
+  // if...else
+  if (hora < 18) {
+    saludo = "Buen día";
+  } else {
+    saludo = "Buenas noches";
+  }
+  
+  // if...else if...else
+  if (hora < 10) {
+    saludo += " - Buenos días";
+  } else if (hora < 20) {
+    saludo += " - Buen día";
+  } else {
+    saludo += " - Buenas noches";
+  }
+  
+  document.getElementById("demo").innerHTML = saludo;
+}
+
+function linkRandom() {
+  let texto;
+  if (Math.random() < 0.5) {
+    texto = "<a href='https://www.w3schools.com'>W3Schools</a>";
+  } else {
+    texto = "<a href='https://www.wwf.org'>WWF</a>";
+  }
+  document.getElementById("linkDemo").innerHTML = texto;
+}
+</script>
+
+</body>
+</html>

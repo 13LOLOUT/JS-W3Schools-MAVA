@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Parámetros vs Argumentos</h2>
+
+<button onclick="paramsVsArgs()">Params vs Args</button>
+<button onclick="argumentsObj()">Arguments object</button>
+<button onclick="ordenArgs()">Orden importa</button>
+<button onclick="faltantes()">Args faltantes</button>
+
+<p id="demo"></p>
+
+<script>
+// PARAMETROS (nombres en definición)
+function multiply(a, b) {  // a, b = parámetros
+  return a * b;
+}
+
+function findMax() {
+  let max = -Infinity;
+  for (let i = 0; i < arguments.length; i++) {
+    if (arguments[i] > max) {
+      max = arguments[i];
+    }
+  }
+  return max;
+}
+
+function sumAll() {
+  let suma = 0;
+  for (let i = 0; i < arguments.length; i++) {
+    suma += arguments[i];
+  }
+  return suma;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+function paramsVsArgs() {
+  // ARGUMENTOS (valores reales)
+  let resultado = multiply(4, 5); // 4, 5 = argumentos
+  document.getElementById("demo").innerHTML = 
+    `Parámetros: a, b<br>Argumentos: 4, 5<br>Resultado: ${resultado}`;
+}
+
+function argumentsObj() {
+  document.getElementById("demo").innerHTML = 
+    `findMax(1,123,500): ${findMax(1,123,500)}<br>
+    sumAll(1,123,500,115): ${sumAll(1,123,500,115)}`;
+}
+
+function ordenArgs() {
+  document.getElementById("demo").innerHTML = 
+    `subtract(10,5): ${subtract(10,5)}<br>
+    subtract(5,10): ${subtract(5,10)}`;
+}
+
+function faltantes() {
+  function miFuncion(x, y = 10) {
+    return x + y;
+  }
+  document.getElementById("demo").innerHTML = 
+    `miFuncion(5): ${miFuncion(5)} (15)<br>
+    miFuncion(5,20): ${miFuncion(5,20)} (25)`;
+}
+</script>
+
+</body>
+</html>

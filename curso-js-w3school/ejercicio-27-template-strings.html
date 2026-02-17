@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Template Strings</h2>
+
+<button onclick="templatesBasicos()">Básicos</button>
+<button onclick="interpolacion()">Interpolación</button>
+<button onclick="expresiones()">Expresiones</button>
+<button onclick="htmlTemplate()">HTML template</button>
+
+<div id="demo"></div>
+
+<script>
+let nombre = "Ana";
+let apellido = "García";
+let precio = 25;
+let iva = 0.16;
+
+function templatesBasicos() {
+  let texto = `Hola Mundo!`;
+  let conComillas = `He's "Johnny"`;
+  let multilinea = `The quick
+brown fox
+jumps`;
+  
+  document.getElementById("demo").innerHTML = 
+    `${texto}<br>${conComillas}<br>${multilinea}`;
+}
+
+function interpolacion() {
+  let texto = `Bienvenida ${nombre} ${apellido}!`;
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function expresiones() {
+  let total = `Total: $${(precio * (1 + iva)).toFixed(2)}`;
+  document.getElementById("demo").innerHTML = total;
+}
+
+function htmlTemplate() {
+  let header = "Template Strings";
+  let tags = ["templates", "javascript", "ES6"];
+  
+  let html = `<h2>${header}</h2><ul>`;
+  for (const tag of tags) {
+    html += `<li>${tag}</li>`;
+  }
+  html += `</ul>`;
+  
+  document.getElementById("demo").innerHTML = html;
+}
+</script>
+
+</body>
+</html>

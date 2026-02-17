@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Strings JS</h2>
+
+<button onclick="quotes()">Quotes</button>
+<button onclick="escapeChars()">Escape chars</button>
+<button onclick="templates()">Templates</button>
+<button onclick="stringObjects()">String objetos</button>
+
+<p id="demo"></p>
+
+<script>
+function quotes() {
+  let texto1 = "Volvo XC60";     // Dobles
+  let texto2 = 'Volvo XC60';     // Simples
+  let texto3 = "It's alright";   // ' dentro "
+  let texto4 = 'He said "hola"'; // " dentro '
+  
+  document.getElementById("demo").innerHTML = 
+    `Doble: ${texto1}<br>
+    Simple: ${texto2}<br>
+    It's: ${texto3}<br>
+    "hola": ${texto4}`;
+}
+
+function escapeChars() {
+  let vikings = "We are the so-called \"Vikings\" from the north.";
+  let its = 'It\'s alright.';
+  let backslash = "C:\\\\Users\\\\Yo";
+  let largo = "ABC...XYZ".length; // 26
+  
+  document.getElementById("demo").innerHTML = 
+    `Vikings: ${vikings}<br>
+    It's: ${its}<br>
+    \\: ${backslash}<br>
+    Length: ${largo}`;
+}
+
+function templates() {
+  let texto = `He's often called "Johnny"`;
+  let multilinea = `Línea 1
+Línea 2
+Línea 3`;
+  
+  document.getElementById("demo").innerHTML = 
+    `Template: ${texto}<br>
+    Multilínea:<br>${multilinea}`;
+}
+
+function stringObjects() {
+  let primitivo = "Juan";
+  let objeto = new String("Juan");
+  
+  document.getElementById("demo").innerHTML = 
+    `== : ${primitivo == objeto} (true)<br>
+    ===: ${primitivo === objeto} (false)<br>
+    typeof primitivo: ${typeof primitivo}<br>
+    typeof objeto: ${typeof objeto}`;
+}
+</script>
+
+</body>
+</html>

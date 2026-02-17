@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Métodos String JS</h2>
+
+<button onclick="metodosBasicos()">Básicos</button>
+<button onclick="extraer()">Extraer chars</button>
+<button onclick="cortar()">Slice/substring</button>
+<button onclick="modificar()">Modificar</button>
+
+<p id="demo"></p>
+
+<script>
+let texto = "Hola Mundo! 123 Apple, Banana, Kiwi";
+
+function metodosBasicos() {
+  document.getElementById("demo").innerHTML = 
+    `Length: ${texto.length}<br>
+    charAt(0): ${texto.charAt(0)}<br>
+    charCodeAt(0): ${texto.charCodeAt(0)}<br>
+    at(-1): ${texto.at(-1)}<br>
+    [4]: ${texto[4]}`;
+}
+
+function extraer() {
+  document.getElementById("demo").innerHTML = 
+    `charAt(4): ${texto.charAt(4)}<br>
+    at(4): ${texto.at(4)}<br>
+    at(-3): ${texto.at(-3)}`;
+}
+
+function cortar() {
+  document.getElementById("demo").innerHTML = 
+    `slice(7,13): "${texto.slice(7,13)}"<br>
+    slice(-12): "${texto.slice(-12)}"<br>
+    substring(7,13): "${texto.substring(7,13)}"<br>
+    substr(7,6): "${texto.substr(7,6)}"`;
+}
+
+function modificar() {
+  let mod = "  hola Mundo  ";
+  document.getElementById("demo").innerHTML = 
+    `toUpper: ${mod.toUpperCase()}<br>
+    toLower: ${mod.toLowerCase()}<br>
+    trim: "${mod.trim()}"<br>
+    padStart(10,'0'): "${mod.trim().padStart(10,'0')}"<br>
+    repeat(2): ${mod.trim().repeat(2)}<br>
+    replace: "${mod.replace('Mundo','JS')}"`;
+}
+</script>
+
+</body>
+</html>

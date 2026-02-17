@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Hoisting - ejemplos</h2>
+
+<button onclick="varHoisting()">var hoisting</button>
+<button onclick="letConstHoisting()">let/const hoisting</button>
+<button onclick="initNoHoisted()">Inicialización NO hoisted</button>
+<button onclick="ejemplo2vs1()">Ejemplo 2 vs 1</button>
+
+<p id="demo"></p>
+
+<script>
+// EJEMPLO 1: var hoisting (misma función que declaración arriba)
+function varHoisting() {
+  x = 5;
+  elem = document.getElementById("demo");
+  elem.innerHTML = x;
+  var x; // Declaración movida arriba por hoisting
+}
+
+// EJEMPLO 2: let/const NO inicializados (temporal dead zone)
+function letConstHoisting() {
+  try {
+    carName = "Volvo";
+    let carName;
+    document.getElementById("demo").innerHTML = "ReferenceError: let TDZ";
+  } catch(e) {
+    document.getElementById("demo").innerHTML = `Error: ${e.message}`;
+  }
+}
+
+// Inicialización NO hoisted
+function initNoHoisted() {
+  var x = 5;
+  var y;
+  elem = document.getElementById("demo");
+  elem.innerHTML = x + " " + y; // y = undefined
+  y = 7;
+}
+
+// Comparación Ejemplo 2 vs 1
+function ejemplo2vs1() {
+  // Como JS lo interpreta realmente:
+  var x = 5;
+  var y; // Declaración hoisted, NO inicialización
+  elem = document.getElementById("demo");
+  elem.innerHTML = x + " " + y; // "5 undefined"
+  y = 7;
+}
+
+</script>
+
+</body>
+</html>

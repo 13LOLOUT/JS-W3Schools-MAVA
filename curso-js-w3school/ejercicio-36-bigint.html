@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>BigInt JS</h2>
+
+<button onclick="crearBigInt()">Crear BigInt</button>
+<button onclick="precision()">Precisión</button>
+<button onclick="operaciones()">Operaciones</button>
+
+<p id="demo"></p>
+
+<script>
+function crearBigInt() {
+  let x = 999999999999999n;        // Literal n
+  let y = BigInt("12345678901234567890");
+  
+  document.getElementById("demo").innerHTML = 
+    `Number 16dig: ${9999999999999999}<br>
+    BigInt 16dig: ${x}<br>
+    BigInt string: ${y}<br>
+    typeof: ${typeof x}`;
+}
+
+function precision() {
+  let max = Number.MAX_SAFE_INTEGER;
+  let maxBig = 9007199254740991n;
+  let maxBigMas10 = maxBig + 10n;
+  
+  document.getElementById("demo").innerHTML = 
+    `MAX_SAFE: ${max}<br>
+    MAX_SAFE+10: ${max + 10} (redondea!)<br>
+    BigInt MAX+10: ${maxBigMas10}`;
+}
+
+function operaciones() {
+  let a = 10n;
+  let b = 3n;
+  
+  // ❌ NO se puede mezclar
+  // let error = a + 3; 
+  
+  document.getElementById("demo").innerHTML = 
+    `10n + 3n: ${a + b}<br>
+    10n * 3n: ${a * b}<br>
+    10n / 3n: ${a / b}<br>
+    10n > 5n: ${a > 5n}<br>
+    10n === 10: ${a === 10}`;
+}
+</script>
+
+</body>
+</html>

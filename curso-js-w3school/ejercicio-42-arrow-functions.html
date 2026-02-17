@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Arrow Functions</h2>
+
+<button onclick="basicos()">Básicos</button>
+<button onclick="unParametro()">Un parámetro</button>
+<button onclick="sinParametros()">Sin parámetros</button>
+<button onclick="thisArrow()">Arrow y this</button>
+
+<p id="demo"></p>
+
+<script>
+// Expresión normal vs arrow
+const addNormal = function(a, b) {
+  return a + b;
+};
+
+const addArrow = (a, b) => a * b; // ejemplo como en el texto
+
+// Arrow con return implícito
+const hello = () => "Hello World!";
+
+// Arrow con un parámetro
+const square = x => x * x;
+const helloVal = val => "Hello " + val;
+
+// Arrow con cuerpo de bloque (requiere return)
+const myFunctionOk = (x, y) => { return x * y; };
+
+function basicos() {
+  document.getElementById("demo").innerHTML = 
+    `addNormal(2,3): ${addNormal(2,3)}<br>
+    addArrow(2,3): ${addArrow(2,3)}<br>
+    hello(): ${hello()}<br>
+    myFunctionOk(3,4): ${myFunctionOk(3,4)}`;
+}
+
+function unParametro() {
+  document.getElementById("demo").innerHTML = 
+    `square(5): ${square(5)}<br>
+    helloVal("Juan"): ${helloVal("Juan")}`;
+}
+
+function sinParametros() {
+  const hola = () => "Hola sin params";
+  document.getElementById("demo").innerHTML = hola();
+}
+
+// this en arrow vs normal
+const persona1 = {
+  name: "John",
+  greet: function() {
+    return this.name;
+  }
+};
+
+const persona2 = {
+  name: "John",
+  greet: () => {
+    return this.name; // this NO es persona2
+  }
+};
+
+function thisArrow() {
+  document.getElementById("demo").innerHTML = 
+    `Normal this: ${persona1.greet()}<br>
+    Arrow this: ${persona2.greet()}`;
+}
+</script>
+
+</body>
+</html>

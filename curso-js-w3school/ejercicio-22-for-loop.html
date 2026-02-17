@@ -1,0 +1,76 @@
+    <!DOCTYPE html>
+<html>
+<body>
+
+<h2>For Loop Detallado</h2>
+
+<button onclick="forCompleto()">For completo</button>
+<button onclick="forSinExp1()">Sin exp1</button>
+<button onclick="forSinExp2()">Sin exp2 (con break)</button>
+<button onclick="forSinExp3()">Sin exp3</button>
+<button onclick="scopeFor()">Scope var vs let</button>
+
+<p id="demo"></p>
+
+<script>
+const autos = ["BMW", "Volvo", "Saab", "Ford", "Audi"];
+
+function forCompleto() {
+  let texto = "";
+  for (let i = 0; i < 5; i++) {
+    texto += "Número " + i + "<br>";
+  }
+  texto += "<br>Autos:<br>";
+  for (let i = 0; i < autos.length; i++) {
+    texto += autos[i] + "<br>";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function forSinExp1() {
+  let i = 2;
+  let texto = "";
+  for (; i < autos.length; i++) {
+    texto += autos[i] + "<br>";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function forSinExp2() {
+  let i = 0;
+  let texto = "";
+  for (; ; i++) {
+    if (i >= 3) break; // IMPORTANTE!
+    texto += "i=" + i + "<br>";
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function forSinExp3() {
+  let i = 0;
+  let texto = "";
+  for (; i < 3; ) {
+    texto += autos[i] + "<br>";
+    i++; // Incremento manual
+  }
+  document.getElementById("demo").innerHTML = texto;
+}
+
+function scopeFor() {
+  let texto = "";
+  let i = 5;
+  
+  // var (cambia i global)
+  for (var j = 0; j < 3; j++) {}
+  texto += "var j después: " + j + "<br>"; // 3
+  
+  // let (NO cambia i)
+  for (let k = 0; k < 3; k++) {}
+  texto += "let i sigue: " + i + "<br>"; // 5
+  
+  document.getElementById("demo").innerHTML = texto;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Aritmética JS</h2>
+
+<button onclick="pruebaOperadores()">Todos operadores</button>
+<button onclick="precedencia()">Precedencia</button>
+<button onclick="incremento()">++ --</button>
+
+<p id="demo"></p>
+
+<script>
+let a = 10;
+let b = 3;
+
+function pruebaOperadores() {
+  let suma = a + b;     // 13
+  let resta = a - b;    // 7
+  let multi = a * b;    // 30
+  let divi = a / b;     // 3.333
+  let modu = a % b;     // 1
+  let expo = a ** b;    // 1000
+  
+  document.getElementById("demo").innerHTML = 
+    `+ ${suma}<br>- ${resta}<br>* ${multi}<br>/ ${divi}<br>% ${modu}<br>** ${expo}`;
+}
+
+function precedencia() {
+  // * antes que +
+  let x1 = 100 + 50 * 3;     // 250 (50*3=150 +100)
+  let x2 = (100 + 50) * 3;   // 450
+  
+  // Izquierda a derecha
+  let x3 = 100 + 50 - 3;     // 147
+  let x4 = 100 / 50 * 3;     // 6
+  
+  document.getElementById("demo").innerHTML = 
+    `100+50*3: ${x1}<br>(100+50)*3: ${x2}<br>100+50-3: ${x3}<br>100/50*3: ${x4}`;
+}
+
+function incremento() {
+  let x = 5;
+  let original = x;
+  x++;  // post: 5, luego 6
+  let post = x;
+  ++x;  // pre: 7
+  let pre = x;
+  x--;  // 6
+  
+  document.getElementById("demo").innerHTML = 
+    `x=5<br>x++: ${original}→${post}<br>++x: ${pre}`;
+}
+</script>
+
+</body>
+</html>

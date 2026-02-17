@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Variables JS</h2>
+
+<button onclick="muestraVariables()">Ver todas variables</button>
+<button onclick="pruebaLetConst()">let vs const</button>
+<button onclick="pruebaVar()">var viejo</button>
+<button onclick="automatico()">Automático (malo)</button>
+
+<p id="demo"></p>
+<p id="demo2"></p>
+
+<script>
+// let (recomendado)
+let carro = "Mazda";
+let edad = 22;
+let precio = 25000;
+
+// const (no cambia)
+const pi = 3.14;
+const nombre = "Carlos López";
+
+// Múltiples variables
+let persona = "Ana", modelo = "Toyota", costo = 180;
+
+// Underscore y dollar
+let _privado = "secreto";
+let $dinero = 500;
+
+// AUTOMÁTICO (NO recomendado, solo pa probar)
+function automatico() {
+  miVar = "Automática"; // Se crea sola
+  document.getElementById("demo2").innerHTML = "Automática: " + miVar;
+}
+
+function muestraVariables() {
+  document.getElementById("demo").innerHTML = 
+    `carro: ${carro}<br>
+    edad: ${edad}<br>
+    const pi: ${pi}<br>
+    Múltiples: ${persona} ${modelo} $${costo}<br>
+    _privado: ${_privado}<br>
+    $$: $${$dinero}`;
+}
+
+function pruebaLetConst() {
+  let total = precio + costo;
+  document.getElementById("demo2").innerHTML = 
+    `Suma let: ${total}<br>
+    const NO cambia: ${nombre}`;
+}
+
+// var (viejo)
+function pruebaVar() {
+  var viejo = "var antiguo";
+  console.log("En consola: " + viejo);
+  alert(viejo);
+}
+
+// Números y strings
+let cinco = 5 + "2" + 3;    // "52" + 3 = "523"
+let otro = 2 + 3 + "5";     // 5 + "5" = "55"
+console.log("String mix:", cinco, otro);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Boolean JS</h2>
+
+<button onclick="pruebaBoolean()">Valores Boolean</button>
+<button onclick="pruebaTruthy()">Truthy/Falsy</button>
+<button onclick="booleanFunc()">Boolean()</button>
+
+<p id="demo"></p>
+
+<script>
+let x = 5;
+
+function pruebaBoolean() {
+  // Comparaciones devuelven boolean
+  document.getElementById("demo").innerHTML = 
+    `x==8: ${x==8} (false)<br>
+    x!=8: ${x!=8} (true)<br>
+    x>8: ${x>8} (false)<br>
+    x<8: ${x<8} (true)`;
+}
+
+function pruebaTruthy() {
+  // Falsy valores
+  let falsy = `
+  0: ${Boolean(0)}<br>
+  "": ${Boolean("")}<br>
+  null: ${Boolean(null)}<br>
+  undefined: ${Boolean(undefined)}<br>
+  NaN: ${Boolean(NaN)}`;
+  
+  // Truthy valores
+  falsy += `<br><br>Truthy:<br>
+  100: ${Boolean(100)}<br>
+  "hola": ${Boolean("hola")}<br>
+  []: ${Boolean([])}<br>
+  {}: ${Boolean({})}`;
+  
+  document.getElementById("demo").innerHTML = falsy;
+}
+
+function booleanFunc() {
+  // Boolean() función
+  console.log("Boolean(10>9):", Boolean(10>9));  // true
+  console.log("Boolean(0):", Boolean(0));        // false
+  
+  // NO usar new Boolean()
+  let primitivo = false;
+  let objeto = new Boolean(false);
+  console.log("primitivo:", typeof primitivo);  // boolean
+  console.log("objeto:", typeof objeto);        // object
+}
+</script>
+
+</body>
+</html>

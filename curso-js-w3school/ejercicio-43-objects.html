@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Objects - ejemplos</h2>
+
+<button onclick="objLiteral()">Object Literal</button>
+<button onclick="newObject()">new Object()</button>
+<button onclick="propiedades()">Propiedades</button>
+<button onclick="metodos()">Métodos con this</button>
+
+<p id="demo"></p>
+
+<script>
+// Object Literal (simple)
+const car1 = {
+  type: "Fiat",
+  model: "500", 
+  color: "white"
+};
+
+// Object Literal multilínea
+const person1 = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+};
+
+// Vacío + agregar propiedades
+const person2 = {};
+person2.firstName = "John";
+person2.lastName = "Doe";
+person2.age = 50;
+person2.eyeColor = "blue";
+
+// new Object()
+const person3 = new Object({
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+});
+
+// Object con MÉTODO
+const personConMetodo = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+function objLiteral() {
+  document.getElementById("demo").innerHTML = 
+    `car1: ${JSON.stringify(car1)}<br>
+    person1: ${JSON.stringify(person1)}`;
+}
+
+function newObject() {
+  document.getElementById("demo").innerHTML = 
+    `person2 (vacío+props): ${JSON.stringify(person2)}<br>
+    person3 (new Object): ${JSON.stringify(person3)}`;
+}
+
+function propiedades() {
+  document.getElementById("demo").innerHTML = 
+    `Dot: ${person1.firstName}<br>
+    Bracket: ${person1["lastName"]}`;
+}
+
+function metodos() {
+  document.getElementById("demo").innerHTML = 
+    `fullName(): ${personConMetodo.fullName()}`;
+}
+</script>
+
+</body>
+</html>

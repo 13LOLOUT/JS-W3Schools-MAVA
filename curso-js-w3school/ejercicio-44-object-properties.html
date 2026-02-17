@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Object Properties - ejemplos</h2>
+
+<button onclick="dotBracket()">Dot & Bracket</button>
+<button onclick="variableBracket()">Bracket Variable</button>
+<button onclick="cambiarAgregar()">Cambiar/Agregar</button>
+<button onclick="eliminar()">delete</button>
+<button onclick="existe()">in operator</button>
+<button onclick="nested()">Nested Objects</button>
+
+<p id="demo"></p>
+
+<script>
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50
+};
+
+// Bracket con variable
+let n1 = "firstName";
+let n2 = "lastName";
+
+// Nested objects
+const myObj = {
+  name: "John",
+  age: 30,
+  myCars: {
+    car1: "Ford",
+    car2: "BMW",
+    car3: "Fiat"
+  }
+};
+
+function dotBracket() {
+  document.getElementById("demo").innerHTML = 
+    `Dot: ${person.firstName} es ${person.age}<br>
+    Bracket: ${person["firstName"]} es ${person["age"]}`;
+}
+
+function variableBracket() {
+  document.getElementById("demo").innerHTML = 
+    `Variable bracket: ${person[n1]} ${person[n2]}`;
+}
+
+function cambiarAgregar() {
+  person.age = 10;           // Cambiar
+  person.nationality = "English"; // Agregar
+  document.getElementById("demo").innerHTML = 
+    `Modificado: ${JSON.stringify(person)}`;
+}
+
+function eliminar() {
+  // Reset person
+  Object.assign(person, {firstName: "John", lastName: "Doe", age: 50});
+  
+  delete person.age;         // delete dot
+  // O delete person["age"]; // delete bracket
+  
+  document.getElementById("demo").innerHTML = 
+    `Después delete age: ${JSON.stringify(person)}<br>
+    person.age = ${person.age}`;
+}
+
+function existe() {
+  document.getElementById("demo").innerHTML = 
+    `"firstName" in person: ${("firstName" in person)}<br>
+    "middleName" in person: ${("middleName" in person)}`;
+}
+
+function nested() {
+  document.getElementById("demo").innerHTML = 
+    `myObj.myCars.car2: ${myObj.myCars.car2}<br>
+    myObj["myCars"]["car2"]: ${myObj["myCars"]["car2"]}<br>
+    let p1="myCars"; let p2="car2"; myObj[p1][p2]: ${myObj.myCars.car2}`;
+}
+</script>
+
+</body>
+</html>

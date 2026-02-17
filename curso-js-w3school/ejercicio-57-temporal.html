@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Temporal - ejemplos</h2>
+
+<button onclick="temporalNow()">Temporal.Now</button>
+<button onclick="zonedDateTime()">ZonedDateTime</button>
+<button onclick="temporalInstant()">Temporal.Instant</button>
+<button onclick="plainDate()">PlainDate</button>
+<button onclick="arithmetic()">Arithmetic</button>
+
+<p id="demo" style="font-family:monospace"></p>
+
+<script>
+try {
+  // Temporal.Now
+  function temporalNowDemo() {
+    const now = Temporal.Now.zonedDateTimeISO();
+    const today = Temporal.Now.plainDateISO();
+    return `Now zoned: ${now.toString()}\nToday: ${today}`;
+  }
+  
+  // ZonedDateTime
+  function zonedDateTimeDemo() {
+    const zoned = Temporal.ZonedDateTime.from({
+      timeZone: 'America/Los_Angeles',
+      year: 1995, month: 12, day: 7,
+      hour: 3, minute: 24, second: 30,
+      millisecond: 0, microsecond: 3, nanosecond: 500
+    });
+    return `ZonedDateTime: ${zoned}`;
+  }
+  
+  // Temporal.Instant
+  function instantDemo() {
+    const instant1 = Temporal.Instant.from('1969-07-20T20:17:00Z');
+    const nowInstant = Temporal.Now.instant();
+    const epochMs = Temporal.Instant.fromEpochMilliseconds(Date.now());
+    return `Instant Apollo11: ${instant1}\nNow instant: ${nowInstant}\nEpoch ms: ${epochMs}`;
+  }
+  
+  // PlainDate
+  function plainDateDemo() {
+    const plainDate = Temporal.PlainDate.from('2026-05-01');
+    return `PlainDate: ${plainDate}`;
+  }
+  
+  // Arithmetic (add/subtract)
+  function arithmeticDemo() {
+    const now = Temporal.Now.zonedDateTimeISO();
+    const tomorrow = now.add({ days: 1 });
+    const duration = now.until(tomorrow);
+    return `Now: ${now}\n+1 día: ${tomorrow}\nDuración: ${duration}`;
+  }
+  
+  function temporalNow() {
+    document.getElementById("demo").textContent = temporalNowDemo();
+  }
+  
+  function zonedDateTime() {
+    document.getElementById("demo").textContent = zonedDateTimeDemo();
+  }
+  
+  function temporalInstant() {
+    document.getElementById("demo").textContent = instantDemo();
+  }
+  
+  function plainDate() {
+    document.getElementById("demo").textContent = plainDateDemo();
+  }
+  
+  function arithmetic() {
+    document.getElementById("demo").textContent = arithmeticDemo();
+  }
+  
+} catch(e) {
+  document.getElementById("demo").innerHTML = 
+    `<strong>Error:</strong> Temporal no soportado aún<br>${e.message}`;
+}
+</script>
+
+</body>
+</html>

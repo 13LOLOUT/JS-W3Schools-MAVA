@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Métodos Number JS</h2>
+
+<button onclick="metodosBasicos()">Básicos</button>
+<button onclick="conversion()">Conversión</button>
+<button onclick="staticos()">Number estáticos</button>
+
+<p id="demo"></p>
+
+<script>
+let x = 9.656;
+
+function metodosBasicos() {
+  document.getElementById("demo").innerHTML = 
+    `toString(): ${x.toString()}<br>
+    toString(2): ${x.toString(2)}<br>
+    toExponential(2): ${x.toExponential(2)}<br>
+    toFixed(2): ${x.toFixed(2)}<br>
+    toPrecision(4): ${x.toPrecision(4)}<br>
+    valueOf(): ${x.valueOf()}`;
+}
+
+function conversion() {
+  document.getElementById("demo").innerHTML = 
+    `Number("10"): ${Number("10")}<br>
+    Number(true): ${Number(true)}<br>
+    Number("John"): ${Number("John")}<br>
+    parseInt("10.33"): ${parseInt("10.33")}<br>
+    parseFloat("10.33"): ${parseFloat("10.33")}`;
+}
+
+function staticos() {
+  document.getElementById("demo").innerHTML = 
+    `isInteger(10): ${Number.isInteger(10)}<br>
+    isInteger(10.5): ${Number.isInteger(10.5)}<br>
+    isNaN(NaN): ${Number.isNaN(NaN)}<br>
+    isFinite(123): ${Number.isFinite(123)}<br>
+    isSafeInteger(10): ${Number.isSafeInteger(10)}`;
+}
+</script>
+
+</body>
+</html>

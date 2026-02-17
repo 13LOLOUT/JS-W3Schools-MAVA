@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Referencia Strings Completa</h2>
+
+<button onclick="todosMetodos()">Todos los métodos</button>
+
+<p id="demo"></p>
+
+<script>
+let texto = "Hola Mundo! ABC";
+
+function todosMetodos() {
+  document.getElementById("demo").innerHTML = 
+    `length: ${texto.length}<br>
+    at(0): ${texto.at(0)}<br>
+    charAt(0): ${texto.charAt(0)}<br>
+    charCodeAt(0): ${texto.charCodeAt(0)}<br>
+    indexOf('M'): ${texto.indexOf('M')}<br>
+    lastIndexOf('o'): ${texto.lastIndexOf('o')}<br>
+    includes('Mundo'): ${texto.includes('Mundo')}<br>
+    startsWith('Hola'): ${texto.startsWith('Hola')}<br>
+    endsWith('!'): ${texto.endsWith('!')}<br>
+    slice(0,4): "${texto.slice(0,4)}"<br>
+    toUpperCase(): ${texto.toUpperCase()}<br>
+    trim(): "${'  hola  '.trim()}"<br>
+    padStart(10,'0'): "${'5'.padStart(10,'0')}"<br>
+    repeat(3): ${'hi'.repeat(3)}<br>
+    replace('Mundo','JS'): "${texto.replace('Mundo','JS')}"`;
+}
+</script>
+
+</body>
+</html>

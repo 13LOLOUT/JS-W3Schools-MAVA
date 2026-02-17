@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Números JS</h2>
+
+<button onclick="tiposNumeros()">Tipos números</button>
+<button onclick="precision()">Precisión</button>
+<button onclick="sumas()">+ num vs string</button>
+<button onclick="nanInfinito()">NaN Infinity</button>
+
+<p id="demo"></p>
+
+<script>
+function tiposNumeros() {
+  let x = 3.14;
+  let y = 3;
+  let expo = 123e5;
+  
+  document.getElementById("demo").innerHTML = 
+    `Decimal: ${x}<br>
+    Entero: ${y}<br>
+    Expo: ${expo}`;
+}
+
+function precision() {
+  let x = 999999999999999;   // OK
+  let y = 9999999999999999;  // Redondea!
+  let flotante = 0.2 + 0.1;  // 0.30000000000000004
+  
+  document.getElementById("demo").innerHTML = 
+    `15 dígitos: ${x}<br>
+    16 dígitos: ${y}<br>
+    0.2+0.1: ${flotante}`;
+}
+
+function sumas() {
+  let num = 10 + 20;              // 30
+  let str = "10" + "20";          // "1020"
+  let mix1 = 10 + "20";           // "1020"
+  let mix2 = "The result: " + 10 + 20; // "The result: 1020"
+  
+  document.getElementById("demo").innerHTML = 
+    `10+20: ${num}<br>
+    "10"+"20": ${str}<br>
+    10+"20": ${mix1}<br>
+    "res: "+10+20: ${mix2}`;
+}
+
+function nanInfinito() {
+  let nan = 100 / "Apple";        // NaN
+  let inf = 2 / 0;                // Infinity
+  let hex = 0xFF;                 // 255
+  
+  document.getElementById("demo").innerHTML = 
+    `100/"Apple": ${nan} (NaN)<br>
+    2/0: ${inf}<br>
+    0xFF: ${hex}<br>
+    isNaN(${nan}): ${isNaN(nan)}`;
+}
+</script>
+
+</body>
+</html>

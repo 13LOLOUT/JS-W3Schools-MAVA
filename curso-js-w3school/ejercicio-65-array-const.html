@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Array Const - ejemplos</h2>
+
+<button onclick="constVsVar()">const vs var</button>
+<button onclick="changeElements()">Cambiar elementos</button>
+<button onclick="blockScope()">Block scope</button>
+<button onclick="redeclare()">Redeclarar</button>
+
+<p id="demo"></p>
+
+<script>
+// const NO reasignable
+const cars = ["Saab", "Volvo", "BMW"];
+// cars = ["Toyota", "Audi"]; // ERROR!
+
+// Pero SÍ modificar elementos
+cars[0] = "Toyota";
+cars.push("Audi");
+
+// var SÍ reasignable
+var carsVar = ["Saab", "Volvo"];
+
+function constVsVar() {
+  document.getElementById("demo").innerHTML = 
+    `const cars: ${cars.join(", ")}<br>
+    cars[0] = "Toyota": OK<br>
+    cars = [...]: ERROR!`;
+}
+
+function changeElements() {
+  const fruits = ["Banana", "Orange"];
+  fruits[0] = "Kiwi";
+  fruits.push("Lemon");
+  document.getElementById("demo").innerHTML = 
+    `Antes: Banana,Orange<br>
+    Después: ${fruits.join(", ")}`;
+}
+
+function blockScope() {
+  let txt = "";
+  const carsOuter = ["Saab", "Volvo"];
+  txt += `Fuera block: ${carsOuter[0]}<br>`;
+  
+  {
+    const carsBlock = ["Toyota", "Audi"];
+    txt += `Dentro block: ${carsBlock[0]}<br>`;
+  }
+  
+  txt += `Fuera block: ${carsOuter[0]}`;
+  document.getElementById("demo").innerHTML = txt;
+}
+
+function redeclare() {
+  try {
+    const cars1 = ["Volvo"];
+    // const cars1 = ["BMW"]; // ERROR mismo scope
+    document.getElementById("demo").innerHTML = "Redeclarar const MISMO scope: ERROR";
+  } catch(e) {
+    document.getElementById("demo").innerHTML = 
+      `Redeclarar const mismo scope: ${e.message}`;
+  }
+}
+</script>
+
+</body>
+</html>

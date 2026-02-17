@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Function Expressions</h2>
+
+<button onclick="expresionBasica()">Expression básica</button>
+<button onclick="anonima()">Anónima</button>
+<button onclick="hoisting()">Hoisting</button>
+<button onclick="callback()">Callback</button>
+
+<p id="demo"></p>
+
+<script>
+// Function DECLARATION (hoisted)
+function declaration(a, b) {
+  return a + b;
+}
+
+// Function EXPRESSION (NO hoisted)
+const suma = function(a, b) {
+  return a + b;
+};
+
+// Named expression
+const resta = function resta(a, b) {
+  return a - b;
+};
+
+function expresionBasica() {
+  let resultado = suma(4, 3);
+  document.getElementById("demo").innerHTML = 
+    `Declaration: ${declaration(4,3)}<br>
+    Expression: ${resultado}`;
+}
+
+function anonima() {
+  const anonima = function() {  // Sin nombre
+    return "Función anónima";
+  };
+  document.getElementById("demo").innerHTML = anonima();
+}
+
+function hoisting() {
+  // declaration(2,3); // OK! Hoisted
+  // suma(2,3); // ERROR! No hoisted
+  
+  document.getElementById("demo").innerHTML = 
+    `Declaration hoisted: ${declaration(2,3)}`;
+}
+
+function callback() {
+  function run(fn) {
+    return fn();
+  }
+  
+  const sayHi = function() {
+    return "Hola desde callback";
+  };
+  
+  document.getElementById("demo").innerHTML = run(sayHi);
+}
+</script>
+
+</body>
+</html>

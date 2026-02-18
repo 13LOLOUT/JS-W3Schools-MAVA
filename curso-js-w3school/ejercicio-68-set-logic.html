@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Set Logic Methods - ejemplos</h2>
+
+<button onclick="setLogic()">Set Logic Methods</button>
+
+<p id="demo" style="font-family:monospace"></p>
+
+<script>
+try {
+  const A = new Set(['a','b','c']);
+  const B = new Set(['b','c','d']);
+  
+  function setLogicDemo() {
+    const union = A.union(B);
+    const intersection = A.intersection(B);
+    const difference = A.difference(B);
+    const symDiff = A.symmetricDifference(B);
+    
+    const subset = new Set(['b','c']).isSubsetOf(A);
+    const superset = A.isSupersetOf(new Set(['b']));
+    const disjoint = A.isDisjointFrom(new Set(['x','y']));
+    
+    return `A: ${Array.from(A).join(', ')}
+B: ${Array.from(B).join(', ')}
+
+union(): ${Array.from(union).join(', ')}
+intersection(): ${Array.from(intersection).join(', ')}
+difference(): ${Array.from(difference).join(', ')}
+symmetricDifference(): ${Array.from(symDiff).join(', ')}
+
+isSubsetOf(['b','c']): ${subset}
+isSupersetOf(['b']): ${superset}
+isDisjointFrom(['x','y']): ${disjoint}`;
+  }
+  
+  function setLogic() {
+    document.getElementById("demo").textContent = setLogicDemo();
+  }
+  
+} catch(e) {
+  document.getElementById("demo").innerHTML = 
+    `<strong>ES2025 Set Logic</strong><br>
+    No soportado aún<br>
+    Chrome 136+, Firefox 129+, Safari 18.2+`;
+}
+</script>
+
+</body>
+</html>

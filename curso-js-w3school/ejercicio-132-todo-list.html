@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List - localStorage</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: 50px auto; }
+    #task { padding: 12px; width: 300px; font-size: 16px; }
+    button { padding: 12px 20px; font-size: 16px; margin: 0 5px; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 12px; margin: 8px 0; background: #f8f9fa; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; }
+    .remove { background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+    #status { margin: 20px 0; padding: 10px; background: #d4edda; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<h2>📝 To-Do List con localStorage</h2>
+
+<input id="task" placeholder="Nueva tarea... (Enter para agregar)" maxlength="100">
+<button onclick="addTask()">➕ Agregar</button>
+<button onclick="clearAll()" style="background:#dc3545;color:white;">🗑️ Clear All</button>
+
+<ul id="list"></ul>
+<div id="status"></div>
+
+<script>
+let tasks = [];
+
+// Cargar al iniciar
+loadTasks();
+displayTasks();
+
+function displayTasks() {
+  const listEl = document.getElementById("list");
+  let html = "";
+  
+  for (let i = 0; i < tasks.length; i++) {
+    html += `<li>
+      ${tasks[i]}
+      <button class="remove" onclick="removeTask(${i})">❌</button>
+    </li>`;
+  }
+  
+  listEl.innerHTML = html;
+  document.getElementById("status").innerHTML = `📊 ${tasks.length} tareas guardadas`;
+}
+
+function addTask() {
+  const taskInput = document.getElementById("task");
+  const text = taskInput.value.trim();
+  
+  if (text === "") {
+    alert("❌ Escribe una tarea");
+    return;
+  }
+  
+  tasks.push(text);
+  taskInput.value = "";
+  saveTasks();
+  displayTasks();
+}
+
+function removeTask(i) {
+  tasks.splice(i, 1);
+  saveTasks();
+  displayTasks();
+}
+
+function clearAll() {
+  if (tasks.length === 0 || confirm("🗑️ ¿Borrar todas las tareas?")) {
+    tasks = [];
+    saveTasks();
+    displayTasks();
+  }
+}
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function loadTasks() {
+  const saved = localStorage.getItem("tasks");
+  if (saved !== null) {
+    tasks = JSON.parse(saved);
+  }
+}
+
+// Enter para agregar
+document.getElementById("task").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    addTask();
+  }
+});
+</script>
+
+</body>
+</html>

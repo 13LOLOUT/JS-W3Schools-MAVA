@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Destructuring - ejemplos</h2>
+
+<button onclick="objectDestructuring()">Object</button>
+<button onclick="arrayDestructuring()">Array</button>
+<button onclick="restSpread()">Rest / Defaults</button>
+<button onclick="swapVars()">Swap variables</button>
+
+<p id="demo"></p>
+
+<script>
+// Object destructuring
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50
+};
+
+// Array destructuring
+const fruits = ["Bananas", "Oranges", "Apples", "Mangos"];
+const numbers = [10, 20, 30, 40, 50, 60, 70];
+
+function objectDestructuring() {
+  const {firstName, lastName} = person;
+  const {lastName: name, firstName: fn} = person;
+  const {firstName: f, country = "US"} = person;
+  
+  document.getElementById("demo").innerHTML = 
+    `{firstName,lastName}: ${fn} ${name}<br>
+    {lastName:name}: ${name}<br>
+    {country="US"}: ${f} (US)`;
+}
+
+function arrayDestructuring() {
+  const [fruit1, fruit2] = fruits;
+  const [fruitSkip1,,, fruitSkip2] = fruits;
+  const {[0]: pos0, [1]: pos1} = fruits;
+  
+  document.getElementById("demo").innerHTML = 
+    `[0],[1]: ${fruit1}, ${fruit2}<br>
+    [0,,,3]: ${fruitSkip1}, ${fruitSkip2}<br>
+    {[0]:pos0}: ${pos0}`;
+}
+
+function restSpread() {
+  const [a, b, ...rest] = numbers;
+  
+  document.getElementById("demo").innerHTML = 
+    `[a,b,...rest]: a=${a} b=${b} rest=[${rest.join(',')}]`;
+}
+
+function swapVars() {
+  let firstName = "John";
+  let lastName = "Doe";
+  [firstName, lastName] = [lastName, firstName];
+  
+  document.getElementById("demo").innerHTML = 
+    `Antes: John Doe<br>
+    Después swap: ${firstName} ${lastName}`;
+}
+</script>
+
+</body>
+</html>

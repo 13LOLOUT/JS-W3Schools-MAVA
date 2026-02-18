@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript RegExp - ejemplos</h2>
+
+<button onclick="regexBasics()">Básicos search match replace</button>
+<button onclick="regexFlags()">Flags g i</button>
+<button onclick="metacharacters()">Metacaracteres</button>
+<button onclick="quantifiers()">Quantifiers</button>
+<button onclick="assertions()">Assertions</button>
+<button onclick="charClasses()">Character Classes</button>
+
+<p id="demo"></p>
+
+<script>
+const text = "Visit W3Schools! Hello W3Schools tutorial Microsoft";
+
+function regexBasics() {
+  const n = text.search(/w3schools/i);
+  const match = text.match(/W3schools/);
+  const replace = text.replace(/Microsoft/i, "W3Schools");
+  
+  document.getElementById("demo").innerHTML = 
+    `search(/w3schools/i): ${n}<br>
+    match(/W3schools/): ${JSON.stringify(match)}<br>
+    replace(/Microsoft/i): ${replace.substring(0,50)}...`;
+}
+
+function regexFlags() {
+  const resultG = text.match(/is/g);
+  const resultI = text.match(/w3schools/i);
+  
+  document.getElementById("demo").innerHTML = 
+    `/is/g: ${JSON.stringify(resultG)}<br>
+    /w3schools/i: ${JSON.stringify(resultI)}`;
+}
+
+function metacharacters() {
+  const resultD = "Give 100%!".match(/\d/g);
+  const resultW = "Give 100%!".match(/\w/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `\\d (digits): ${JSON.stringify(resultD)}<br>
+    \\w (words): ${JSON.stringify(resultW)}`;
+}
+
+function quantifiers() {
+  const textQ = "1, 100 or 1000?";
+  const result = textQ.match(/10?/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `/10?/g: ${JSON.stringify(result)}`;
+}
+
+function assertions() {
+  const start = "W3Schools Tutorial".search(/^W3Schools/);
+  const end = "Hello W3Schools".search(/W3Schools$/);
+  
+  document.getElementById("demo").innerHTML = 
+    `^W3Schools (inicio): ${start}<br>
+    W3Schools$ (final): ${end}`;
+}
+
+function charClasses() {
+  const result = "More than 1000 times".match(/[0-9]/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `/[0-9]/g: ${JSON.stringify(result)}`;
+}
+</script>
+
+</body>
+</html>

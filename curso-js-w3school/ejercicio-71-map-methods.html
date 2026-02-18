@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Map Methods - ejemplos</h2>
+
+<button onclick="basicMethods()">get set size</button>
+<button onclick="deleteClearHas()">delete clear has</button>
+<button onclick="iterators()">forEach entries keys values</button>
+<button onclick="objectKeys()">Object keys</button>
+<button onclick="groupBy()">Map.groupBy()</button>
+
+<p id="demo"></p>
+
+<script>
+const fruits = new Map([
+  ["apples", 500],
+  ["bananas", 300],
+  ["oranges", 200]
+]);
+
+function basicMethods() {
+  const applesVal = fruits.get("apples");
+  fruits.set("mangos", 100);
+  const mapSize = fruits.size;
+  
+  document.getElementById("demo").innerHTML = 
+    `get("apples"): ${applesVal}<br>
+    set("mangos",100): OK<br>
+    size: ${mapSize}`;
+}
+
+function deleteClearHas() {
+  const f = new Map(fruits); // Copia
+  f.delete("apples");
+  const hasBananas = f.has("bananas");
+  f.clear();
+  
+  document.getElementById("demo").innerHTML = 
+    `delete("apples"): OK<br>
+    has("bananas"): ${hasBananas}<br>
+    clear(): vaciado`;
+}
+
+function iterators() {
+  let txtForEach = "";
+  fruits.forEach(function(value, key) {
+    txtForEach += `${key} = ${value}<br>`;
+  });
+  
+  let txtKeys = "";
+  for (const x of fruits.keys()) {
+    txtKeys += x + " ";
+  }
+  
+  let txtValues = "";
+  let total = 0;
+  for (const x of fruits.values()) {
+    txtValues += x + " ";
+    total += x;
+  }
+  
+  document.getElementById("demo").innerHTML = 
+    `forEach: ${txtForEach}<br>
+    keys: ${txtKeys}<br>
+    values: ${txtValues}(suma: ${total})`;
+}
+
+function objectKeys() {
+  const applesObj = {name: 'Apples'};
+  const bananasObj = {name: 'Bananas'};
+  
+  const objMap = new Map();
+  objMap.set(applesObj, 500);
+  objMap.set(bananasObj, 300);
+  
+  document.getElementById("demo").innerHTML = 
+    `objMap.get("apples"): ${objMap.get("apples")}<br>
+    objMap.get(applesObj): 500<br>
+    (keys son objetos!)`;
+}
+
+function groupBy() {
+  const inventory = [
+    {name:"apples", quantity:300},
+    {name:"bananas", quantity:500},
+    {name:"oranges", quantity:200},
+    {name:"kiwi", quantity:150}
+  ];
+  
+  function myCallback({ quantity }) {
+    return quantity > 200 ? "ok" : "low";
+  }
+  
+  const result = Map.groupBy(inventory, myCallback);
+  
+  document.getElementById("demo").innerHTML = 
+    `Map.groupBy:<br>
+    ${JSON.stringify(Object.fromEntries(result), null, 2)}`;
+}
+</script>
+
+</body>
+</html>

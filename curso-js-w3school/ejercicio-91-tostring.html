@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript toString() - ejemplos</h2>
+
+<button onclick="arrayToString()">Array.toString()</button>
+<button onclick="dateToString()">Date.toString()</button>
+<button onclick="numberToString()">Number.toString()</button>
+<button onclick="objectToString()">Object.toString()</button>
+
+<p id="demo"></p>
+
+<script>
+// Array ejemplo
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+
+// Date ejemplo
+const d = new Date();
+
+// Number ejemplo
+let x = 123;
+
+// Object ejemplo
+let person = {
+  firstname: "John",
+  lastname: "Doe"
+};
+
+function arrayToString() {
+  let myList = fruits.toString();
+  document.getElementById("demo").innerHTML = 
+    `fruits: [${fruits.join(', ')}]<br>
+    fruits.toString(): "${myList}"`;
+}
+
+function dateToString() {
+  let text = d.toString();
+  document.getElementById("demo").innerHTML = 
+    `new Date(): ${d}<br>
+    d.toString(): "${text}"`;
+}
+
+function numberToString() {
+  let text1 = x.toString();
+  let text2 = x.toString(2); // binario
+  
+  document.getElementById("demo").innerHTML = 
+    `123.toString(): "${text1}"<br>
+    123.toString(2): "${text2}" (binario)`;
+}
+
+function objectToString() {
+  let text1 = person.toString();
+  
+  // Override toString
+  person.toString = function() {
+    return `${this.firstname} ${this.lastname}`;
+  };
+  let text2 = person.toString();
+  
+  document.getElementById("demo").innerHTML = 
+    `person.toString() default: "${text1}"<br>
+    person.toString() custom: "${text2}"`;
+}
+</script>
+
+</body>
+</html>

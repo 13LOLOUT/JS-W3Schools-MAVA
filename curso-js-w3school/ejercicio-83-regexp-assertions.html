@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript RegExp Assertions - ejemplos</h2>
+
+<button onclick="boundaries()">^ $ \b</button>
+<button onclick="lookaheads()">Lookahead ?= ?!</button>
+<button onclick="lookbehinds()">Lookbehind ?<= ?<!</button>
+<button onclick="groups()">Groups (x) (?<n>)</button>
+
+<p id="demo"></p>
+
+<script>
+const text1 = "W3Schools Tutorial";
+const text2 = "Hello W3Schools";
+const text3 = "HELLO, LOOK AT YOU!";
+const text4 = "Name: John Doe";
+
+function boundaries() {
+  const start1 = /^W3Schools/.test(text1);
+  const start2 = /^W3Schools/.test(text2);
+  const end1 = /W3Schools$/.test(text2);
+  const end2 = /W3Schools$/.test("W3Schools tutorial");
+  const wordStart = text3.search(/\bLO/);
+  const wordEnd = text3.search(/LO\b/);
+  
+  document.getElementById("demo").innerHTML = 
+    `^W3Schools:<br>
+    "${text1}": ${start1}<br>
+    "${text2}": ${start2}<br><br>
+    W3Schools$:<br>
+    "${text2}": ${end1}<br>
+    "W3Schools tutorial": ${end2}<br><br>
+    \\bLO (inicio palabra): ${wordStart}<br>
+    LO\\b (final palabra): ${wordEnd}`;
+}
+
+function lookaheads() {
+  const textLA = "W3Schools Tutorials";
+  const lookahead = /W3Schools(?= Tutorials)/.test(textLA);
+  const negLookahead = /W3Schools(?! Tutorials)/.test(textLA);
+  
+  document.getElementById("demo").innerHTML = 
+    `(?= Tutorials): ${lookahead}<br>
+    (?! Tutorials): ${negLookahead}`;
+}
+
+function lookbehinds() {
+  const textLB = "Hello W3Schools";
+  const lookbehind = /(?<=Hello )W3Schools/.test(textLB);
+  const negLookbehind = /(?<!Hello )W3Schools/.test(textLB);
+  
+  document.getElementById("demo").innerHTML = 
+    `(?<=Hello )W3Schools: ${lookbehind}<br>
+    (?<!Hello )W3Schools: ${negLookbehind}`;
+}
+
+function groups() {
+  // Capturing groups
+  const match1 = /(haha)+/.exec("Haha, haha, haha.");
+  
+  // Named groups
+  const match2 = /(?<firstName>\w+) (?<lastName>\w+)/.exec(text4);
+  
+  // Group modifier (?i:)
+  const insensitive = /(?i:WShools) tutorials/.test("W3Schools tutorials.");
+  
+  document.getElementById("demo").innerHTML = 
+    `(haha)+: ${JSON.stringify(match1)}<br>
+    (?<firstName>...) ${text4}<br>
+    groups: ${JSON.stringify(match2.groups)}<br>
+    (?i:WShools): ${insensitive}`;
+}
+</script>
+
+</body>
+</html>

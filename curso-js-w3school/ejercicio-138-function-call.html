@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript call() Method</h2>
+
+<button onclick="runCallExamples()">Ver ejemplos call()</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+func.call(objeto, arg1, arg2)
+</pre>
+
+<script>
+function runCallExamples() {
+  document.getElementById("demo").innerHTML = 
+`// 1️⃣ BÁSICO: Controlar 'this'
+function greet(greeting) {
+  return greeting + " " + this.name;
+}
+
+const juan = { name: "Juan" };
+const maria = { name: "María" };
+
+greet.call(juan, "Hola");    // "Hola Juan"
+greet.call(maria, "Buenos"); // "Buenos María"
+
+// 2️⃣ PRESTAR MÉTODO
+const plantilla = {
+  fullName: function(city) {
+    return this.firstName + " " + this.lastName + ", " + city;
+  }
+};
+
+const p1 = { firstName: "Ana", lastName: "López" };
+const p2 = { firstName: "Luis", lastName: "Gómez" };
+
+plantilla.fullName.call(p1, "CDMX");  // "Ana López, CDMX"
+plantilla.fullName.call(p2, "Guadalajara"); // "Luis Gómez, Guadalajara"
+
+// 3️⃣ CON ARGUMENTOS
+const persona = {
+  fullName: function(city, country) {
+    return this.firstName + " " + this.lastName + ", " + city + ", " + country;
+  }
+};
+
+const john = { firstName: "John", lastName: "Doe" };
+persona.fullName.call(john, "Oslo", "Norway"); // "John Doe, Oslo, Norway"
+`;
+}
+
+// Demo interactivo
+const person1 = { firstName: "Pedro", lastName: "Martínez" };
+const person2 = { firstName: "Sofía", lastName: "Ramírez" };
+
+function showFullName(city) {
+  return this.firstName + " " + this.lastName + " de " + city;
+}
+
+document.write(`
+  <h3>Demo call() en vivo:</h3>
+  <p>Pedro: ${showFullName.call(person1, "Guadalajara")}</p>
+  <p>Sofía: ${showFullName.call(person2, "Monterrey")}</p>
+`);
+
+console.log("Normal:", showFullName()); // undefined
+console.log("call():", showFullName.call(person1, "México")); // "Pedro Martínez de México"
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>call() vs Normal:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Normal</th><th>call()</th></tr>
+  <tr><td><code>func()</code></td><td><code>func.call(obj, args...)</code></td></tr>
+  <tr><td>this = global/window</td><td>this = objeto especificado</td></tr>
+  <tr><td>Ejecuta inmediatamente</td><td>Ejecuta inmediatamente</td></tr>
+</table>
+
+<h4>🔑 Sintaxis:</h4>
+<p><code>funcion.call(objetoDestino, arg1, arg2, ...)</code></p>
+
+<h4>⚠️ Errores comunes:</h4>
+<ul>
+  <li><code>call()</code> NO crea nueva función (usa <code>bind()</code>)</li>
+  <li>Argumentos individuales, no array (usa <code>apply()</code>)</li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Iterables - ejemplos</h2>
+
+<button onclick="stringArray()">String Array</button>
+<button onclick="setMap()">Set Map</button>
+<button onclick="homeMadeIterator()">Home Made Iterator</button>
+<button onclick="symbolIterator()">Symbol.iterator</button>
+
+<p id="demo"></p>
+
+<script>
+// String iterable
+const name = "W3Schools";
+
+// Array iterable  
+const letters = ["a","b","c"];
+const numbers = [2,4,6,8];
+
+// Set iterable
+const setLetters = new Set(["a","b","c"]);
+
+// Map iterable
+const fruits = new Map([
+  ["apples", 500],
+  ["bananas", 300]
+]);
+
+function stringArray() {
+  let text = "";
+  for (const x of name) {
+    text += x + " ";
+  }
+  text += "<br>";
+  for (const x of letters) {
+    text += x + " ";
+  }
+  document.getElementById("demo").innerHTML = text;
+}
+
+function setMap() {
+  let text = "";
+  for (const x of setLetters) {
+    text += x + " ";
+  }
+  text += "<br>";
+  for (const x of fruits) {
+    text += `[${x[0]},${x[1]}] `;
+  }
+  document.getElementById("demo").innerHTML = text;
+}
+
+// Home Made Iterator (NO for...of)
+function homeMadeIterator() {
+  function myNumbers() {
+    let n = 0;
+    return {
+      next: function() {
+        n += 10;
+        return {value: n, done: false};
+      }
+    };
+  }
+  
+  const n = myNumbers();
+  document.getElementById("demo").innerHTML = 
+    `n.next(): ${n.next().value}<br>
+    n.next(): ${n.next().value}<br>
+    (NO for...of)`;
+}
+
+// Symbol.iterator completo
+function symbolIterator() {
+  const myNumbers = {};
+  
+  myNumbers[Symbol.iterator] = function() {
+    let n = 0;
+    let done = false;
+    return {
+      next() {
+        n += 10;
+        if (n >= 100) done = true;
+        return {value: n, done: done};
+      }
+    };
+  };
+  
+  let text = "";
+  for (const num of myNumbers) {
+    text += num + " ";
+  }
+  document.getElementById("demo").innerHTML = text;
+}
+</script>
+
+</body>
+</html>

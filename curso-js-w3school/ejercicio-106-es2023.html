@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2023 - Nuevas Features</h2>
+
+<button onclick="showES2023()">Ver ejemplos ES2023</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+const temp = [27, 28, 30, 40, 42, 35, 30];
+let high = temp.findLast(x => x > 40);
+</pre>
+
+<script>
+function showES2023() {
+  const temp = [27, 28, 30, 40, 42, 35, 30];
+  const months = ["Jan", "Feb", "Mar", "Apr"];
+  
+  document.getElementById("demo").innerHTML = 
+`// 1. Array.findLast()
+const high = temp.findLast(x => x > 40);     // 42 (último)
+console.log(high);
+
+// 2. Array.findLastIndex()
+const pos = temp.findLastIndex(x => x > 40); // 4 (índice)
+console.log(pos);
+
+// 3. Array.toReversed() - NO muta original
+const reversed = months.toReversed();        // ["Apr", "Mar", "Feb", "Jan"]
+console.log(months);                         // Original intacto
+console.log(reversed);
+
+// 4. Array.toSorted()
+const sorted = months.toSorted();            // ["Apr", "Feb", "Jan", "Mar"]
+console.log(sorted);
+
+// 5. Array.toSpliced()
+const spliced = months.toSpliced(0, 1);      // ["Feb", "Mar", "Apr"]
+console.log(spliced);
+
+// 6. Array.with()
+const updated = months.with(2, "March");     // ["Jan", "Feb", "March", "Apr"]
+console.log(updated);
+
+// 7. Shebang (Node.js)
+// #!/usr/bin/env node
+`;
+  
+  console.log("Original months:", months);
+  console.log("ES2023 methods funcionan");
+}
+
+console.log("ES2023 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2023:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>toReversed(), toSorted()</td><td>110+</td><td>110+</td><td>115+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

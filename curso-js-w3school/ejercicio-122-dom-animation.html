@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Animaciones DOM con JavaScript</h2>
+
+<div id="container" style="width:400px;height:400px;position:relative;background:linear-gradient(yellow,orange);border:2px solid #333;">
+  <div id="animate" style="width:50px;height:50px;position:absolute;background:red;border-radius:50%;transition:0.05s;">●</div>
+</div>
+
+<button onclick="moveRight()">→ Derecha</button>
+<button onclick="moveDown()">↓ Abajo</button>
+<button onclick="diagonal()">↘ Diagonal</button>
+<button onclick="bounce()">Rebotar</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+let id = setInterval(frame, 10);
+</pre>
+
+<script>
+function moveRight() {
+  let id = null;
+  const elem = document.getElementById("animate");
+  let pos = 0;
+  
+  clearInterval(id);
+  id = setInterval(() => {
+    if (pos >= 350) {
+      clearInterval(id);
+    } else {
+      pos += 2;
+      elem.style.left = pos + "px";
+    }
+  }, 10);
+}
+
+function moveDown() {
+  let id = null;
+  const elem = document.getElementById("animate");
+  let pos = 0;
+  
+  clearInterval(id);
+  id = setInterval(() => {
+    if (pos >= 350) {
+      clearInterval(id);
+    } else {
+      pos += 2;
+      elem.style.top = pos + "px";
+    }
+  }, 10);
+}
+
+function diagonal() {
+  let id = null;
+  const elem = document.getElementById("animate");
+  let posX = 0, posY = 0;
+  
+  clearInterval(id);
+  id = setInterval(() => {
+    if (posX >= 350 || posY >= 350) {
+      clearInterval(id);
+    } else {
+      posX += 2;
+      posY += 2;
+      elem.style.left = posX + "px";
+      elem.style.top = posY + "px";
+    }
+  }, 10);
+}
+
+function bounce() {
+  let id = null;
+  const elem = document.getElementById("animate");
+  let pos = 0;
+  let direction = 1;
+  
+  clearInterval(id);
+  id = setInterval(() => {
+    pos += direction * 3;
+    elem.style.left = pos + "px";
+    
+    if (pos >= 350 || pos <= 0) {
+      direction *= -1;
+    }
+  }, 20);
+}
+
+document.getElementById("demo").innerHTML = 
+`// Estructura animación DOM
+function myMove() {
+  let id = null;
+  const elem = document.getElementById("animate");
+  let pos = 0;
+  
+  id = setInterval(frame, 10);  // 10ms = fluido
+  
+  function frame() {
+    if (pos == 350) {           // Condición fin
+      clearInterval(id);
+    } else {
+      pos++;                    // Incremento gradual
+      elem.style.left = pos + 'px';
+      elem.style.top = pos + 'px';
+    }
+  }
+}
+
+// CSS necesario:
+#container { position: relative; }
+#animate { position: absolute; }
+`;
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>Animación DOM:</h3>
+<ul>
+  <li><strong>setInterval(frame, 10)</strong> - Llama función cada 10ms</li>
+  <li><strong>position: absolute</strong> - Elemento fuera del flujo</li>
+  <li><strong>clearInterval(id)</strong> - Para animación</li>
+  <li><strong>style.left/top</strong> - Mueve píxel a píxel</li>
+</ul>
+</div>
+
+</body>
+</html>

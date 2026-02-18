@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>DOM - Cambiar CSS con JavaScript</h2>
+
+<p id="p2">Texto que cambia color</p>
+<h1 id="id1">Título que cambia</h1>
+
+<button onclick="changeColor()">Color rojo</button>
+<button onclick="hideShow()">Ocultar/Mostrar</button>
+<button onclick="bigSmall()">Agrandar/Reducir</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+element.style.color = "red";
+</pre>
+
+<script>
+function changeColor() {
+  document.getElementById("id1").style.color = "red";
+}
+
+function hideShow() {
+  const p2 = document.getElementById("p2");
+  if (p2.style.visibility === "hidden") {
+    p2.style.visibility = "visible";
+  } else {
+    p2.style.visibility = "hidden";
+  }
+}
+
+function bigSmall() {
+  const p2 = document.getElementById("p2");
+  if (p2.style.fontSize === "30px") {
+    p2.style.fontSize = "16px";
+  } else {
+    p2.style.fontSize = "30px";
+  }
+}
+
+// Demo automático
+setInterval(() => {
+  const p2 = document.getElementById("p2");
+  p2.style.color = p2.style.color === "blue" ? "green" : "blue";
+}, 1000);
+
+document.getElementById("demo").innerHTML = 
+`// Sintaxis básica
+element.style.color = "red";
+element.style.backgroundColor = "yellow";
+element.style.fontSize = "24px";
+
+// CSS → JavaScript (camelCase)
+margin-top     → marginTop
+background-color → backgroundColor
+border-radius → borderRadius
+
+// Eventos onclick directo
+onclick="document.getElementById('id1').style.color='red'"
+
+// Más ejemplos comunes:
+element.style.display = "none";     // Ocultar
+element.style.display = "block";    // Mostrar
+element.style.opacity = "0.5";     // Transparencia
+element.style.position = "absolute"; // Posición absoluta
+`;
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>CSS → JavaScript:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>CSS</th><th>JavaScript</th></tr>
+  <tr><td>color</td><td>color</td></tr>
+  <tr><td>font-size</td><td>fontSize</td></tr>
+  <tr><td>margin-top</td><td>marginTop</td></tr>
+  <tr><td>background-color</td><td>backgroundColor</td></tr>
+</table>
+</div>
+
+</body>
+</html>

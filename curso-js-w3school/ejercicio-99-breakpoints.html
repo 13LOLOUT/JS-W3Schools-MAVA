@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Breakpoints - F12 Sources</h2>
+
+<button onclick="triggerBreakpoints()"> Activar Breakpoints</button>
+<p id="demo">Presiona F12 → Sources → Click números línea → Reload</p>
+
+<script>
+function add(a, b) {
+  let result = a + b;     // ← Breakpoint AQUÍ
+  console.log("result =", result);
+  return result;
+}
+
+function testScope() {
+  let globalX = 10;       // ← Breakpoint: mira Scope
+  
+  function inner() {
+    let localY = 5;       // ← Breakpoint: local vs global
+    console.log(globalX + localY);
+  }
+  
+  inner();
+}
+
+// CÓDIGO PARA BREAKPOINTS
+document.getElementById("demo").innerHTML = add(10, 5);
+document.getElementById("demo").innerHTML = add(10, 50);
+document.getElementById("demo").innerHTML = add(10, 500);
+testScope();
+
+let x = 15 * 5;
+debugger;  // ← Keyword debugger (si F12 abierto)
+document.getElementById("demo").innerHTML += " → " + x;
+</script>
+
+<div style="background:#fff3cd; padding:15px; margin:20px 0; border-left:4px solid #ffc107;">
+<h3> PASO A PASO Breakpoints:</h3>
+<ol>
+  <li><strong>F12 → Sources</strong> (Chrome/Edge)</li>
+  <li>Encuentra este archivo JS</li>
+  <li><strong>Click número línea</strong> (punto azul)</li>
+  <li><strong>F5 Reload</strong> página</li>
+  <li><strong>Play </strong> línea por línea</li>
+</ol>
+</div>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>Controles Debug:</h3>
+<ul>
+  <li><strong>Resume</strong> continúa</li>
+  <li><strong>F10 Step Over</strong> siguiente línea</li>
+  <li><strong>F11 Step Into</strong> entra función</li>
+  <li><strong>Shift+F11 Step Out</strong> sale función</li>
+  <li><strong>Scope panel</strong> → variables actuales</li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Generators - ejemplos</h2>
+
+<button onclick="generatorForOf()">for...of</button>
+<button onclick="yieldNext()">yield + next()</button>
+<button onclick="generatorMethods()">next return throw</button>
+
+<p id="demo"></p>
+
+<script>
+// Generator básico
+function* myStream() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+// Generator con return (NO incluido en for...of)
+function* myStreamReturn() {
+  yield 1;
+  yield 2;
+  return 3; // done:true, NO yield
+}
+
+function generatorForOf() {
+  let text = "";
+  for (let value of myStream()) {
+    text += value + " ";
+  }
+  document.getElementById("demo").innerHTML = 
+    `for...of myStream(): ${text}`;
+}
+
+function yieldNext() {
+  const gen = myStream();
+  let text = "";
+  
+  text += `gen.next(): ${JSON.stringify(gen.next())}<br>`;
+  text += `gen.next(): ${JSON.stringify(gen.next())}<br>`;
+  text += `gen.next(): ${JSON.stringify(gen.next())}`;
+  
+  document.getElementById("demo").innerHTML = text;
+}
+
+function generatorMethods() {
+  const gen = myStreamReturn();
+  
+  let text = "";
+  text += `next(): ${JSON.stringify(gen.next())}<br>`;
+  text += `next(): ${JSON.stringify(gen.next())}<br>`;
+  text += `return(99): ${JSON.stringify(gen.return(99))}<br>`;
+  
+  // throw() ejemplo comentado (lanza excepción)
+  // gen.throw("Error test");
+  
+  document.getElementById("demo").innerHTML = text;
+}
+</script>
+
+</body>
+</html>

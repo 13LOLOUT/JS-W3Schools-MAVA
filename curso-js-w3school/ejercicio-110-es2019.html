@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2019 - Nuevas Features</h2>
+
+<button onclick="showES2019()">Ver ejemplos ES2019</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+"     Hello    ".trimStart();
+</pre>
+
+<script>
+function showES2019() {
+  document.getElementById("demo").innerHTML = 
+`// 1. String.trimStart() / trimEnd()
+"     Hello World!     ".trimStart();  // "Hello World!     "
+"     Hello World!     ".trimEnd();   // "     Hello World!"
+
+// 2. Object.fromEntries()
+const entries = [["apples", 300], ["bananas", 500]];
+const obj = Object.fromEntries(entries);  // {apples: 300, bananas: 500}
+
+// 3. Optional catch binding
+try {
+  JSON.parse("invalid");
+} catch {  // Sin parámetro
+  console.log("Error capturado");
+}
+
+// 4. Array.flat()
+[[1,2],[3,4],[5,6]].flat();  // [1,2,3,4,5,6]
+
+// 5. Array.flatMap()
+[1,2,3].flatMap(x => [x, x*10]);  // [1,10, 2,20, 3,30]
+
+// 6. Stable sort()
+[{name:"X00",price:100}, {name:"X01",price:100}].sort((a,b)=>a.price-b.price);
+// Mantiene orden relativo
+
+// 7. JSON.stringify() UTF-8 seguro
+JSON.stringify("\u26D4");  // ✅ Funciona correctamente
+`;
+}
+
+console.log("ES2019 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2019:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>trimStart, flat()</td><td>66+</td><td>79+</td><td>61+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

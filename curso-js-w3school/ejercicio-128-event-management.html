@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Event Management - add/removeEventListener</h2>
+
+<button id="add">➕ Agregar Evento</button>
+<button id="remove">➖ Remover Evento</button>
+<hr>
+<button id="test">🔘 Test Click</button>
+
+<p id="demo">Click "Agregar" → "Test Click" → "Remover"</p>
+
+<pre id="code" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+test.addEventListener("click", myFunction);
+test.removeEventListener("click", myFunction);
+</pre>
+
+<script>
+const testBtn = document.getElementById("test");
+const addBtn = document.getElementById("add");
+const removeBtn = document.getElementById("remove");
+const demo = document.getElementById("demo");
+
+function myFunction() {
+  demo.innerHTML += "<br>✅ Evento funcionando!";
+}
+
+// 1. AGREGAR evento
+addBtn.addEventListener("click", function() {
+  testBtn.addEventListener("click", myFunction);
+  demo.innerHTML = "Evento AGREGADO ✅";
+});
+
+// 2. REMOVER evento (misma función)
+removeBtn.addEventListener("click", function() {
+  testBtn.removeEventListener("click", myFunction);
+  demo.innerHTML = "Evento REMOVIDO ❌";
+});
+
+// 3. Bloquear evento (preventDefault)
+document.getElementById("test").addEventListener("contextmenu", function(event) {
+  event.preventDefault();
+  demo.innerHTML += "<br>🔒 Click derecho bloqueado";
+});
+
+document.getElementById("code").innerHTML = 
+`// AGREGAR evento
+element.addEventListener("click", miFuncion);
+
+// REMOVER evento (misma función)
+element.removeEventListener("click", miFuncion);
+
+// ❌ NO funciona:
+test.onclick = miFuncion;           // Asigna
+test.onclick = null;                // Remueve
+
+// ✅ Bloquear eventos
+function handle(event) {
+  event.preventDefault();           // Bloquea link/form
+  event.stopPropagation();          // No propaga a padres
+}
+
+// Múltiples listeners
+btn.addEventListener("click", func1);
+btn.addEventListener("click", func2);  // Todos ejecutan
+`;
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>⚠️ Reglas importantes:</h3>
+<ul>
+  <li><strong>removeEventListener</strong> necesita <em>misma función nombrada</em></li>
+  <li>Funciones anónimas <code>() => {}</code> NO se pueden remover</li>
+  <li><code>event.preventDefault()</code> bloquea acción por defecto</li>
+  <li><code>event.stopPropagation()</code> evita propagación</li>
+</ul>
+</div>
+
+</body>
+</html>

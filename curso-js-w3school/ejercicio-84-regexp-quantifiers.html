@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript RegExp Quantifiers - ejemplos</h2>
+
+<button onclick="plusStar()">+ *</button>
+<button onclick="questionN()">{n} {n,m} {n,}</button>
+
+<p id="demo"></p>
+
+<script>
+const textQ = "Hellooo World! Hello W3Schools! 1, 100 or 1000? 100, 1000 or 10000?";
+
+function plusStar() {
+  const plusResult = textQ.match(/lo+/g);
+  const starResult = textQ.match(/lo*/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `/lo+/g: ${JSON.stringify(plusResult.slice(0,5))}...<br>
+    /lo*/g: ${JSON.stringify(starResult.slice(0,5))}...`;
+}
+
+function questionN() {
+  const textQ2 = "1, 100 or 1000?";
+  const questionResult = textQ2.match(/10?/g);
+  
+  const textN4 = "100, 1000 or 10000?";
+  const n4Result = textN4.match(/\d{4}/g);
+  const n3_4Result = textN4.match(/\d{3,4}/g);
+  const n3PlusResult = textN4.match(/\d{3,}/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `/10?/g: ${JSON.stringify(questionResult)}<br><br>
+    /\\d{4}/g: ${JSON.stringify(n4Result)}<br>
+    /\\d{3,4}/g: ${JSON.stringify(n3_4Result)}<br>
+    /\\d{3,}/g: ${JSON.stringify(n3PlusResult)}`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Function Definitions</h2>
+
+<button onclick="runExamples()">Ver ejemplos funciones</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+function miFunc() {}
+</pre>
+
+<script>
+function runExamples() {
+  document.getElementById("demo").innerHTML = 
+`// 1️⃣ FUNCTION DECLARATION (Hoisted)
+miFunc();  // ✅ Funciona ANTES declaración
+
+function miFunc() {
+  return "Declaration";
+}
+
+// 2️⃣ FUNCTION EXPRESSION (NO Hoisted)
+miExpr();  // ❌ ERROR antes declaración
+
+const miExpr = function() {
+  return "Expression";
+};
+
+// 3️⃣ ARROW FUNCTION (ES6)
+const arrow = (a, b) => a * b;
+arrow(2, 3);  // 6
+
+// 4️⃣ Múltiples formas
+const obj = {
+  metodo(a, b) { return a + b; }
+};
+
+// 5️⃣ Function son OBJETOS
+function mult(a, b) {
+  return arguments.length;  // Número argumentos
+}
+mult();      // 0
+mult(1,2);   // 2
+
+// 6️⃣ toString()
+mult.toString();  // Código fuente como string
+`;
+  
+  console.log("Ejemplos funciones ejecutados");
+}
+
+// Demo hoisting
+try {
+  console.log("Declaration:", declaration(2,3));  // ✅ 5
+  
+  function declaration(a,b) {
+    return a + b;
+  }
+} catch(e) {
+  console.log("Declaration error:", e);
+}
+
+try {
+  console.log("Expression:", expression(2,3));  // ❌ Error
+  
+  const expression = function(a,b) {
+    return a + b;
+  }
+} catch(e) {
+  console.log("Expression error:", e.message);
+}
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Declaration vs Expression:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Tipo</th><th>Syntax</th><th>Hoisting</th><th>Uso</th></tr>
+  <tr><td>Declaration</td><td><code>function nombre()</code></td><td>✅ Completo</td><td>Funciones globales</td></tr>
+  <tr><td>Expression</td><td><code>const fn = function()</code></td><td>❌ Solo var</td><td>Callbacks, objetos</td></tr>
+  <tr><td>Arrow</td><td><code>() => {}</code></td><td>❌ No</td><td>ES6 moderno, callbacks</td></tr>
+</table>
+</div>
+
+</body>
+</html>

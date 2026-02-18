@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Timing Events - setTimeout / setInterval</h2>
+
+<button id="startClock">▶️ Reloj</button>
+<button id="stopClock">⏹️ Parar</button>
+<button id="alertBtn">⏰ Alerta 3s</button>
+
+<p id="clock">00:00:00</p>
+<p id="counter">Contador: 0</p>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+let id = setInterval(func, 1000);
+clearInterval(id);
+</pre>
+
+<script>
+let clockInterval;
+let counterInterval;
+let count = 0;
+
+document.getElementById("startClock").onclick = function() {
+  clockInterval = setInterval(showTime, 1000);
+};
+
+document.getElementById("stopClock").onclick = function() {
+  clearInterval(clockInterval);
+  clearInterval(counterInterval);
+  count = 0;
+  document.getElementById("counter").innerHTML = "Contador: 0";
+};
+
+document.getElementById("alertBtn").onclick = function() {
+  setTimeout(() => {
+    alert("¡3 segundos después!");
+  }, 3000);
+};
+
+// Reloj cada segundo
+function showTime() {
+  const now = new Date();
+  const time = now.toLocaleTimeString();
+  document.getElementById("clock").innerHTML = time;
+  
+  // Contador cada 500ms
+  if (!counterInterval) {
+    counterInterval = setInterval(() => {
+      count++;
+      document.getElementById("counter").innerHTML = `Contador: ${count}`;
+    }, 500);
+  }
+}
+
+document.getElementById("demo").innerHTML = 
+`// setTimeout() - UNA vez
+setTimeout(func, 3000);           // 3 segundos
+setTimeout(func, 0);              // Lo más rápido posible
+
+// setInterval() - REPETIDO
+let id = setInterval(func, 1000); // Cada segundo
+clearInterval(id);                // Para
+
+// Parámetros adicionales
+setTimeout(func, 1000, "param1", 42);
+
+// Arrow function moderna
+setTimeout(() => console.log("Hola"), 1000);
+`;
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>setTimeout vs setInterval:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Método</th><th>Ejecuta</th><th>Detener</th></tr>
+  <tr><td>setTimeout</td><td>1 vez</td><td>Automático</td></tr>
+  <tr><td>setInterval</td><td>Repetido</td><td>clearInterval(id)</td></tr>
+</table>
+</div>
+
+</body>
+</html>

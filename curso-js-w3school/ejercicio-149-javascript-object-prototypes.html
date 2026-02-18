@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 149 - JavaScript Object Prototypes</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #007bff; }
+    button { background: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    #output { margin-top: 20px; padding: 15px; background: #cce7ff; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    .proto { background: #e7f3ff; padding: 10px; margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Object Prototypes (Herencia)</h1>
+
+<div class="example">
+  <h3>1. Constructor básico SIN prototype</h3>
+  <div class="proto">myFather: <span id="result1"></span></div>
+</div>
+
+<div class="example">
+  <h3>2. ❌ NO funciona: Person.nationality</h3>
+  <pre>Person.nationality = "English"; // NO comparte</pre>
+  <div class="proto">nationality: <span id="result2">undefined</span></div>
+</div>
+
+<div class="example">
+  <h3>3. ✅ Prototype: Person.prototype.nationality</h3>
+  <div class="proto">Prototype nationality: <span id="result3"></span></div>
+</div>
+
+<div class="example">
+  <h3>4. Prototype Method: name()</h3>
+  <button onclick="testProtoMethod()">Probar name()</button>
+  <div class="proto">Resultado: <span id="protoMethod"></span></div>
+</div>
+
+<div class="example">
+  <h3>5. Cadena de prototipos</h3>
+  <div class="proto">Cadena completa: <span id="protoChain"></span></div>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <input type="text" id="protoFirst" placeholder="Nombre" value="Pedro">
+  <input type="text" id="protoLast" placeholder="Apellido" value="Gómez">
+  <button onclick="createProtoPerson()">Crear con prototype</button>
+  <br><br>
+  <button onclick="testMyProto()" id="testProtoBtn" style="display:none">Probar métodos</button>
+  <div id="myProtoResult"></div>
+</div>
+
+<script>
+  // ========== CONSTRUCTOR BÁSICO ==========
+  function Person(first, last, age, eyecolor) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eyecolor;
+  }
+
+  const myFather = new Person("John", "Doe", 50, "blue");
+  const myMother = new Person("Sally", "Rally", 48, "green");
+
+  document.getElementById('result1').textContent = `John Doe, ${myFather.age} años`;
+
+  // ========== 2. NO FUNCIONA: Directo en constructor ==========
+  Person.nationality = "English"; // NO se hereda
+  document.getElementById('result2').textContent = myFather.nationality;
+
+  // ========== 3. PROTOTYPE: TODOS comparten ==========
+  Person.prototype.nationality = "English";
+  document.getElementById('result3').textContent = `${myFather.nationality} / ${myMother.nationality}`;
+
+  // ========== 4. PROTOTYPE METHOD ==========
+  Person.prototype.name = function() {
+    return this.firstName + " " + this.lastName;
+  };
+
+  function testProtoMethod() {
+    document.getElementById('protoMethod').textContent = 
+      `myFather: ${myFather.name()} | myMother: ${myMother.name()}`;
+  }
+
+  // ========== 5. CADENA PROTOTIPOS ==========
+  document.getElementById('protoChain').textContent = 
+    `myFather → Person.prototype → Object.prototype → null`;
+
+  // ========== DEMO INTERACTIVO ==========
+  function createProtoPerson() {
+    const first = document.getElementById('protoFirst').value;
+    const last = document.getElementById('protoLast').value;
+    window.myProtoPerson = new Person(first, last, 30, "brown");
+    document.getElementById('testProtoBtn').style.display = 'inline-block';
+  }
+
+  function testMyProto() {
+    if (window.myProtoPerson) {
+      document.getElementById('myProtoResult').innerHTML = `
+        <div>Nombre: ${myProtoPerson.name()}</div>
+        <div>Nationality: ${myProtoPerson.nationality}</div>
+        <div>Age: ${myProtoPerson.age}</div>
+        <div><strong>¡HEREDADO del prototype!</strong></div>
+      `;
+    }
+  }
+</script>
+
+</body>
+</html>

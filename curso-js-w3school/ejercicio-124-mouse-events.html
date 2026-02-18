@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Mouse Events</h2>
+
+<div id="box" style="width:250px;height:120px;padding:20px;border:3px solid #333;background:#f0f8ff;cursor:pointer;margin:20px 0;font-family:Arial;">
+  Mueve el mouse aquí
+</div>
+
+<p id="coords">X: 0 Y: 0</p>
+<p id="stats">
+  click: 0 | mouseover: 0 | mousedown: 0
+</p>
+
+<button onclick="resetStats()">Reset Contador</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+box.addEventListener("mouseover", function(event) {});
+</pre>
+
+<script>
+const box = document.getElementById("box");
+const coords = document.getElementById("coords");
+const stats = document.getElementById("stats");
+
+let clickCount = 0, overCount = 0, downCount = 0;
+
+box.addEventListener("click", function(event) {
+  clickCount++;
+  box.style.background = "#90EE90";
+  box.innerHTML = "¡Click detectado!";
+  updateStats();
+  setTimeout(() => {
+    box.style.background = "#f0f8ff";
+    box.innerHTML = "Mueve el mouse aquí";
+  }, 300);
+});
+
+box.addEventListener("mouseover", function(event) {
+  overCount++;
+  box.style.borderColor = "#4CAF50";
+  updateStats();
+});
+
+box.addEventListener("mouseout", function(event) {
+  box.style.borderColor = "#333";
+});
+
+box.addEventListener("mousedown", function(event) {
+  downCount++;
+  box.style.transform = "scale(0.95)";
+  updateStats();
+});
+
+box.addEventListener("mouseup", function(event) {
+  box.style.transform = "scale(1)";
+});
+
+document.addEventListener("mousemove", function(event) {
+  coords.innerHTML = `X: ${event.clientX} Y: ${event.clientY}`;
+});
+
+function updateStats() {
+  stats.innerHTML = `click: ${clickCount} | mouseover: ${overCount} | mousedown: ${downCount}`;
+}
+
+function resetStats() {
+  clickCount = overCount = downCount = 0;
+  updateStats();
+}
+
+document.getElementById("demo").innerHTML = 
+`// Mouse Events principales
+"click"          // mousedown + mouseup
+"dblclick"       // Doble click
+"mouseover"      // Mouse entra (incluye hijos)
+"mouseout"       // Mouse sale (incluye hijos)
+"mouseenter"     // Mouse entra (NO hijos)
+"mouseleave"     // Mouse sale (NO hijos)
+"mousedown"      // Botón presionado
+"mouseup"        // Botón soltado
+"mousemove"      // Mouse se mueve
+
+// Coordenadas event
+event.clientX    // Relativo viewport
+event.clientY    // Relativo viewport
+event.pageX      // Relativo documento
+event.pageY      // Relativo documento
+`;
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>Diferencia mouseover vs mouseenter:</h3>
+<ul>
+  <li><strong>mouseover/out:</strong> Se dispara con hijos</li>
+  <li><strong>mouseenter/leave:</strong> Ignora hijos (como CSS :hover)</li>
+</ul>
+</div>
+
+</body>
+</html>

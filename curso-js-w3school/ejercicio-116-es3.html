@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 3 (1999) - Primera revisión</h2>
+
+<button onclick="showES3()">Ver features ES3</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+try { x = y; } catch(err) {}
+</pre>
+
+<script>
+function showES3() {
+  document.getElementById("demo").innerHTML = 
+`// 1. Regular Expressions
+let text = "Visit W3Schools";
+text.search(/w3schools/i);  // Busca case-insensitive
+
+// 2. try...catch error handling
+let x = 5;
+try {
+  x = y + 1;  // y no existe → ReferenceError
+} catch(err) {
+  console.log(err.name);  // "ReferenceError"
+}
+
+// 3. switch statement
+switch (new Date().getDay()) {
+  case 0: day = "Sunday"; break;
+  case 1: day = "Monday"; break;
+  case 2: day = "Tuesday"; break;
+  case 3: day = "Wednesday"; break;
+  case 4: day = "Thursday"; break;
+  case 5: day = "Friday"; break;
+  case 6: day = "Saturday"; break;
+  default: day = "Unknown";
+}
+
+// 4. do...while loop
+let i = 0;
+do {
+  console.log("Number: " + i);
+  i++;
+} while (i < 3);
+`;
+}
+
+console.log("ES3 features básicas de JavaScript");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>ES3 (1999) - Features clave:</h3>
+<ul>
+  <li>Regular Expressions (/pattern/)</li>
+  <li>try...catch error handling</li>
+  <li>switch statement</li>
+  <li>do...while loop</li>
+</ul>
+</div>
+
+</body>
+</html>

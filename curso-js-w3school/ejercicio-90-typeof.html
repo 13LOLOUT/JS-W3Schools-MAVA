@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript typeof - ejemplos</h2>
+
+<button onclick="primitiveTypes()">Primitivos typeof</button>
+<button onclick="complexTypes()">Objetos + Array.isArray</button>
+<button onclick="typeCheckers()">instanceof constructor</button>
+
+<p id="demo"></p>
+
+<script>
+function primitiveTypes() {
+  document.getElementById("demo").innerHTML = 
+    `typeof "John": ${typeof "John"}<br>
+    typeof 3.14: ${typeof 3.14}<br>
+    typeof true: ${typeof true}<br>
+    typeof 1234n: ${typeof 1234n}<br>
+    typeof Symbol(): ${typeof Symbol()}<br>
+    typeof undefined: ${typeof undefined}<br>
+    typeof null: ${typeof null}`;
+}
+
+function complexTypes() {
+  const obj = {name:'John'};
+  const arr = [1,2,3];
+  const fn = function(){};
+  
+  document.getElementById("demo").innerHTML = 
+    `typeof {obj}: ${typeof obj}<br>
+    typeof [arr]: ${typeof arr}<br>
+    typeof function: ${typeof fn}<br>
+    Array.isArray(arr): ${Array.isArray(arr)}`;
+}
+
+function typeCheckers() {
+  const fruits = ["apples", "bananas"];
+  const time = new Date();
+  const fruitsMap = new Map([["apples",500]]);
+  
+  document.getElementById("demo").innerHTML = 
+    `fruits instanceof Array: ${fruits instanceof Array}<br>
+    time instanceof Date: ${time instanceof Date}<br>
+    fruitsMap instanceof Map: ${fruitsMap instanceof Map}<br><br>
+    
+    fruits.constructor: ${fruits.constructor.name}<br>
+    time.constructor: ${time.constructor.name}`;
+}
+</script>
+
+</body>
+</html>

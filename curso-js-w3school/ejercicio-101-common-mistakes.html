@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Common Mistakes</h2>
+
+<button onclick="showMistakes()">Ver errores comunes</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+let x = 0;
+if (x = 10) {  // ❌ Asignación
+  console.log("Ejecuta!");
+}
+</pre>
+
+<script>
+function showMistakes() {
+  document.getElementById("demo").innerHTML = 
+`// 1. = en lugar de ==
+let x = 0;
+if (x = 10) {      // ❌ Asigna 10, siempre true
+  console.log("Ejecuta!");
+}
+if (x == 10) {     // ✅ Compara correctamente
+  console.log("NO ejecuta");
+}
+
+// 2. == vs === en switch
+let x = 10;
+switch(x) {
+  case "10": console.log("NO ejecuta");  // ❌ switch usa ===
+  case 10:   console.log("Ejecuta");     // ✅
+}
+
+// 3. + suma vs concatenación
+let x = 10;
+let y = "5";
+x + y;  // "105" ❌
+
+// 4. Floats imprecisos
+let x = 0.1;
+let y = 0.2;
+x + y;  // 0.30000000000000004 ❌
+
+// 5. String partido MAL
+let x = "Hello
+World";  // ❌ Syntax Error
+
+// 6. Semicolon mal puesto
+if (x == 19); {    // ❌ Semicolon ejecuta siempre
+  console.log("Ejecuta");
+}
+
+// 7. Return partido
+function myFunction(a) {
+  let power = 10;
+  return     // ❌ Cierra aquí
+  a * power; // Nunca llega
+}
+
+// 8. Array con índices nombrados
+const person = [];
+person["firstName"] = "John";  // ❌ Convierte a objeto
+person.length;  // 0 ❌
+person[0];      // undefined ❌
+`;
+}
+
+console.log("Common mistakes cargados");
+</script>
+
+<div style="background:#f8d7da; padding:15px; margin:20px 0; border-left:4px solid #dc3545;">
+<h3>Errores más comunes:</h3>
+<ul>
+  <li>= en lugar de == en if</li>
+  <li>== loose comparison (usar ===)</li>
+  <li>switch con strings cuando es number</li>
+  <li>+ número + string = concatenación</li>
+  <li>Floats: 0.1 + 0.2 != 0.3</li>
+  <li>Semicolon después de if</li>
+  <li>return en línea nueva</li>
+</ul>
+</div>
+
+</body>
+</html>             

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2024 - Nuevas Features</h2>
+
+<button onclick="showES2024()">Ver ejemplos ES2024</button>
+
+<p id="demo">Click para ver ejemplos</p>
+
+<pre id="code" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+const fruits = [
+  {name:"apples", quantity:300},
+  {name:"bananas", quantity:500}
+];
+</pre>
+
+<script>
+function showES2024() {
+  const fruits = [
+    {name:"apples", quantity:300},
+    {name:"bananas", quantity:500},
+    {name:"oranges", quantity:200},
+    {name:"kiwi", quantity:150}
+  ];
+
+  function myCallback({ quantity }) {
+    return quantity > 200 ? "ok" : "low";
+  }
+
+  document.getElementById("code").innerHTML = 
+`// 1. Object.groupBy()
+const result1 = Object.groupBy(fruits, myCallback);
+console.log(result1);
+// {ok: [{name:"apples",...}, {name:"bananas",...}], low: [...]}
+
+// 2. Map.groupBy()
+const result2 = Map.groupBy(fruits, myCallback);
+console.log(result2);
+// Map(2) { "ok" => Array(2), "low" => Array(2) }
+
+// 3. String isWellFormed()
+"Hello world!".isWellFormed();     // true
+"Hello \\uD800".isWellFormed();    // false
+
+// 4. String toWellFormed()
+"Hello \\uD800".toWellFormed();    // "Hello �"
+
+// 5. Promise.withResolvers()
+const {promise, resolve, reject} = Promise.withResolvers();
+`;
+
+  // Promise.withResolvers demo live
+  const {promise, resolve, reject} = Promise.withResolvers();
+  setTimeout(() => {
+    Math.random() > 0.5 ? resolve("Success!") : reject("Failed!");
+  }, 1000);
+
+  promise
+    .then(msg => document.getElementById("demo").innerHTML = msg)
+    .catch(err => document.getElementById("demo").innerHTML = err);
+}
+
+console.log("ES2024 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2024:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>Object.groupBy()</td><td>108+</td><td>108+</td><td>121+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

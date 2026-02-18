@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Loops - ejemplos</h2>
+
+<button onclick="forLoop()">for</button>
+<button onclick="whileLoop()">while</button>
+<button onclick="doWhile()">do...while</button>
+<button onclick="forIn()">for...in</button>
+<button onclick="forOf()">for...of</button>
+
+<p id="demo"></p>
+
+<script>
+function forLoop() {
+  let text = "";
+  for (let i = 0; i < 5; i++) {
+    text += "The number is " + i + "<br>";
+  }
+  document.getElementById("demo").innerHTML = text;
+}
+
+function whileLoop() {
+  let i = 0;
+  let text = "";
+  while (i < 5) {
+    text += "The number is " + i + "<br>";
+    i++;
+  }
+  document.getElementById("demo").innerHTML = text;
+}
+
+function doWhile() {
+  let i = 0;
+  let text = "";
+  do {
+    text += "The number is " + i + "<br>";
+    i++;
+  } while (i < 5);
+  document.getElementById("demo").innerHTML = text;
+}
+
+function forIn() {
+  const person = {fname:"John", lname:"Doe", age:25};
+  let text = "";
+  for (let x in person) {
+    text += person[x] + " ";
+  }
+  document.getElementById("demo").innerHTML = `for...in person: ${text}`;
+}
+
+function forOf() {
+  const fruits = ["Banana", "Orange", "Apple"];
+  let text = "";
+  for (const fruit of fruits) {
+    text += fruit + " ";
+  }
+  document.getElementById("demo").innerHTML = `for...of fruits: ${text}`;
+}
+</script>
+
+</body>
+</html>

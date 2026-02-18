@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Callbacks</h2>
+
+<button onclick="runCallbacks()">Ver ejemplos callbacks</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+setTimeout(callback, 1000);
+</pre>
+
+<script>
+function runCallbacks() {
+  document.getElementById("demo").innerHTML = 
+`// 1️⃣ EVENT HANDLING (callback)
+btn.addEventListener("click", displayDate);
+// ❌ NO: displayDate()
+✅ SÍ: displayDate (sin paréntesis)
+
+// 2️⃣ setTimeout (asíncrono)
+setTimeout(function() {
+  console.log("¡3 segundos después!");
+}, 3000);
+
+// 3️⃣ Array methods (síncrono)
+[1,2,3].forEach(x => console.log(x));
+[1,2,3].map(x => x * 2);     // [2,4,6]
+
+// 4️⃣ CALLBACK HELL (control secuencia)
+function myDisplayer(some) {
+  document.getElementById("demo").innerHTML = some;
+}
+
+function myCalculator(num1, num2, callback) {
+  let sum = num1 + num2;
+  callback(sum);  // ← CALLBACK
+}
+
+myCalculator(5, 5, myDisplayer);  // 10
+`;
+}
+
+// Demo en vivo
+function displayDate() {
+  document.getElementById("demo").innerHTML += "<br>✅ Callback ejecutado: " + new Date().toLocaleTimeString();
+}
+
+// Array callback
+const numbers = [1,2,3,4,5];
+console.log("forEach:", numbers.forEach(n => console.log(n)));
+console.log("map:", numbers.map(n => n*2)); // [2,4,6,8,10]
+
+// setTimeout callback
+setTimeout(() => {
+  console.log("✅ setTimeout callback 2s");
+}, 2000);
+
+console.log("Callbacks demo cargados");
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>Tipos de Callbacks:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Tipo</th><th>Ejemplo</th><th>Cuándo se ejecuta</th></tr>
+  <tr><td>Síncrono</td><td><code>array.forEach(callback)</code></td><td>Inmediato</td></tr>
+  <tr><td>Asíncrono</td><td><code>setTimeout(callback, 1000)</code></td><td>Después delay</td></tr>
+  <tr><td>Eventos</td><td><code>addEventListener("click", callback)</code></td><td>Click usuario</td></tr>
+</table>
+
+<h4>🔑 Regla oro:</h4>
+<p><code>addEventListener("click", miFuncion)</code> ✅</p>
+<p><code>addEventListener("click", miFuncion())</code> ❌</p>
+</div>
+
+</body>
+</html>

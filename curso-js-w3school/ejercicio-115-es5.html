@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2009 (ES5) - Primera gran revisión</h2>
+
+<button onclick="showES5()">Ver principales features ES5</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+"use strict";
+"HELLO"[0];  // "H"
+</pre>
+
+<script>
+function showES5() {
+  document.getElementById("demo").innerHTML = 
+`// 1. "use strict" - Modo estricto
+"use strict";
+x = 10;  // ❌ Error (variable no declarada)
+
+// 2. String access []
+"HELLO WORLD"[0];  // "H" (igual que charAt(0))
+
+// 3. Array methods funcionales
+const numbers = [1,2,3,4,5];
+
+// forEach
+numbers.forEach(x => console.log(x));
+
+// map
+const doubled = numbers.map(x => x * 2);
+
+// filter
+const evens = numbers.filter(x => x % 2 === 0);
+
+// reduce
+const sum = numbers.reduce((acc, x) => acc + x, 0);
+
+// 4. JSON
+const obj = {name: "John", age: 30};
+const json = JSON.stringify(obj);
+const parsed = JSON.parse(json);
+
+// 5. Object.keys()
+Object.keys({a:1, b:2});  // ["a", "b"]
+
+// 6. Getters/Setters
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  get fullName() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+person.fullName;  // "John Doe"
+
+// 7. Array.isArray()
+Array.isArray([]);     // true
+Array.isArray({});     // false
+`;
+}
+
+console.log("ES5 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>ES5 Principales (2009):</h3>
+<ul>
+  <li>"use strict"</li>
+  <li>Array: forEach, map, filter, reduce</li>
+  <li>JSON.parse/stringify</li>
+  <li>Object.keys()</li>
+  <li>Getters/Setters</li>
+  <li>Date.now()</li>
+</ul>
+</div>
+
+</body>
+</html>

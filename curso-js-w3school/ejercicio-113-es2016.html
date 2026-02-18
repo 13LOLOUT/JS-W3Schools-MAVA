@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2016 - Nuevas Features</h2>
+
+<button onclick="showES2016()">Ver ejemplos ES2016</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+let x = 5 ** 2;  // 25
+fruits.includes("Mango");
+</pre>
+
+<script>
+function showES2016() {
+  document.getElementById("demo").innerHTML = 
+`// 1. Exponentiation operator **
+let x = 5 ** 2;        // 25 (igual que Math.pow(5,2))
+let y = 3 ** 4;        // 81
+let z = 2 ** 10;       // 1024
+
+// 2. Exponentiation assignment **=
+let x = 5;
+x **= 2;               // x = 25
+
+// 3. Array.includes()
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.includes("Mango");    // true
+fruits.includes("Apple");    // true
+fruits.includes("Cherry");   // false
+
+// Comparación con indexOf()
+fruits.indexOf("Mango") !== -1;  // true (viejo método)
+fruits.includes("Mango");        // true (nuevo método)
+`;
+  
+  console.log("5 ** 2 =", 5 ** 2);
+  console.log("Array.includes funciona");
+}
+
+console.log("ES2016 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2016:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>** y includes()</td><td>52+</td><td>15+</td><td>52+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

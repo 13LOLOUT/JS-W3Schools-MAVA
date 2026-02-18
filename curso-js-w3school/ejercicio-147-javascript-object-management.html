@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 147 - JavaScript Object Management</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #6c757d; }
+    button { background: #6c757d; color: white; padding: 8px 16px; border: none; cursor: pointer; margin: 2px; }
+    button:hover { background: #545b62; }
+    #output { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    .prop-display { background: #e9ecef; padding: 8px; margin: 5px 0; font-family: monospace; }
+    .readonly { background: #ffeaa7; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Object Management (Property Descriptors)</h1>
+
+<div class="example">
+  <h3>1. Object.defineProperty() - Agregar propiedad</h3>
+  <div class="prop-display">Antes: <span id="beforeAdd"></span></div>
+  <div class="prop-display">Después year: <span id="afterAdd"></span></div>
+</div>
+
+<div class="example">
+  <h3>2. Cambiar propiedad</h3>
+  <button onclick="changeLanguage()">Cambiar language → "NO"</button>
+  <div class="prop-display">language: <span id="languageResult"></span></div>
+</div>
+
+<div class="example">
+  <h3>3. getOwnPropertyNames() vs Object.keys()</h3>
+  <button onclick="demoNames()">Mostrar propiedades</button>
+  <div class="prop-display">keys(): <span id="keysResult"></span></div>
+  <div class="prop-display">getOwnPropertyNames(): <span id="namesResult"></span></div>
+</div>
+
+<div class="example">
+  <h3>4. Atributos: writable/enumerable</h3>
+  <button onclick="makeReadOnly()">Hacer read-only</button>
+  <button onclick="tryChange()">Intentar cambiar</button>
+  <div class="prop-display readonly">¿Se cambió?: <span id="readonlyResult"></span></div>
+</div>
+
+<div class="example">
+  <h3>5. Counter con defineProperty</h3>
+  <button onclick="counterReset()">reset</button>
+  <button onclick="counterInc()">+1</button>
+  <button onclick="counterDec()">-1</button>
+  <input type="number" id="counterVal" value="3">
+  <button onclick="counterAdd()">add</button>
+  <div>Counter: <span id="counterDisplay">0</span></div>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <input type="text" id="customProp" placeholder="Nueva propiedad" value="city">
+  <input type="text" id="customValue" placeholder="Valor" value="Madrid">
+  <button onclick="addCustomProperty()">Agregar propiedad</button>
+  <div id="customProps"></div>
+</div>
+
+<script>
+  // ========== PERSONA BASE ==========
+  const person = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "EN"
+  };
+
+  // 1. AGREGAR PROPUEDAD
+  Object.defineProperty(person, "year", {value: "2008"});
+  document.getElementById('beforeAdd').textContent = JSON.stringify({firstName: person.firstName, lastName: person.lastName});
+  document.getElementById('afterAdd').textContent = JSON.stringify(person);
+
+  // 2. CAMBIAR PROPIEDAD
+  function changeLanguage() {
+    Object.defineProperty(person, "language", {value: "NO"});
+    document.getElementById('languageResult').textContent = person.language;
+  }
+
+  // 3. getOwnPropertyNames vs Object.keys
+  let hiddenLangPerson = { firstName: "John", lastName: "Doe", language: "EN" };
+  Object.defineProperty(hiddenLangPerson, "language", {enumerable: false});
+  
+  function demoNames() {
+    document.getElementById('keysResult').textContent = JSON.stringify(Object.keys(hiddenLangPerson));
+    document.getElementById('namesResult').textContent = JSON.stringify(Object.getOwnPropertyNames(hiddenLangPerson));
+  }
+
+  // 4. ATRIBUTOS writable/enumerable
+  let testProp = { test: "cambiable" };
+  function makeReadOnly() {
+    Object.defineProperty(testProp, "test", { writable: false });
+  }
+  function tryChange() {
+    try {
+      testProp.test = "nuevo";
+      document.getElementById('readonlyResult').textContent = "¡NO! Sigue siendo '" + testProp.test + "'";
+    } catch(e) {
+      document.getElementById('readonlyResult').textContent = "Error: " + e.message;
+    }
+  }
+
+  // 5. COUNTER CON DEFINEPROPERTY
+  const counterObj = { counter: 0 };
+  Object.defineProperty(counterObj, "reset", {
+    get: function() { this.counter = 0; }
+  });
+  Object.defineProperty(counterObj, "increment", {
+    get: function() { this.counter++; }
+  });
+  Object.defineProperty(counterObj, "decrement", {
+    get: function() { this.counter--; }
+  });
+  Object.defineProperty(counterObj, "add", {
+    set: function(value) { this.counter += value; }
+  });
+
+  function counterReset() { counterObj.reset; updateCounter(); }
+  function counterInc() { counterObj.increment; updateCounter(); }
+  function counterDec() { counterObj.decrement; updateCounter(); }
+  function counterAdd() {
+    counterObj.add = parseInt(document.getElementById('counterVal').value);
+    updateCounter();
+  }
+  function updateCounter() {
+    document.getElementById('counterDisplay').textContent = counterObj.counter;
+  }
+
+  // ========== DEMO INTERACTIVO ==========
+  const customPerson = { name: "Demo" };
+  function addCustomProperty() {
+    const prop = document.getElementById('customProp').value;
+    const value = document.getElementById('customValue').value;
+    
+    Object.defineProperty(customPerson, prop, {
+      value: value,
+      writable: true,
+      enumerable: true
+    });
+    
+    document.getElementById('customProps').innerHTML = 
+      `<div>Prop: ${prop} = "${customPerson[prop]}"</div>
+       <div>keys(): ${JSON.stringify(Object.keys(customPerson))}</div>`;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript RegExp Character Classes - ejemplos</h2>
+
+<button onclick="singleChar()">[a] [^a]</button>
+<button onclick="sets()">[abc] [^abc]</button>
+<button onclick="ranges()">[a-z] [0-9]</button>
+
+<p id="demo"></p>
+
+<script>
+const textHW = "Hello World!";
+const textAZ = "This is W3School";
+const textNum = "123456789";
+
+function singleChar() {
+  const result1 = textHW.match(/[HW]/g);
+  const result2 = textHW.match(/[^HW]/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `[HW]: ${JSON.stringify(result1)}<br>
+    [^HW]: ${JSON.stringify(result2.slice(0,5))}...`;
+}
+
+function sets() {
+  const result1 = textNum.match(/[1234]/g);
+  const result2 = textNum.match(/[^1234]/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `[1234]: ${JSON.stringify(result1)}<br>
+    [^1234]: ${JSON.stringify(result2)}`;
+}
+
+function ranges() {
+  const resultAZ = textAZ.match(/[A-Z]/g);
+  const result09 = textNum.match(/[0-9]/g);
+  const resultNeg = "abc123".match(/[^a-z]/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `[A-Z]: ${JSON.stringify(resultAZ)}<br>
+    [0-9]: ${JSON.stringify(result09)}<br>
+    [^a-z]: ${JSON.stringify(resultNeg)}`;
+}
+</script>
+
+</body>
+</html>

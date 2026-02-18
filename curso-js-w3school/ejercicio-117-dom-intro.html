@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>HTML DOM - Document Object Model</h2>
+
+<button onclick="domDemo()">Ver DOM básico</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+const element = document.getElementById("demo");
+element.innerHTML = "Hello DOM!";
+</pre>
+
+<script>
+function domDemo() {
+  // 1. Acceder por ID
+  const para = document.getElementById("demo");
+  
+  // 2. Propiedades DOM
+  para.innerHTML = "¡DOM funcionando!";
+  para.style.color = "blue";
+  para.style.fontSize = "20px";
+  
+  document.getElementById("demo").innerHTML = 
+`// DOM Tree básico
+Document
+├── <html>
+│   ├── <head>
+│   └── <body>
+│       ├── <h1> Element Node
+│       ├── <p id="demo"> Element Node
+│       │   └── "Texto" Text Node
+│       └── <script> Element Node
+
+// Métodos principales
+document.getElementById("id");     // Por ID
+document.getElementsByTagName("p"); // Por tag
+document.querySelector(".class");   // CSS selector
+
+// Propiedades comunes
+element.innerHTML     // Contenido HTML
+element.textContent   // Solo texto
+element.style.color   // CSS
+element.className     // Clases CSS
+`;
+}
+
+console.log("DOM básico cargado");
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>DOM Nodos principales:</h3>
+<ul>
+  <li><strong>Document</strong> - Raíz del árbol</li>
+  <li><strong>Element</strong> - &lt;p&gt;, &lt;div&gt;</li>
+  <li><strong>Text</strong> - "Hola mundo"</li>
+  <li><strong>Attribute</strong> - id="demo"</li>
+</ul>
+</div>
+
+</body>
+</html>

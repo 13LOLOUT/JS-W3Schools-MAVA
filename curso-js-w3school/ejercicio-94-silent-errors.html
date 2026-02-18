@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Silent Errors - ejemplos</h2>
+
+<button onclick="divisionZero()">1/0 = ∞</button>
+<button onclick="assignmentError()">Asignación ≠ Comparación</button>
+<button onclick="nanError()">NaN silencioso</button>
+<button onclick="undefinedError()">undefined silencioso</button>
+<button onclick="coercionError()">Type coercion</button>
+
+<p id="demo"></p>
+
+<script>
+function divisionZero() {
+  let x = 1 / 0;
+  document.getElementById("demo").innerHTML = 
+    `1 / 0 = ${x} ✅ NO error, sigue ejecutando<br>
+    <span style="color:orange">Silent Error: Infinity NO detiene programa</span>`;
+}
+
+function assignmentError() {
+  let result = "Not Active.";
+  let isActive = false;
+  
+  // ❌ Asignación en lugar de comparación
+  if (isActive = true) {
+    result = "Active!";
+  }
+  
+  document.getElementById("demo").innerHTML = 
+    `if (isActive = true) → "${result}"<br>
+    <span style="color:red">❌ Silent Error: Asignó true, NO comparó</span><br>
+    isActive ahora es: ${isActive}`;
+}
+
+function nanError() {
+  const result = parseInt("abc");
+  document.getElementById("demo").innerHTML = 
+    `parseInt("abc") = ${result}<br>
+    <span style="color:orange">Silent Error: NaN NO detiene programa</span>`;
+}
+
+function undefinedError() {
+  const user = {};
+  let result = user.name;
+  document.getElementById("demo").innerHTML = 
+    `user.name = ${result}<br>
+    <span style="color:orange">Silent Error: undefined NO detiene programa</span>`;
+}
+
+function coercionError() {
+  let result1 = ('5' + '2');
+  let result2 = ('5' - '2');
+  document.getElementById("demo").innerHTML = 
+    `'5' + '2' = "${result1}"<br>
+    '5' - '2' = ${result2}<br>
+    <span style="color:red">❌ Silent Error: Coerción diferente por operador</span>`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2021 - Nuevas Features</h2>
+
+<button onclick="showES2021()">Ver ejemplos ES2021</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+const num = 1_000_000_000;
+text = text.replaceAll("Cats", "Dogs");
+</pre>
+
+<script>
+function showES2021() {
+  document.getElementById("demo").innerHTML = 
+`// 1. Numeric Separator (_)
+const num1 = 1_000_000_000;     // 1000000000
+const num2 = 123_456_789.99;    // 123456789.99
+const num3 = 0xA_B_C_D;         // Hex también
+console.log(num1 === 1000000000);  // true
+
+// 2. String.replaceAll()
+let text = "Cats are Cats. cats are cats.";
+text = text.replaceAll("Cats", "Dogs");        // "Dogs are Dogs..."
+text = text.replaceAll(/cats/g, "dogs");       // regex con flag g
+
+// 3. Promise.any() - primer resolved
+const p1 = new Promise(resolve => setTimeout(resolve, 200, "King"));
+const p2 = new Promise(resolve => setTimeout(resolve, 100, "Queen"));
+
+Promise.any([p1, p2]).then(result => {
+  console.log(result);  // "Queen" (más rápido)
+});
+`;
+  
+  console.log("1_000_000_000 == 1000000000:", 1_000_000_000 === 1000000000);
+}
+
+console.log("ES2021 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2021:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>Promise.any(), replaceAll()</td><td>85+</td><td>85+</td><td>79+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript RegExp Metacharacters - ejemplos</h2>
+
+<button onclick="digitsWords()">\d \D \w \W</button>
+<button onclick="spaces()">\s \S</button>
+<button onclick="hexUnicode()">\xhh \uhhhh</button>
+
+<p id="demo"></p>
+
+<script>
+const textMeta = "Give 100%! Is this all?";
+
+function digitsWords() {
+  const dResult = textMeta.match(/\d/g);
+  const DResult = textMeta.match(/\D/g);
+  const wResult = textMeta.match(/\w/g);
+  const WResult = textMeta.match(/\W/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `\\d: ${JSON.stringify(dResult)}<br>
+    \\D: ${JSON.stringify(DResult.slice(0,10))}...<br>
+    \\w: ${JSON.stringify(wResult.slice(0,10))}...<br>
+    \\W: ${JSON.stringify(WResult)}`;
+}
+
+function spaces() {
+  const textSpace = "Is  this  all  there  is?";
+  const sResult = textSpace.match(/\s/g);
+  const SResult = textSpace.match(/\S/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `\\s: ${JSON.stringify(sResult)}<br>
+    \\S: ${JSON.stringify(SResult.slice(0,10))}...`;
+}
+
+function hexUnicode() {
+  const textHex = "Visit W3Schools. Hello World!";
+  
+  // \x6F = 'o'
+  const hexResult = textHex.replace(/\x6F/g, "*");
+  
+  // \u0057 = 'W'
+  const uniResult = textHex.match(/\u0057/g);
+  
+  document.getElementById("demo").innerHTML = 
+    `replace(/\\x6F/g,'*'): ${hexResult.substring(0,25)}...<br>
+    /\\u0057/g: ${JSON.stringify(uniResult)}`;
+}
+</script>
+
+</body>
+</html>

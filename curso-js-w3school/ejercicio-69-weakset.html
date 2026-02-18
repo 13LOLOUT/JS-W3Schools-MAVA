@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript WeakSet - ejemplos</h2>
+
+<button onclick="weakSetBasic()">WeakSet básico</button>
+<button onclick="garbageCollection()">Garbage Collection</button>
+<button onclick="trackVisitors()">Track Visitors</button>
+
+<p id="demo"></p>
+
+<script>
+// WeakSet básico
+let mySet = new WeakSet();
+let myObj = {fname:"John", lname:"Doe"};
+mySet.add(myObj);
+
+function weakSetBasic() {
+  const ws = new WeakSet();
+  const obj1 = {name: "John"};
+  const obj2 = {name: "Jane"};
+  
+  ws.add(obj1);
+  ws.add(obj2);
+  
+  const hasObj1 = ws.has(obj1);
+  const hasObj2 = ws.has(obj2);
+  
+  document.getElementById("demo").innerHTML = 
+    `add(obj1,obj2): OK<br>
+    has(obj1): ${hasObj1}<br>
+    has(obj2): ${hasObj2}`;
+}
+
+function garbageCollection() {
+  let ws = new WeakSet();
+  let obj = {name: "Test"};
+  
+  ws.add(obj);
+  const hasObj = ws.has(obj);
+  
+  // Simular garbage collection (obj = null)
+  obj = null;
+  
+  document.getElementById("demo").innerHTML = 
+    `Antes GC: has(obj) = ${hasObj}<br>
+    Después obj=null: automáticamente eliminado`;
+}
+
+let text = "";
+const persons = new WeakSet();
+
+function trackVisitors() {
+  // Reset tracking
+  text = "";
+  persons.clear = function() {}; // WeakSet no tiene clear(), simular
+  
+  const John = {name:"John", age:40};
+  const Paul = {name:"Paul", age:41};
+  
+  track(Paul);
+  track(John);
+  track(Paul);
+  
+  document.getElementById("demo").innerHTML = text;
+}
+
+function track(visitor) {
+  if (persons.has(visitor)) {
+    text += visitor.name + " is visiting again.<br>";
+  } else {
+    persons.add(visitor);
+    text += visitor.name + ", age " + visitor.age + ", is visiting for the first time<br>";
+  }
+}
+</script>
+
+</body>
+</html>

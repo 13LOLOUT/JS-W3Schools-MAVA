@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 143 - JavaScript Object Definitions</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #6f42c1; }
+    button { background: #6f42c1; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background: #5a32a3; }
+    #output { margin-top: 20px; padding: 15px; background: #e2d9f3; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    .obj-display { background: #e9ecef; padding: 10px; margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Object Definitions (6 Métodos)</h1>
+
+<div class="example">
+  <h3>1. Object Literal (Más común)</h3>
+  <pre id="demo1">// const person = { firstName: "John", ... }</pre>
+  <div class="obj-display">Objeto: <span id="result1"></span></div>
+</div>
+
+<div class="example">
+  <h3>2. new Object() (Igual pero más largo)</h3>
+  <div class="obj-display">Objeto new: <span id="result2"></span></div>
+</div>
+
+<div class="example">
+  <h3>3. Object.create() (Herencia)</h3>
+  <button onclick="demoCreate()">Crear con herencia</button>
+  <div class="obj-display">Hijo: <span id="result3"></span></div>
+</div>
+
+<div class="example">
+  <h3>4. Object.fromEntries() (ES2019)</h3>
+  <div class="obj-display">De array: <span id="result4"></span></div>
+</div>
+
+<div class="example">
+  <h3>5. Object.assign() (Copiar propiedades)</h3>
+  <button onclick="demoAssign()">Mezclar objetos</button>
+  <div class="obj-display">Resultado: <span id="result5"></span></div>
+</div>
+
+<div class="example">
+  <h3>6. Primitivos vs Objetos (Referencia)</h3>
+  <button onclick="demoReference()">Cambiar por referencia</button>
+  <p id="refResult"></p>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <input type="text" id="objName" placeholder="Nombre" value="Carlos">
+  <input type="number" id="objAge" placeholder="Edad" value="25">
+  <button onclick="createCustomObj()">Crear mi objeto</button>
+  <div class="obj-display">Mi objeto: <span id="customObj"></span></div>
+  <button onclick="copyCustomObj()" id="copyBtn" style="display:none">Copiar & Modificar</button>
+</div>
+
+<script>
+  // ========== TODOS LOS EJEMPLOS DE W3SCHOOLS ==========
+
+  // 1. OBJECT LITERAL (más simple y rápido)
+  const personLiteral = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 50,
+    eyeColor: "blue"
+  };
+  document.getElementById('result1').textContent = JSON.stringify(personLiteral, null, 2);
+
+  // 2. NEW OBJECT() (misma cosa, más verbose)
+  const personNew = new Object({
+    firstName: "John",
+    lastName: "Doe",
+    age: 50,
+    eyeColor: "blue"
+  });
+  document.getElementById('result2').textContent = JSON.stringify(personNew, null, 2);
+
+  // 3. OBJECT.CREATE() (herencia prototipal)
+  const parentProto = { firstName: "John", lastName: "Doe" };
+  function demoCreate() {
+    const man = Object.create(parentProto);
+    man.firstName = "Peter";
+    document.getElementById('result3').textContent = 
+      `man: ${JSON.stringify(man)}\nProto: ${JSON.stringify(parentProto)}`;
+  }
+
+  // 4. OBJECT.FROMENTRIES() (array → objeto)
+  const fruits = [
+    ["apples", 300],
+    ["pears", 900],
+    ["bananas", 500]
+  ];
+  const myObj = Object.fromEntries(fruits);
+  document.getElementById('result4').textContent = JSON.stringify(myObj, null, 2);
+
+  // 5. OBJECT.ASSIGN() (mezclar objetos)
+  const person1 = { firstName: "John", lastName: "Doe", age: 50, eyeColor: "blue" };
+  const person2 = { firstName: "Anne", lastName: "Smith" };
+  function demoAssign() {
+    Object.assign(person1, person2);
+    document.getElementById('result5').textContent = JSON.stringify(person1, null, 2);
+  }
+
+  // 6. REFERENCIA vs VALOR (objetos mutables)
+  function demoReference() {
+    const personRef = { firstName: "John", lastName: "Doe", age: 50 };
+    const x = personRef;
+    x.age = 10;
+    
+    document.getElementById('refResult').innerHTML = 
+      `personRef.age: ${personRef.age}<br>x.age: ${x.age}<br>
+       ¡Ambos cambiaron! (misma referencia)`;
+  }
+
+  // ========== DEMO INTERACTIVO ==========
+  let customObject = null;
+  function createCustomObj() {
+    const name = document.getElementById('objName').value;
+    const age = document.getElementById('objAge').value;
+    customObject = { name, age, type: "custom" };
+    document.getElementById('customObj').textContent = JSON.stringify(customObject, null, 2);
+    document.getElementById('copyBtn').style.display = 'inline-block';
+  }
+
+  function copyCustomObj() {
+    if (customObject) {
+      const copy = customObject; // ¡Por referencia!
+      copy.age = parseInt(copy.age) + 10;
+      document.getElementById('customObj').textContent = JSON.stringify(customObject, null, 2);
+      document.getElementById('refResult').innerHTML += '<br><strong>¡Copia cambió el original!</strong>';
+    }
+  }
+</script>
+
+</body>
+</html>

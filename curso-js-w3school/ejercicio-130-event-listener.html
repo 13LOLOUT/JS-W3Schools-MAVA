@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>addEventListener() vs onclick</h2>
+
+<button id="btn1">addEventListener</button>
+<button id="btn2">onclick</button>
+<button id="multiBtn">Múltiples Eventos</button>
+<button id="windowBtn">Resize Window</button>
+
+<p id="demo">Click cualquier botón</p>
+
+<pre id="code" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+btn.addEventListener("click", func);
+</pre>
+
+<script>
+// Función compartida
+function showMessage(msg) {
+  document.getElementById("demo").innerHTML = msg + " - " + new Date().toLocaleTimeString();
+}
+
+// 1. addEventListener - MÚLTIPLES eventos
+const btn1 = document.getElementById("btn1");
+btn1.addEventListener("click", () => showMessage("addEventListener"));
+btn1.addEventListener("click", () => console.log("Segundo listener"));
+btn1.addEventListener("dblclick", () => showMessage("Doble click"));
+
+// 2. onclick - SOBREESCRIBE
+const btn2 = document.getElementById("btn2");
+btn2.onclick = () => showMessage("onclick 1");
+btn2.onclick = () => showMessage("onclick 2"); // ← Sobrescribe anterior
+
+// 3. Múltiples eventos diferentes
+const multiBtn = document.getElementById("multiBtn");
+multiBtn.addEventListener("click", () => showMessage("Click"));
+multiBtn.addEventListener("mouseover", () => showMessage("Mouse over"));
+multiBtn.addEventListener("mouseout", () => multiBtn.style.background = "#fff");
+
+// 4. Window events
+const windowBtn = document.getElementById("windowBtn");
+windowBtn.addEventListener("click", () => {
+  window.addEventListener("resize", () => {
+    showMessage("Ventana redimensionada: " + window.innerWidth + "x" + window.innerHeight);
+  });
+});
+
+// 5. Event capturing vs bubbling (3er parámetro)
+document.getElementById("demo").innerHTML = 
+`// ✅ addEventListener (múltiples)
+btn.addEventListener("click", func1);
+btn.addEventListener("click", func2);  // AMBOS ejecutan
+
+// ❌ onclick (sobrescribe)
+btn.onclick = func1;
+btn.onclick = func2;                   // Solo func2
+
+// Parámetros:
+addEventListener(event, func, useCapture);
+useCapture: true  → Capturing (padre → hijo)
+useCapture: false → Bubbling  (hijo → padre) ← DEFAULT
+
+// Remover (misma función)
+btn.removeEventListener("click", func);
+`;
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>Por qué addEventListener es mejor:</h3>
+<ul>
+  <li>✅ Múltiples handlers (no sobrescribe)</li>
+  <li>✅ Separa HTML de JavaScript</li>
+  <li>✅ Funciona en window, document, etc</li>
+  <li>✅ Control bubbling/capturing</li>
+  <li>✅ Fácil remover con removeEventListener</li>
+</ul>
+</div>
+
+</body>
+</html>

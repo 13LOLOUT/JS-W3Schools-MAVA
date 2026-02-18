@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2026 - Nuevas Features</h2>
+
+<button onclick="showES2026()">Ver ejemplos ES2026</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+// ES2026 usando resource management
+using resource = new MyResource("DB");
+</pre>
+
+<script>
+function showES2026() {
+  document.getElementById("demo").innerHTML = 
+`// 1. using - resource management
+class MyResource {
+  constructor(name) {
+    this.name = name;
+    console.log("Resource " + this.name + " acquired");
+  }
+  [Symbol.dispose]() {
+    console.log("Resource " + this.name + " disposed");
+  }
+}
+
+using resource = new MyResource("Database");
+// Resource auto-disposed aquí
+
+// 2. Error.isError()
+console.log(Error.isError(new TypeError()));  // true
+console.log(Error.isError({name: "Error"}));  // false
+
+// 3. Array.fromAsync()
+async function processAsync() {
+  const arr = await Array.fromAsync([
+    Promise.resolve(1),
+    Promise.resolve(2),
+    Promise.resolve(3)
+  ]);
+  console.log(arr);  // [1, 2, 3]
+}
+
+// 4. Uint8Array Base64
+const arr1 = Uint8Array.fromBase64("SGVsbG8=");
+console.log(arr1.toBase64());  // "SGVsbG8="
+
+// 5. Uint8Array Hex
+const arr2 = Uint8Array.fromHex("48656c6c6f");
+console.log(arr2.toHex());  // "48656c6c6f"
+`;
+}
+
+// Browser support table
+console.log("ES2026 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2026:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>using</td><td>134+</td><td>134+</td><td>141+</td></tr>
+  <tr><td>Error.isError()</td><td>134+</td><td>134+</td><td>138+</td></tr>
+  <tr><td>Array.fromAsync()</td><td>121+</td><td>121+</td><td>115+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2022 - Nuevas Features</h2>
+
+<button onclick="showES2022()">Ver ejemplos ES2022</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+const fruits = ["Banana", "Orange", "Apple"];
+let last = fruits.at(-1);  // "Apple"
+</pre>
+
+<script>
+function showES2022() {
+  const fruits = ["Banana", "Orange", "Apple", "Mango"];
+  const name = "W3Schools";
+  
+  document.getElementById("demo").innerHTML = 
+`// 1. Array.at() - índice negativo
+fruits.at(2);      // "Apple" (igual que fruits[2])
+fruits.at(-1);     // "Mango" (último)
+fruits.at(-2);     // "Apple"
+
+// 2. String.at()
+name.at(2);        // "S" (igual que name[2])
+name.at(-1);       // "s" (último)
+
+// 3. RegExp /d flag
+"aaaabb".match(/(aa)(bb)/d);  // substring matches
+
+// 4. Object.hasOwn()
+Object.hasOwn({age: 25}, "age");  // true
+
+// 5. Error.cause
+try {
+  try {
+    JSON.parse("invalid");
+  } catch(err) {
+    throw new Error("JSON failed", {cause: err});
+  }
+} catch(err) {
+  console.log(err.cause);  // Error original
+}
+
+// 6. Class fields
+class Hello {
+  counter = 0;  // Public field
+}
+
+// 7. Private fields (#)
+class Counter {
+  #count = 0;   // Private
+  #increment() { this.#count++; }
+  
+  getCount() { return this.#count; }
+}
+`;
+  
+  console.log("Array.at(-1):", fruits.at(-1));
+  console.log("ES2022 features cargadas");
+}
+
+console.log("ES2022 ready");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2022:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>Array/String.at()</td><td>94+</td><td>94+</td><td>93+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript WeakMap - ejemplos</h2>
+
+<button onclick="weakMapBasic()">WeakMap básico</button>
+<button onclick="trackVisitors()">Track Visitors</button>
+<button onclick="secretData()">Secret Data Class</button>
+
+<p id="demo"></p>
+
+<script>
+let text = "";
+
+// WeakMap básico
+function weakMapBasic() {
+  const wm = new WeakMap();
+  const obj = {name: "John"};
+  
+  wm.set(obj, "player");
+  const type = wm.get(obj);
+  const hasObj = wm.has(obj);
+  
+  document.getElementById("demo").innerHTML = 
+    `set(obj, "player")<br>
+    get(obj): ${type}<br>
+    has(obj): ${hasObj}`;
+}
+
+const visitsCount = new WeakMap();
+
+function trackVisitors() {
+  text = "";
+  
+  const John = {name:"John", age:40};
+  const Paul = {name:"Paul", age:41};
+  
+  track(Paul);
+  track(Ringo = {name:"Ringo", age:42});
+  track(Paul);
+  track(John);
+  
+  document.getElementById("demo").innerHTML = text;
+}
+
+function track(visitor) {
+  let count = visitsCount.get(visitor) || 0;
+  count++;
+  visitsCount.set(visitor, count);
+  text += `${visitor.name}, age ${visitor.age}, visited ${count} time(s).<br>`;
+}
+
+// Secret Data con WeakMap (private fields)
+const myMap = new WeakMap();
+
+class User {
+  constructor(name) {
+    myMap.set(this, {secret: "hidden data"});
+    this.name = name;
+  }
+  
+  getSecret() {
+    return myMap.get(this).secret;
+  }
+}
+
+function secretData() {
+  const user1 = new User("John");
+  const secret = user1.getSecret();
+  
+  document.getElementById("demo").innerHTML = 
+    `new User("John")<br>
+    user1.getSecret(): ${secret}<br>
+    (datos privados con WeakMap)`;
+}
+</script>
+
+</body>
+</html>

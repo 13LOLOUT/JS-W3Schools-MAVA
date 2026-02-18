@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>HTML DOM API - Methods y Properties</h2>
+
+<button onclick="apiDemo()">Ver DOM API</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+// Seleccionar elementos
+const p = document.getElementById("demo");
+</pre>
+
+<script>
+function apiDemo() {
+  // 1. Seleccionar elementos
+  const byId = document.getElementById("demo");
+  const byTag = document.getElementsByTagName("p")[0];
+  const byClass = document.getElementsByClassName("highlight")[0];
+  const bySelector = document.querySelector("#demo");
+  const all = document.querySelectorAll("p");
+  
+  // 2. Contenido
+  byId.innerHTML = "<strong>¡DOM API funcionando!</strong>";
+  byId.textContent = "Texto plano";
+  
+  // 3. Atributos y estilo
+  byId.setAttribute("class", "highlight");
+  byId.style.color = "blue";
+  byId.style.fontSize = "18px";
+  
+  document.getElementById("demo").innerHTML = 
+`// 🟦 Seleccionar elementos
+document.getElementById("id")           // Por ID
+document.getElementsByTagName("p")      // Todos los <p>
+document.getElementsByClassName("clase") // Por clase
+document.querySelector(".clase")        // Primer match CSS
+document.querySelectorAll("p")          // Todos CSS
+
+// 🟨 Contenido
+element.innerHTML     // HTML completo
+element.textContent   // Solo texto
+
+// 🟩 Atributos/Estilo
+element.setAttribute("class", "nueva")
+element.style.color = "red"
+element.className = "clase1 clase2"
+
+// 🔴 Estructura
+document.createElement("div")
+element.appendChild(nuevo)
+element.removeChild(hijo)
+`;
+}
+
+console.log("DOM API lista");
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>DOM API - Poder total:</h3>
+<ul>
+  <li><strong>Seleccionar:</strong> getElementById, querySelector</li>
+  <li><strong>Contenido:</strong> innerHTML, textContent</li>
+  <li><strong>Estilo:</strong> style.color, className</li>
+  <li><strong>Estructura:</strong> createElement, appendChild</li>
+  <li><strong>Eventos:</strong> onclick, addEventListener</li>
+</ul>
+</div>
+
+</body>
+</html>

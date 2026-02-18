@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Random - ejemplos</h2>
+
+<button onclick="randomBasics()">Math.random()</button>
+<button onclick="randomInts()">Random integers</button>
+<button onclick="properRandom()">Proper random func</button>
+
+<p id="demo"></p>
+
+<script>
+function randomBasics() {
+  document.getElementById("demo").innerHTML = 
+    `Math.random(): ${Math.random().toFixed(4)} [0,1)<br>
+    *10: ${(Math.random()*10).toFixed(2)} [0,10)<br>
+    floor(*10): ${Math.floor(Math.random()*10)} [0,9]`;
+}
+
+function randomInts() {
+  document.getElementById("demo").innerHTML = 
+    `0-9: ${Math.floor(Math.random()*10)}<br>
+    0-10: ${Math.floor(Math.random()*11)}<br>
+    0-99: ${Math.floor(Math.random()*100)}<br>
+    1-10: ${Math.floor(Math.random()*10)+1}<br>
+    1-100: ${Math.floor(Math.random()*100)+1}`;
+}
+
+function properRandom() {
+  function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+  document.getElementById("demo").innerHTML = 
+    `getRndInteger(1,6): ${getRndInteger(1,6)} [dado]<br>
+    getRndInteger(1,10): ${getRndInteger(1,10)}<br>
+    getRndInteger(18,65): ${getRndInteger(18,65)} [edad]<br>
+    getRndInteger(-5,5): ${getRndInteger(-5,5)}`;
+}
+</script>
+
+</body>
+</html>

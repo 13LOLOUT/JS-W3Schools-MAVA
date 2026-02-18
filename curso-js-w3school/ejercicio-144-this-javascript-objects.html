@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 144 - this en JavaScript Objects</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #dc3545; }
+    button { background: #dc3545; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background: #c82333; }
+    #output { margin-top: 20px; padding: 15px; background: #f8d7da; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    .this-demo { background: #fff3cd; padding: 10px; margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+<h1>this en JavaScript Objects</h1>
+
+<div class="example">
+  <h3>1. this en Object Method (Normal)</h3>
+  <pre id="demo1">// this = person object</pre>
+  <div class="this-demo">fullName(): <span id="result1"></span></div>
+</div>
+
+<div class="example">
+  <h3>2. this devuelve el Object completo</h3>
+  <div class="this-demo">this completo: <span id="result2"></span></div>
+</div>
+
+<div class="example">
+  <h3>3. Explicit Binding con call()</h3>
+  <button onclick="demoCall()">Probar call()</button>
+  <div class="this-demo">call() resultado: <span id="result3"></span></div>
+</div>
+
+<div class="example">
+  <h3>4. Function Borrowing con bind()</h3>
+  <button onclick="demoBind()">Probar bind()</button>
+  <div class="this-demo">bind() resultado: <span id="result4"></span></div>
+</div>
+
+<div class="example">
+  <h3>5. Problema this perdido</h3>
+  <button onclick="demoLostThis()">Perder this (callback)</button>
+  <p id="lostThis"></p>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <input type="text" id="customName" placeholder="Primer nombre" value="Ana">
+  <input type="text" id="customLast" placeholder="Apellido" value="García">
+  <button onclick="createCustomPerson()">Crear mi persona</button>
+  <br><br>
+  <button onclick="testThisMethods()" id="testBtn" style="display:none">Probar TODOS los métodos</button>
+  <div id="customResults"></div>
+</div>
+
+<script>
+  // ========== TODOS LOS EJEMPLOS DE W3SCHOOLS ==========
+
+  // 1. this en Object Method (normal)
+  const person = {
+    firstName: "John",
+    lastName: "Doe",
+    id: 5566,
+    fullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  };
+  document.getElementById('result1').textContent = person.fullName();
+
+  // 2. this devuelve el object completo
+  const personThis = {
+    firstName: "John",
+    lastName: "Doe",
+    id: 5566,
+    myFunction: function() {
+      return this;
+    }
+  };
+  document.getElementById('result2').textContent = 
+    JSON.stringify(personThis.myFunction(), null, 2);
+
+  // 3. EXPLICIT BINDING con call()
+  const person1 = {
+    fullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  }
+  const person2 = { firstName: "John", lastName: "Doe" };
+  function demoCall() {
+    document.getElementById('result3').textContent = person1.fullName.call(person2);
+  }
+
+  // 4. FUNCTION BORROWING con bind()
+  const personBorrow = {
+    firstName: "John",
+    lastName: "Doe",
+    fullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  }
+  const member = {
+    firstName: "Hege",
+    lastName: "Nilsen",
+  }
+  function demoBind() {
+    let fullName = personBorrow.fullName.bind(member);
+    document.getElementById('result4').textContent = fullName();
+  }
+
+  // 5. PROBLEMA: this perdido en callbacks
+  const personLost = {
+    name: "Pedro",
+    sayName: function() {
+      return "Hola, soy " + this.name;
+    }
+  };
+  function demoLostThis() {
+    const hello = personLost.sayName;
+    document.getElementById('lostThis').innerHTML = 
+      `Sin bind: ${hello()}<br>
+       Con bind: ${personLost.sayName.bind(personLost)()}`;
+  }
+
+  // ========== DEMO INTERACTIVO ==========
+  let customPerson = null;
+  function createCustomPerson() {
+    const first = document.getElementById('customName').value;
+    const last = document.getElementById('customLast').value;
+    customPerson = {
+      firstName: first,
+      lastName: last,
+      fullName: function() { return this.firstName + " " + this.lastName; },
+      sayHi: function() { return "¡Hola " + this.firstName + "!"; }
+    };
+    document.getElementById('testBtn').style.display = 'inline-block';
+  }
+
+  function testThisMethods() {
+    if (customPerson) {
+      const results = document.getElementById('customResults');
+      results.innerHTML = `
+        <div>Normal: ${customPerson.fullName()}</div>
+        <div>call(): ${customPerson.fullName.call({firstName: 'MARÍA', lastName: 'LOPEZ'})}</div>
+        <div>bind(): ${customPerson.sayHi.bind({firstName: 'JUAN'})()}</div>
+      `;
+    }
+  }
+</script>
+
+</body>
+</html>

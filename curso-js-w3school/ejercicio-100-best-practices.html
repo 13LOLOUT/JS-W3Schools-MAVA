@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Best Practices</h2>
+
+<button onclick="showPractices()">Ver ejemplos</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+let nombre = "Juan";
+let edad = 25;
+let precio = 19.90;
+</pre>
+
+<script>
+function showPractices() {
+  document.getElementById("demo").innerHTML = 
+`// camelCase para variables y funciones
+let firstName = "John";
+let calculateTotal = function(precio, impuesto) {
+  return precio + (precio * impuesto);
+};
+
+// 2 espacios, no tabs
+function convertirCelsius(fahrenheit) {
+  return (5 / 9) * (fahrenheit - 32);
+}
+
+// Objetos bien formateados
+const persona = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  city: "NY"
+};
+
+// Espacios alrededor de operadores
+let total = precio + impuesto;
+let autos = ["Volvo", "Saab", "Fiat"];
+`;
+}
+</script>
+
+<div style="background:#d4edda; padding:15px; margin:20px 0; border-left:4px solid #28a745;">
+<h3>Reglas principales:</h3>
+<ul>
+  <li>camelCase: firstName, myFunction</li>
+  <li>2 espacios indentación</li>
+  <li>Espacios: let x = y + z;</li>
+  <li>Semicolon en statements simples</li>
+  <li>Objects: {firstName: "John",}</li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Type Conversion - ejemplos</h2>
+
+<button onclick="stringToNumber()">String → Number</button>
+<button onclick="numberToString()">Number → String</button>
+<button onclick="dateConv()">Date conversions</button>
+<button onclick="boolConv()">Boolean conversions</button>
+<button onclick="autoConv()">Automatic</button>
+
+<p id="demo"></p>
+
+<script>
+function stringToNumber() {
+  document.getElementById("demo").innerHTML = 
+    `Number("3.14"): ${Number("3.14")}<br>
+    Number(" "): ${Number(" ")}<br>
+    Number("John"): ${Number("John")}<br>
+    + "5": ${+ "5"} unary+<br>
+    parseInt("99 88"): ${parseInt("99 88")}`;
+}
+
+function numberToString() {
+  let x = 123;
+  document.getElementById("demo").innerHTML = 
+    `String(123): "${String(x)}"<br>
+    x.toString(): "${x.toString()}"<br>
+    (100+23).toString(): "${(100+23).toString()}"`;
+}
+
+function dateConv() {
+  const d = new Date();
+  document.getElementById("demo").innerHTML = 
+    `Number(new Date()): ${Number(d)}<br>
+    d.getTime(): ${d.getTime()}<br>
+    String(Date()): "${String(Date())}"`;
+}
+
+function boolConv() {
+  document.getElementById("demo").innerHTML = 
+    `Number(true): ${Number(true)}<br>
+    Number(false): ${Number(false)}<br>
+    String(true): "${String(true)}"`;
+}
+
+function autoConv() {
+  document.getElementById("demo").innerHTML = 
+    `5 + null: ${5 + null}<br>
+    "5" + null: "${"5" + null}"<br>
+    "5" + 2: "${"5" + 2}"<br>
+    "5" - 2: ${"5" - 2}<br>
+    "5" * "2": ${"5" * "2"}`;
+}
+</script>
+
+</body>
+</html>

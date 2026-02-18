@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Console Pro - F12</h2>
+
+<button onclick="consoleDemo()">Ver Console (F12)</button>
+<button onclick="tableDemo()">Console.table()</button>
+
+<div id="demo" style="background:#f8f9fa; padding:20px; margin:20px 0; border-left:4px solid #007bff;">
+  <h3>📱 Abre F12 → Console</h3>
+  <p>Click botones → Mira console.log, warn, error, table</p>
+</div>
+
+<script>
+// Demo básico
+function consoleDemo() {
+  console.log("🔵 Mensaje normal");
+  console.log("Usuario:", {name: "John", age: 25});
+  
+  console.warn("🟡 WARNING: Deprecado");
+  console.error("🔴 ERROR: Falló conexión");
+  
+  let x = 10, y = 5;
+  console.log("Múltiples:", "x =", x, "y =", y, "suma =", x+y);
+  
+  // Objeto expandible
+  let user = {name: "Ana", email: "ana@email.com", active: true};
+  console.log("Objeto:", user);
+}
+
+// Tabla datos
+function tableDemo() {
+  let users = [
+    {name: "John", age: 25, city: "NY"},
+    {name: "Ana", age: 30, city: "LA"},
+    {name: "Bob", age: 35, city: "SF"}
+  ];
+  
+  console.table(users);
+  
+  // Tabla simple
+  console.table(["Error", "Warning", "Info"]);
+  
+  console.log("%cStyled Log", "color: blue; font-size: 20px;");
+}
+</script>
+
+<div style="background:#e7f3ff; padding:15px; margin:20px 0;">
+<h3>Console Methods:</h3>
+<ul>
+  <li><code>console.log("mensaje")</code> → Texto normal</li>
+  <li><code>console.warn("warning")</code> 🟡 Amarillo</li>
+  <li><code>console.error("error")</code> 🔴 Rojo</li>
+  <li><code>console.table(array)</code> → Tabla bonita</li>
+</ul>
+</div>
+
+</body>
+</html>

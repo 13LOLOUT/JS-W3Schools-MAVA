@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Load Events</h2>
+
+<img id="myImg" src="https://via.placeholder.com/200x150/4CAF50/ffffff?text=Loading..." width="200" style="margin:10px;">
+<p id="status">Cargando...</p>
+
+<script>
+// 1. DOMContentLoaded - Solo HTML listo
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("status").innerHTML = "✅ DOM listo (HTML cargado)";
+});
+
+// 2. window load - TODO cargado (imágenes, CSS, etc)
+window.addEventListener("load", function() {
+  document.getElementById("status").innerHTML = "✅ Página completa (imágenes incluidas)";
+});
+
+// 3. Imagen específica
+document.getElementById("myImg").addEventListener("load", function() {
+  document.getElementById("status").innerHTML += "<br>🖼️ Imagen cargada";
+});
+
+// 4. Error de carga
+document.getElementById("myImg").addEventListener("error", function() {
+  document.getElementById("status").innerHTML += "<br>❌ Error cargando imagen";
+});
+</script>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+document.addEventListener("DOMContentLoaded", fn);
+window.addEventListener("load", fn);
+</pre>
+
+<script>
+document.getElementById("demo").innerHTML = 
+`// 📄 DOMContentLoaded (rápido)
+document.addEventListener("DOMContentLoaded", function() {
+  // DOM listo - UI, event listeners
+  // Imágenes CSS pueden NO estar listas
+});
+
+// 🌐 window load (lento)
+window.addEventListener("load", function() {
+  // TODO cargado - imágenes, CSS, iframes
+  // Medir dimensiones, validar recursos
+});
+
+// 🖼️ Elementos específicos
+img.addEventListener("load", function() {
+  // Imagen lista
+});
+img.addEventListener("error", function() {
+  // Imagen falló
+});
+
+// jQuery equivalente:
+$(document).ready()     // ≈ DOMContentLoaded
+$(window).load()        // ≈ window load
+`;
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>¿Cuándo usar cada uno?:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Evento</th><th>Cuándo se dispara</th><th>Uso típico</th></tr>
+  <tr><td>DOMContentLoaded</td><td>HTML parseado</td><td>Event listeners, UI init</td></tr>
+  <tr><td>window load</td><td>TODO recursos</td><td>Imágenes listas, analytics</td></tr>
+  <tr><td>img load</td><td>Imagen específica</td><td>Galerías, lazy loading</td></tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Iterators ES2025 Helpers - ejemplos</h2>
+
+<button onclick="iteratorHelpers()">Iterator Helpers</button>
+
+<p id="demo" style="font-family:monospace; white-space:pre-line"></p>
+
+<script>
+try {
+  function iteratorHelpersDemo() {
+    const it = Iterator.from([1,2,3,4,5,6,7,8,9]);
+    
+    // drop(5)
+    const afterDrop = Array.from(it.drop(5));
+    
+    // every(x => x > 7)
+    const everyGt7 = it.every(x => x > 7);
+    
+    // filter(x => x > 5)
+    const filtered = Array.from(it.filter(x => x > 5));
+    
+    // find(x => x > 6)
+    const found = it.find(x => x > 6);
+    
+    // map(x => x*2)
+    const mapped = Array.from(it.map(x => x*2));
+    
+    // reduce sum
+    const sum = it.reduce((acc, x) => acc + x, 0);
+    
+    // some(x => x > 8)
+    const someGt8 = it.some(x => x > 8);
+    
+    // take(3)
+    const first3 = Array.from(it.take(3));
+    
+    return `drop(5): [${afterDrop.join(', ')}]
+every(>7): ${everyGt7}
+filter(>5): [${filtered.join(', ')}]
+find(>6): ${found}
+map(*2): [${mapped.join(', ')}]
+reduce(sum): ${sum}
+some(>8): ${someGt8}
+take(3): [${first3.join(', ')}]`;
+  }
+  
+  function iteratorHelpers() {
+    document.getElementById("demo").textContent = iteratorHelpersDemo();
+  }
+  
+} catch(e) {
+  document.getElementById("demo").innerHTML = 
+    `<strong>ES2025 Iterator Helpers</strong>
+    <br>No soportado aún
+    <br>Chrome/Edge 136+, Firefox 129+, Safari 18.2+`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2025 - Nuevas Features</h2>
+
+<button onclick="showES2025()">Ver ejemplos ES2025</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+const A = new Set(['a','b','c']);
+const B = new Set(['b','c','d']);
+const C = A.union(B);
+</pre>
+
+<script>
+function showES2025() {
+  document.getElementById("demo").innerHTML = 
+`// 1. Set methods nuevos
+const A = new Set(['a','b','c']);
+const B = new Set(['b','c','d']);
+
+A.union(B);              // Set {'a','b','c','d'}
+A.intersection(B);       // Set {'b','c'}
+A.difference(B);         // Set {'a'}
+A.symmetricDifference(B); // Set {'a','d'}
+A.isSubsetOf(B);         // false
+B.isSupersetOf(A);       // false
+A.isDisjointFrom(B);     // false
+
+// 2. Iterator helpers
+const myIterator = Iterator.from([1,2,3,4,5]);
+const filtered = myIterator.filter(x => x > 2);  // 3,4,5
+const mapped = myIterator.map(x => x * 2);       // 2,4,6,8,10
+
+// 3. RegExp /v flag
+"Hello 😄".match(/\p{RGI_Emoji}/v);  // ✅ Encuentra emoji
+
+// 4. RegExp.escape()
+const safe = RegExp.escape("[*]");
+const regex = new RegExp(safe);
+
+// 5. Float16Array
+const arr = new Float16Array([1.5, 2.5, 3.5]);
+console.log(arr.BYTES_PER_ELEMENT);  // 2
+
+// 6. Import attributes
+// import data from "config.json" with {type: "json"};
+`;
+}
+
+console.log("ES2025 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Set Methods ES2025:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Method</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>union(), intersection()</td><td>122+</td><td>122+</td><td>127+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

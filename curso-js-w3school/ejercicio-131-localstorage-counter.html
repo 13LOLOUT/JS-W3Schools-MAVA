@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>🗂️ Proyecto: localStorage Counter</h2>
+
+<h3>Contador con Save/Load</h3>
+
+<p id="count" style="font-size:48px;font-weight:bold;color:#333;margin:20px 0;">0</p>
+
+<button onclick="increaseCount()" style="font-size:24px;padding:15px 25px;">➕</button>
+<button onclick="decreaseCount()" style="font-size:24px;padding:15px 25px;">➖</button>
+<button onclick="resetCount()" style="font-size:24px;padding:15px 25px;background:#ff9800;">🔄 Reset</button>
+<button onclick="saveCount()" style="font-size:24px;padding:15px 25px;background:#4CAF50;color:white;">💾 Save</button>
+<button onclick="loadCount()" style="font-size:24px;padding:15px 25px;background:#2196F3;color:white;">📂 Load</button>
+
+<p id="status" style="margin-top:20px;color:#666;"></p>
+
+<pre id="code" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+let count = 0;
+</pre>
+
+<script>
+// 1. Variable global contador
+let count = 0;
+
+// 2. Actualizar display
+function updateCount() {
+  document.getElementById("count").innerHTML = count;
+  document.getElementById("status").innerHTML = `Valor: ${count} | Guardado: ${localStorage.getItem("count") || "nada"}`;
+}
+
+// 3. ➕ Increase
+function increaseCount() {
+  count++;
+  updateCount();
+}
+
+// 4. ➖ Decrease
+function decreaseCount() {
+  if (count > 0) {
+    count--;
+    updateCount();
+  }
+}
+
+// 5. 🔄 Reset
+function resetCount() {
+  count = 0;
+  updateCount();
+}
+
+// 6. 💾 Save localStorage
+function saveCount() {
+  localStorage.setItem("count", count);
+  document.getElementById("status").innerHTML = "✅ Guardado en localStorage";
+  setTimeout(() => updateCount(), 1000);
+}
+
+// 7. 📂 Load localStorage
+function loadCount() {
+  const saved = localStorage.getItem("count");
+  if (saved !== null) {
+    count = Number(saved);
+    updateCount();
+    document.getElementById("status").innerHTML = "✅ Cargado desde localStorage";
+  } else {
+    document.getElementById("status").innerHTML = "❌ Nada guardado";
+  }
+}
+
+// Inicializar al cargar página
+window.onload = function() {
+  loadCount();
+};
+
+document.getElementById("code").innerHTML = 
+`// Código completo proyecto:
+let count = 0;
+
+function updateCount() {
+  document.getElementById("count").innerHTML = count;
+}
+
+function increaseCount() { count++; updateCount(); }
+function decreaseCount() { 
+  if (count > 0) { count--; updateCount(); }
+}
+function resetCount() { count = 0; updateCount(); }
+
+function saveCount() {
+  localStorage.setItem("count", count);
+}
+
+function loadCount() {
+  let saved = localStorage.getItem("count");
+  if (saved !== null) {
+    count = Number(saved);
+    updateCount();
+  }
+}
+
+// Auto-load al iniciar
+window.onload = loadCount;
+`;
+</script>
+
+<div style="background:#d4edda; padding:15px; margin:20px 0; border-left:4px solid #28a745;">
+<h3>✅ Funcionalidades:</h3>
+<ul>
+  <li>➕➖ Contador</li>
+  <li>🔄 Reset a 0</li>
+  <li>💾 Guarda localStorage</li>
+  <li>📂 Carga localStorage</li>
+  <li>Auto-load al abrir página</li>
+  <li>NO negativo</li>
+</ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>#133 Modal Popup Project</title>
+  <style>
+    /* Modal Overlay - oculto por defecto */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+    
+    /* Mostrar modal */
+    .modal-overlay.show {
+      display: block;
+    }
+    
+    /* Modal Box */
+    .modal-box {
+      background: white;
+      width: 90%;
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    /* Botón cerrar */
+    .modal-close {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      font-size: 24px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-weight: bold;
+      color: #666;
+    }
+    
+    .modal-close:hover {
+      color: #000;
+    }
+    
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+    }
+    
+    button:hover {
+      background: #0056b3;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>#133 Project - Modal Popup</h2>
+<p>3 formas de cerrar: ❌ Click X | 🌑 Click fuera | ⌨️ Escape</p>
+
+<button id="openBtn">🚀 Open Modal</button>
+
+<!-- Modal Structure -->
+<div id="modal" class="modal-overlay">
+  <div class="modal-box">
+    <button id="closeBtn" class="modal-close">&times;</button>
+    <h3>¡Hola Modal!</h3>
+    <p>Este modal se cierra con:</p>
+    <ul>
+      <li>❌ Botón cerrar (X)</li>
+      <li>🌑 Click fuera del modal</li>
+      <li>⌨️ Tecla Escape</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const modal = document.getElementById("modal");
+const openBtn = document.getElementById("openBtn");
+const closeBtn = document.getElementById("closeBtn");
+
+function openModal() {
+  modal.classList.add("show");
+}
+
+function closeModal() {
+  modal.classList.remove("show");
+}
+
+// 1. Abrir modal
+openBtn.addEventListener("click", openModal);
+
+// 2. Cerrar botón X
+closeBtn.addEventListener("click", closeModal);
+
+// 3. Click FUERA modal (overlay)
+modal.addEventListener("click", function(event) {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+// 4. ESC cierra modal
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});
+</script>
+
+<div style="background:#e2e3e5;padding:20px;margin:40px 0;border-left:4px solid #6c757d;">
+<h3>✅ Funcionalidades:</h3>
+<ul>
+  <li>CSS: <code>.show</code> class toggle</li>
+  <li>❌ Botón cerrar</li>
+  <li>🌑 Click fuera (<code>event.target === modal</code>)</li>
+  <li>⌨️ Escape key</li>
+</ul>
+<h4>⚠️ Errores comunes evitados:</h4>
+<ul>
+  <li><code>event.target === modal</code> (no modal-box)</li>
+  <li>ESC funciona siempre (pero modal solo si visible)</li>
+</ul>
+</div>
+
+</body>
+</html>

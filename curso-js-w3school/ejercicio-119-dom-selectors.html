@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Seleccionar Elementos DOM</h2>
+
+<p id="intro">Párrafo con ID</p>
+<p class="highlight">Párrafo clase highlight</p>
+<div id="main">
+  <p>Primer párrafo en main</p>
+  <p>Segundo párrafo en main</p>
+</div>
+
+<button onclick="selectDemo()">Ver selectores</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+const element = document.getElementById("intro");
+</pre>
+
+<script>
+function selectDemo() {
+  // 1. getElementById
+  const byId = document.getElementById("intro");
+  byId.style.color = "blue";
+  
+  // 2. getElementsByTagName
+  const allP = document.getElementsByTagName("p");
+  allP[0].style.background = "yellow";
+  
+  // 3. getElementsByClassName (live collection)
+  const highlights = document.getElementsByClassName("highlight");
+  highlights[0].style.border = "2px solid red";
+  
+  // 4. querySelector (primer match)
+  const firstP = document.querySelector("p");
+  firstP.style.fontWeight = "bold";
+  
+  // 5. querySelectorAll (NodeList estática)
+  const allMainP = document.querySelectorAll("#main p");
+  allMainP.forEach(p => p.style.padding = "10px");
+  
+  document.getElementById("demo").innerHTML = 
+`// ❌ Errores comunes:
+document.getElementById("#intro")  // ❌ NO #
+document.querySelector("#intro")   // ✅ # SÍ en selector
+
+// 1. getElementById("id")           → Element o null
+// 2. getElementsByTagName("p")      → HTMLCollection LIVE
+// 3. getElementsByClassName("clase")→ HTMLCollection LIVE  
+// 4. querySelector(".clase")        → Primer Element o null
+// 5. querySelectorAll("p")          → NodeList ESTÁTICA
+
+// Ejemplo anidado
+const main = document.getElementById("main");
+const ps = main.getElementsByTagName("p");  // Solo dentro de main
+`;
+}
+
+console.log("DOM Selectors demo listo");
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>Resumen selectores DOM:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Método</th><th>Retorna</th><th>Ejemplo</th></tr>
+  <tr><td>getElementById</td><td>Element</td><td>"#intro"</td></tr>
+  <tr><td>getElementsByTagName</td><td>HTMLCollection (live)</td><td>"p"</td></tr>
+  <tr><td>getElementsByClassName</td><td>HTMLCollection (live)</td><td>"highlight"</td></tr>
+  <tr><td>querySelector</td><td>Element</td><td>".demo, #id, p"</td></tr>
+  <tr><td>querySelectorAll</td><td>NodeList (static)</td><td>"p.intro"</td></tr>
+</table>
+</div>
+
+</body>
+</html>

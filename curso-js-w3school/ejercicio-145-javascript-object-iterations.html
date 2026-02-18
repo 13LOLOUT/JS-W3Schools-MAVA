@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 145 - JavaScript Object Iterations</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #fd7e14; }
+    button { background: #fd7e14; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background: #e8620c; }
+    #output { margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    .array-display { background: #e9ecef; padding: 10px; margin: 5px 0; font-family: monospace; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Object Iterations (7 métodos)</h1>
+
+<div class="example">
+  <h3>1. Object.keys() → Array de keys</h3>
+  <div class="array-display">Keys: <span id="result1"></span></div>
+</div>
+
+<div class="example">
+  <h3>2. Object.values() → Array de values</h3>
+  <div class="array-display">Values: <span id="result2"></span></div>
+</div>
+
+<div class="example">
+  <h3>3. Object.entries() → Array [key,value]</h3>
+  <div class="array-display">Entries: <span id="result3"></span></div>
+</div>
+
+<div class="example">
+  <h3>4. Object.assign() → Copiar propiedades</h3>
+  <button onclick="demoAssign()">Ejecutar assign()</button>
+  <div class="array-display">Resultado: <span id="result4"></span></div>
+</div>
+
+<div class="example">
+  <h3>5. Object.fromEntries() → Array → Object</h3>
+  <div class="array-display">De array: <span id="result5"></span></div>
+</div>
+
+<div class="example">
+  <h3>6. for...in Loop</h3>
+  <button onclick="demoForIn()">Ejecutar for...in</button>
+  <p id="result6"></p>
+</div>
+
+<div class="example">
+  <h3>7. Object.groupBy() ES2024</h3>
+  <button onclick="demoGroupBy()">Agrupar frutas</button>
+  <pre id="result7"></pre>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <input type="text" id="customKey1" placeholder="key1" value="nombre">
+  <input type="text" id="customVal1" placeholder="valor1" value="Luis">
+  <input type="text" id="customKey2" placeholder="key2" value="edad">
+  <input type="number" id="customVal2" placeholder="valor2" value="30">
+  <button onclick="createAndIterate()">Iterar mi objeto</button>
+  <div id="customIteration"></div>
+</div>
+
+<script>
+  // ========== PERSONA DE PRUEBA ==========
+  const person = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 50,
+    eyeColor: "blue"
+  };
+
+  // 1. OBJECT.KEYS()
+  document.getElementById('result1').textContent = JSON.stringify(Object.keys(person));
+
+  // 2. OBJECT.VALUES()
+  document.getElementById('result2').textContent = JSON.stringify(Object.values(person));
+
+  // 3. OBJECT.ENTRIES()
+  document.getElementById('result3').textContent = JSON.stringify(Object.entries(person));
+
+  // 4. OBJECT.ASSIGN()
+  const person1 = { firstName: "John", lastName: "Doe", age: 50, eyeColor: "blue" };
+  const person2 = { firstName: "Anne", lastName: "Smith" };
+  function demoAssign() {
+    Object.assign(person1, person2);
+    document.getElementById('result4').textContent = JSON.stringify(person1);
+  }
+
+  // 5. OBJECT.FROMENTRIES()
+  const fruitsArray = [["apples", 300], ["pears", 900], ["bananas", 500]];
+  const fruitsObj = Object.fromEntries(fruitsArray);
+  document.getElementById('result5').textContent = JSON.stringify(fruitsObj);
+
+  // 6. FOR...IN LOOP
+  function demoForIn() {
+    const personIn = { fname: "John", lname: "Doe", age: 25 };
+    let txt = "";
+    for (let x in personIn) {
+      txt += personIn[x] + " ";
+    }
+    document.getElementById('result6').textContent = txt;
+  }
+
+  // 7. OBJECT.GROUPBY() ES2024
+  const fruitsList = [
+    {name:"apples", quantity:300},
+    {name:"bananas", quantity:500},
+    {name:"oranges", quantity:200},
+    {name:"kiwi", quantity:150}
+  ];
+  function myCallback({ quantity }) {
+    return quantity > 200 ? "ok" : "low";
+  }
+  function demoGroupBy() {
+    const result = Object.groupBy(fruitsList, myCallback);
+    document.getElementById('result7').textContent = JSON.stringify(result, null, 2);
+  }
+
+  // ========== LOOP CON ENTRIES ==========
+  const fruits = {Bananas:300, Oranges:200, Apples:500};
+  let text = "";
+  for (let [fruit, value] of Object.entries(fruits)) {
+    text += fruit + ": " + value + "\n";
+  }
+  console.log(text);
+
+  // ========== DEMO INTERACTIVO ==========
+  function createAndIterate() {
+    const obj = {
+      [document.getElementById('customKey1').value]: document.getElementById('customVal1').value,
+      [document.getElementById('customKey2').value]: document.getElementById('customVal2').value
+    };
+
+    const results = document.getElementById('customIteration');
+    results.innerHTML = `
+      <div>keys(): ${JSON.stringify(Object.keys(obj))}</div>
+      <div>values(): ${JSON.stringify(Object.values(obj))}</div>
+      <div>entries(): ${JSON.stringify(Object.entries(obj))}</div>
+      <div>for...in: ${Object.values(obj).join(' ')}</div>
+    `;
+  }
+</script>
+
+</body>
+</html>

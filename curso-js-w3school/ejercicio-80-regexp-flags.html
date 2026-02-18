@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript RegExp Flags - ejemplos</h2>
+
+<button onclick="basicFlags()">/g /i</button>
+<button onclick="d_s_y()">/d /s /y</button>
+<button onclick="u_v()">/u /v</button>
+<button onclick="flagProps()">Propiedades de flags</button>
+
+<p id="demo" style="font-family:monospace; white-space:pre-line"></p>
+
+<script>
+function basicFlags() {
+  const text = "Is this all there is? Visit W3Schools";
+  const gPattern = /is/g;
+  const iPattern = /w3schools/i;
+  
+  const gResult = text.match(gPattern);
+  const iResult = text.match(iPattern);
+  
+  document.getElementById("demo").textContent =
+    `/is/g => ${JSON.stringify(gResult)}
+/w3schools/i => ${JSON.stringify(iResult)}`;
+}
+
+function d_s_y() {
+  // /d (indices)
+  const textD = "aaaabb";
+  const patternD = /(aa)(bb)/d;
+  const dResult = textD.match(patternD);
+  
+  // /s (dotAll)
+  const textS = "Line\nLine.";
+  const patternS = /Line./gs;
+  const sResult = textS.match(patternS);
+  
+  // /y (sticky)
+  const textY = "abc def ghi";
+  const patternY = /\w+/y;
+  patternY.lastIndex = 4;
+  const yResult = patternY.exec(textY);
+  
+  document.getElementById("demo").textContent =
+    `/(aa)(bb)/d => ${JSON.stringify(dResult)}
+/Line./gs => ${JSON.stringify(sResult)}
+/\\w+/y con lastIndex=4 => ${JSON.stringify(yResult && yResult[0])}`;
+}
+
+function u_v() {
+  // /u unicode code point
+  const textU = "䷀";
+  const patternU = /\u{04DC0}/u;
+  const uResult = patternU.test(textU);
+  
+  // /v Unicode sets (puede fallar si no hay soporte)
+  let vResult;
+  try {
+    const textV = "Hello 😄";
+    const patternV = /\p{Emoji}/v;
+    vResult = patternV.test(textV);
+  } catch(e) {
+    vResult = "No soportado en este navegador";
+  }
+  
+  document.getElementById("demo").textContent =
+    `/\\u{04DC0}/u.test("䷀") => ${uResult}
+/\\p{Emoji}/v.test("Hello 😄") => ${vResult}`;
+}
+
+function flagProps() {
+  const pg = /W3Schools/g;
+  const pd = /W3Schools/d;
+  const pi = /W3Schools/i;
+  const ps = /W3Schools/s;
+  const py = /W3Schools/y;
+  const pu = /W3Schools/u;
+  const pv = /W3Schools/v;
+  
+  document.getElementById("demo").textContent =
+    `/g global: ${pg.global}
+/d hasIndices: ${pd.hasIndices}
+/i ignoreCase: ${pi.ignoreCase}
+/s dotAll: ${ps.dotAll}
+/y sticky: ${py.sticky}
+/u unicode: ${pu.unicode}
+/v unicodeSets: ${pv.unicodeSets}`;
+}
+</script>
+
+</body>
+</html>

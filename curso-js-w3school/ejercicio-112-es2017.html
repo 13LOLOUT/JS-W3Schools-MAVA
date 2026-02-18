@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2017 - Nuevas Features</h2>
+
+<button onclick="showES2017()">Ver ejemplos ES2017</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+"5".padStart(4,"0");  // "0005"
+</pre>
+
+<script>
+function showES2017() {
+  document.getElementById("demo").innerHTML = 
+`// 1. String padding
+"5".padStart(4,"0");     // "0005"
+"5".padEnd(4,"0");       // "5000"
+
+// 2. Object.entries()
+const person = {firstName:"John", lastName:"Doe", age:50};
+Object.entries(person);  // [["firstName","John"], ["lastName","Doe"], ...]
+
+// Loop con entries
+for (let [fruit, value] of Object.entries({Bananas:300, Apples:500})) {
+  console.log(fruit + ": " + value);
+}
+
+// 3. Object.values()
+Object.values(person);   // ["John", "Doe", 50]
+
+// 4. Async/await
+async function myFunc() {
+  let promise = new Promise(resolve => {
+    setTimeout(() => resolve("Done!"), 1000);
+  });
+  return await promise;  // Espera resultado
+}
+
+// 5. Trailing commas
+function myFunc(p1, p2,,) {}  // ✅ Válido
+const arr = [1,2,3,,];        // ✅ Válido
+const obj = {a:1, b:2,,};     // ✅ Válido
+
+// 6. Object.getOwnPropertyDescriptors()
+const descriptors = Object.getOwnPropertyDescriptors(person);
+// Clonar objeto preservando getters/setters
+const clone = Object.defineProperties({}, descriptors);
+`;
+}
+
+console.log("ES2017 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2017:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>padStart, async/await</td><td>58+</td><td>15+</td><td>52+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

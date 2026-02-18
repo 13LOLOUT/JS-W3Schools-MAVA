@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Set Methods - ejemplos</h2>
+
+<button onclick="addSizeHas()">add() size has()</button>
+<button onclick="forEach()">forEach()</button>
+<button onclick="iteratorMethods()">keys() values() entries()</button>
+
+<p id="demo"></p>
+
+<script>
+const letters = new Set(["a","b","c"]);
+
+function addSizeHas() {
+  letters.add("d");
+  letters.add("e");
+  letters.add("c"); // Duplicado NO agregado
+  
+  const hasD = letters.has("d");
+  
+  document.getElementById("demo").innerHTML = 
+    `add("d","e"): OK<br>
+    add("c") duplicado: NO<br>
+    size: ${letters.size}<br>
+    has("d"): ${hasD}`;
+}
+
+function forEach() {
+  let text = "";
+  letters.forEach(function(value) {
+    text += value + " ";
+  });
+  document.getElementById("demo").innerHTML = 
+    `forEach: ${text}`;
+}
+
+function iteratorMethods() {
+  let txtKeys = "";
+  let txtValues = "";
+  let txtEntries = "";
+  
+  for (const x of letters.keys()) {
+    txtKeys += x + " ";
+  }
+  
+  for (const x of letters.values()) {
+    txtValues += x + " ";
+  }
+  
+  for (const entry of letters.entries()) {
+    txtEntries += entry + "<br>";
+  }
+  
+  document.getElementById("demo").innerHTML = 
+    `keys(): ${txtKeys}<br>
+    values(): ${txtValues}<br>
+    entries():<br>${txtEntries}`;
+}
+</script>
+
+</body>
+</html>

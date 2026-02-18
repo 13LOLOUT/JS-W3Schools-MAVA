@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Maps - ejemplos</h2>
+
+<button onclick="crearMaps()">Crear Maps</button>
+<button onclick="setGet()">set() get()</button>
+<button onclick="mapVsObject()">Map vs Object</button>
+
+<p id="demo"></p>
+
+<script>
+// Map desde array
+const fruits1 = new Map([
+  ["apples", 500],
+  ["bananas", 300],
+  ["oranges", 200]
+]);
+
+// Map vacío + set()
+const fruits2 = new Map();
+fruits2.set("apples", 500);
+fruits2.set("bananas", 300);
+
+function crearMaps() {
+  document.getElementById("demo").innerHTML = 
+    `new Map([["apples",500],...]): ${JSON.stringify(Object.fromEntries(fruits1))}<br>
+    new Map().set(): ${JSON.stringify(Object.fromEntries(fruits2))}`;
+}
+
+function setGet() {
+  const fruits = new Map();
+  fruits.set("mangos", 100);
+  fruits.set("apples", 200); // Cambiar valor
+  
+  const applesVal = fruits.get("apples");
+  
+  document.getElementById("demo").innerHTML = 
+    `set("mangos",100): OK<br>
+    set("apples",200): CAMBIADO<br>
+    get("apples"): ${applesVal}`;
+}
+
+function mapVsObject() {
+  const fruits = new Map([["apples",500]]);
+  document.getElementById("demo").innerHTML = 
+    `typeof fruits: ${typeof fruits}<br>
+    fruits instanceof Map: ${fruits instanceof Map}<br>
+    size: ${fruits.size}`;
+}
+</script>
+
+</body>
+</html>

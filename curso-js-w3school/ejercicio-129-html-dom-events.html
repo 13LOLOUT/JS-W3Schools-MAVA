@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>HTML DOM Events - onclick onload onchange</h2>
+
+<!-- 1. onclick directo -->
+<button onclick="displayDate()">onclick atributo</button>
+
+<!-- 2. Funciones específicas -->
+<input type="text" id="fname" oninput="upperCase(this.value)" placeholder="Escribe...">
+<h1 onmouseover="this.style.color='red'" onmouseout="this.style.color='black'" 
+    onclick="this.innerHTML='¡Click!'">Mouse over me</h1>
+
+<!-- 3. onload página -->
+<p id="loadStatus">Esperando load...</p>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+onclick="funcion()"
+</pre>
+
+<script>
+// Funciones para eventos
+function displayDate() {
+  document.getElementById("demo").innerHTML = new Date().toLocaleString();
+}
+
+function upperCase(value) {
+  document.getElementById("fname").value = value.toUpperCase();
+}
+
+// onload página
+window.onload = function() {
+  document.getElementById("loadStatus").innerHTML = "✅ Página cargada: " + new Date().toLocaleString();
+};
+
+// Más ejemplos en vivo
+document.querySelector("h1").addEventListener("dblclick", function() {
+  this.innerHTML = "Doble click!";
+});
+
+// onmousedown / mouseup / onclick secuencia
+const btn = document.createElement("button");
+btn.innerHTML = "mousedown test";
+btn.onmousedown = () => console.log("mousedown");
+btn.onmouseup = () => console.log("mouseup");
+btn.onclick = () => console.log("click");
+document.body.appendChild(btn);
+
+document.getElementById("demo").innerHTML = 
+`// Atributos HTML (fácil)
+<button onclick="displayDate()">
+<input oninput="upperCase(this.value)">
+
+// DOM assignment (mejor)
+btn.onclick = displayDate;
+
+// addEventListener (RECOMENDADO)
+btn.addEventListener("click", displayDate);
+
+// Eventos comunes:
+onload        // Página cargada
+onchange      // Input cambió
+oninput       // Input escribiendo
+onmouseover   // Mouse encima
+onmouseout    // Mouse fuera
+onmousedown   // Botón presionado
+onmouseup     // Botón soltado
+onclick       // Click completo
+`;
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>Secuencia click:</h3>
+<ol>
+  <li>onmousedown → Botón presionado</li>
+  <li>onmouseup → Botón soltado</li>
+  <li>onclick → Click completo</li>
+</ol>
+</div>
+
+</body>
+</html>

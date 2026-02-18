@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 139 - Function apply() Method</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #007acc; }
+    button { background: #007acc; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background: #005a99; }
+    #output { margin-top: 20px; padding: 15px; background: #e8f4f8; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Function apply() Method</h1>
+
+<div class="example">
+  <h3>1. Basic apply() Syntax</h3>
+  <pre id="demo1">// greet.apply(person3, ["Hello"]);</pre>
+  <p>Resultado: <span id="result1"></span></p>
+</div>
+
+<div class="example">
+  <h3>2. apply() vs call()</h3>
+  <pre id="demo2">// Arguments as array vs separate</pre>
+  <p>Resultado: <span id="result2"></span></p>
+</div>
+
+<div class="example">
+  <h3>3. Borrowing Methods</h3>
+  <pre id="demo3">// person.fullName.apply(person1);</pre>
+  <p>Resultado: <span id="result3"></span></p>
+</div>
+
+<div class="example">
+  <h3>4. apply() with Arguments Array</h3>
+  <button onclick="demo4()">Ejecutar Demo</button>
+  <p id="result4"></p>
+</div>
+
+<div class="example">
+  <h3>5. Simulate Array Methods</h3>
+  <button onclick="demo5()">Encontrar Máximo</button>
+  <p id="result5"></p>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <input type="text" id="greetingInput" placeholder="Escribe saludo" value="Hola">
+  <button onclick="interactiveDemo()">Probar apply()</button>
+  <p id="interactiveResult"></p>
+</div>
+
+<script>
+  // ========== TODOS LOS EJEMPLOS DE W3SCHOOLS ==========
+
+  // EJEMPLO 1: Basic apply() syntax
+  const person1 = { name: "John" };
+  const person2 = { name: "Paul" };
+  const person3 = { name: "Ringo" };
+
+  function greet(greeting) {
+    return greeting + " " + this.name; // 'this' se define con apply()
+  }
+  
+  document.getElementById('result1').textContent = greet.apply(person3, ["Hello"]);
+
+  // EJEMPLO 2: apply() vs call()
+  document.getElementById('result2').innerHTML = 
+    `apply(): ${greet.apply(person1, ["Hi"])}<br>call(): ${greet.call(person2, "Hey")}`;
+
+  // EJEMPLO 3: Borrowing methods
+  const personObj = {
+    fullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  };
+
+  const personObj1 = { firstName: "John", lastName: "Doe" };
+  const personObj2 = { firstName: "Mary", lastName: "Doe" };
+
+  document.getElementById('result3').textContent = personObj.fullName.apply(personObj1);
+
+  // EJEMPLO 4: apply() with arguments array
+  function demo4() {
+    const personFull = {
+      fullName: function(city, country) {
+        return this.firstName + " " + this.lastName + ", " + city + ", " + country;
+      }
+    };
+    const person1Full = { firstName: "John", lastName: "Doe" };
+    document.getElementById('result4').textContent = 
+      personFull.fullName.apply(person1Full, ["Oslo", "Norway"]);
+  }
+
+  // EJEMPLO 5: Simulate array methods
+  function demo5() {
+    const numbers = [4, 8, 5, 1];
+    document.getElementById('result5').textContent = 
+      `Máximo en array: Math.max.apply(null, ${JSON.stringify(numbers)}) = ` + 
+      Math.max.apply(null, numbers);
+  }
+
+  // ========== DEMO INTERACTIVO ==========
+  function interactiveDemo() {
+    const input = document.getElementById('greetingInput').value;
+    const result = greet.apply(person3, [input]);
+    document.getElementById('interactiveResult').textContent = result;
+  }
+
+  // Inicializar
+  demo4();
+  demo5();
+</script>
+
+</body>
+</html> 

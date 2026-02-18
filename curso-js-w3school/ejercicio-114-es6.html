@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2015 (ES6) - Revolution</h2>
+
+<button onclick="showES6()">Ver principales features ES6</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+let x = 10;
+const PI = 3.14;
+const sum = (a, b) => a + b;
+</pre>
+
+<script>
+function showES6() {
+  document.getElementById("demo").innerHTML = 
+`// 1. let / const - block scope
+let x = 10;           // Block scope
+const PI = 3.14159;   // Constant
+
+// 2. Arrow functions
+const sum = (a, b) => a + b;
+const power = x => x * x;
+
+// 3. Destructuring
+const person = {name: "John", age: 30};
+const {name, age} = person;
+
+const fruits = ["apple", "banana"];
+const [first, second] = fruits;
+
+// 4. Spread operator
+const arr1 = [1,2,3];
+const arr2 = [...arr1, 4, 5];  // [1,2,3,4,5]
+
+// 5. for...of
+for (let fruit of fruits) {
+  console.log(fruit);
+}
+
+// 6. Classes
+class Car {
+  constructor(name) {
+    this.name = name;
+  }
+  drive() {
+    return this.name + " driving";
+  }
+}
+
+// 7. Promises
+const myPromise = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("Done!"), 1000);
+});
+
+// 8. Map / Set
+const map = new Map([["key1", "value1"]]);
+const set = new Set([1,2,3]);
+
+// 9. Default parameters
+function greet(name = "Guest") {
+  return "Hello " + name;
+}
+
+// 10. Rest parameters
+function sumAll(...numbers) {
+  return numbers.reduce((a,b) => a + b);
+}
+`;
+}
+
+console.log("ES6 - La revolución de JavaScript");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>ES6 Principales (2015):</h3>
+<ul>
+  <li>let/const - Block scope</li>
+  <li>Arrow functions</li>
+  <li>Destructuring</li>
+  <li>Spread/rest operator</li>
+  <li>Classes</li>
+  <li>Promises</li>
+  <li>Map/Set</li>
+  <li>Modules</li>
+</ul>
+</div>
+
+</body>
+</html>

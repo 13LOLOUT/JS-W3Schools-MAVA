@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 146 - JavaScript Object Accessors</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #20c997; }
+    button { background: #20c997; color: #000; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background: #1baa7f; }
+    #output { margin-top: 20px; padding: 15px; background: #d1f2eb; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    .getter-setter { background: #e8f5e8; padding: 10px; margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Object Accessors (Getters/Setters)</h1>
+
+<div class="example">
+  <h3>1. Getter básico (get lang)</h3>
+  <div class="getter-setter">person.lang: <span id="result1"></span></div>
+</div>
+
+<div class="example">
+  <h3>2. Setter básico (set lang)</h3>
+  <button onclick="demoSetter()">Cambiar lang → "es"</button>
+  <div class="getter-setter">person.language: <span id="result2"></span></div>
+</div>
+
+<div class="example">
+  <h3>3. Función vs Getter (syntax)</h3>
+  <div class="getter-setter">Función: <span id="funcResult"></span></div>
+  <div class="getter-setter">Getter: <span id="getResult"></span></div>
+</div>
+
+<div class="example">
+  <h3>4. Data Quality (validación)</h3>
+  <button onclick="demoQuality()">Probar calidad datos</button>
+  <div class="getter-setter">Resultado: <span id="qualityResult"></span></div>
+</div>
+
+<div class="example">
+  <h3>5. Object.defineProperty() Counter</h3>
+  <button onclick="counterReset()">reset</button>
+  <button onclick="counterIncrement()">+1</button>
+  <button onclick="counterDecrement()">-1</button>
+  <input type="number" id="counterAdd" value="5">
+  <button onclick="counterAdd()">add</button>
+  <input type="number" id="counterSub" value="2">
+  <button onclick="counterSubtract()">subtract</button>
+  <div>Counter: <span id="counterValue">0</span></div>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <input type="text" id="customFirst" placeholder="Nombre" value="Luis">
+  <input type="text" id="customLast" placeholder="Apellido" value="Pérez">
+  <button onclick="createCustomPerson()">Crear persona con getters</button>
+  <br><br>
+  <button onclick="testCustomGetters()">Leer fullName</button>
+  <div id="customResults"></div>
+</div>
+
+<script>
+  // ========== TODOS LOS EJEMPLOS DE W3SCHOOLS ==========
+
+  // 1. GETTER básico
+  const person = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "en",
+    get lang() {
+      return this.language;
+    }
+  };
+  document.getElementById('result1').textContent = person.lang;
+
+  // 2. SETTER básico
+  const personSetter = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "",
+    set lang(lang) {
+      this.language = lang;
+    }
+  };
+  function demoSetter() {
+    personSetter.lang = "es";
+    document.getElementById('result2').textContent = personSetter.language;
+  }
+
+  // 3. FUNCIÓN vs GETTER (syntax diferente)
+  const personFunc = {
+    firstName: "John",
+    lastName: "Doe",
+    fullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  };
+  const personGet = {
+    firstName: "John",
+    lastName: "Doe",
+    get fullName() {
+      return this.firstName + " " + this.lastName;
+    }
+  };
+  document.getElementById('funcResult').textContent = personFunc.fullName();
+  document.getElementById('getResult').textContent = personGet.fullName;
+
+  // 4. DATA QUALITY (validación)
+  const personQualityGet = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "en",
+    get lang() {
+      return this.language.toUpperCase();
+    }
+  };
+  const personQualitySet = {
+    firstName: "John",
+    lastName: "Doe",
+    language: "",
+    set lang(lang) {
+      this.language = lang.toUpperCase();
+    }
+  };
+  function demoQuality() {
+    personQualitySet.lang = "en";
+    document.getElementById('qualityResult').innerHTML = 
+      `GET: ${personQualityGet.lang}<br>SET: ${personQualitySet.language}`;
+  }
+
+  // 5. OBJECT.DEFINEPROPERTY() COUNTER
+  const counterObj = { counter: 0 };
+  Object.defineProperty(counterObj, "reset", {
+    get: function() { this.counter = 0; }
+  });
+  Object.defineProperty(counterObj, "increment", {
+    get: function() { this.counter++; }
+  });
+  Object.defineProperty(counterObj, "decrement", {
+    get: function() { this.counter--; }
+  });
+  Object.defineProperty(counterObj, "add", {
+    set: function(value) { this.counter += value; }
+  });
+  Object.defineProperty(counterObj, "subtract", {
+    set: function(value) { this.counter -= value; }
+  });
+
+  function counterReset() { counterObj.reset; updateCounterDisplay(); }
+  function counterIncrement() { counterObj.increment; updateCounterDisplay(); }
+  function counterDecrement() { counterObj.decrement; updateCounterDisplay(); }
+  function counterAdd() { 
+    counterObj.add = parseInt(document.getElementById('counterAdd').value); 
+    updateCounterDisplay(); 
+  }
+  function counterSubtract() { 
+    counterObj.subtract = parseInt(document.getElementById('counterSub').value); 
+    updateCounterDisplay(); 
+  }
+  function updateCounterDisplay() {
+    document.getElementById('counterValue').textContent = counterObj.counter;
+  }
+
+  // ========== DEMO INTERACTIVO ==========
+  let customPersonObj = null;
+  function createCustomPerson() {
+    const first = document.getElementById('customFirst').value;
+    const last = document.getElementById('customLast').value;
+    customPersonObj = {
+      firstName: first,
+      lastName: last,
+      get fullName() {
+        return this.firstName + " " + this.lastName;
+      },
+      set name(fullName) {
+        const parts = fullName.split(' ');
+        this.firstName = parts[0];
+        this.lastName = parts[1] || '';
+      }
+    };
+  }
+
+  function testCustomGetters() {
+    if (customPersonObj) {
+      document.getElementById('customResults').innerHTML = `
+        <div>fullName: ${customPersonObj.fullName}</div>
+        <div>firstName: ${customPersonObj.firstName}</div>
+        <input type="text" id="newFullName" placeholder="Nuevo nombre completo" value="Ana López">
+        <button onclick="testSetter()">Cambiar nombre</button>
+      `;
+    }
+  }
+
+  function testSetter() {
+    if (customPersonObj) {
+      customPersonObj.name = document.getElementById('newFullName').value;
+      document.getElementById('customResults').innerHTML += 
+        `<div>¡Cambiado! ${customPersonObj.fullName}</div>`;
+    }
+  }
+</script>
+
+</body>
+</html>

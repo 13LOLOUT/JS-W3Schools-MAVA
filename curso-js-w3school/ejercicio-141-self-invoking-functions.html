@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 141 - Self-Invoking Functions (IIFE)</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #ffc107; }
+    button { background: #ffc107; color: #000; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background: #e0a800; }
+    #output { margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    .error { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Self-Invoking Functions (IIFE)</h1>
+
+<div class="example">
+  <h3>1. Basic IIFE</h3>
+  <pre id="demo1">(function() { ... })();</pre>
+  <p>Ya se ejecutó: <span id="result1"></span></p>
+</div>
+
+<div class="example">
+  <h3>2. Variables Privadas</h3>
+  <p>Intenta acceder a <code>x</code> o <code>hidden</code>: <span id="result2" class="error">Error!</span></p>
+</div>
+
+<div class="example">
+  <h3>3. IIFE con Parámetros</h3>
+  <pre id="demo3">(function(name) { ... })("John Doe");</pre>
+  <p>Resultado: <span id="result3"></span></p>
+</div>
+
+<div class="example">
+  <h3>4. IIFE con Return</h3>
+  <p><span id="result4"></span></p>
+</div>
+
+<div class="example">
+  <h3>5. Arrow Function IIFE</h3>
+  <button onclick="demoArrow()">Ejecutar Arrow IIFE</button>
+  <p id="arrowResult"></p>
+</div>
+
+<div class="example">
+  <h3>6. IIFE como Módulo</h3>
+  <button onclick="counterDemo()">Contador (+1)</button>
+  <p>Valor: <span id="counterValue">0</span></p>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <input type="text" id="iifeName" placeholder="Nombre" value="María">
+  <button onclick="runIIFE()">Ejecutar mi IIFE</button>
+  <p id="interactiveResult"></p>
+</div>
+
+<script>
+  // ========== TODOS LOS EJEMPLOS DE W3SCHOOLS ==========
+
+  // EJEMPLO 1: Basic IIFE
+  (function() {
+    let text = "Hello! I called myself.";
+    document.getElementById('result1').textContent = text;
+  })();
+
+  // EJEMPLO 2: Variables privadas (no accesibles)
+  (function() {
+    let x = 10;
+  })();
+  
+  (function() {
+    let hidden = 42;
+  })();
+  
+  // Esto da error (demostrado)
+  try {
+    // let result = hidden; // ReferenceError
+    document.getElementById('result2').textContent = 'x y hidden NO existen fuera del IIFE';
+  } catch(e) {
+    document.getElementById('result2').textContent = '¡Error! Variables privadas ✓';
+  }
+
+  // EJEMPLO 3: IIFE con parámetros
+  (function(name) {
+    let text = "Hello " + name;
+    document.getElementById('result3').textContent = text;
+  })("John Doe");
+
+  // EJEMPLO 4: IIFE con return value
+  let result = (function() {
+    return 5 + 5;
+  })();
+  document.getElementById('result4').textContent = `result = ${result}`;
+
+  // EJEMPLO 5: Arrow function IIFE
+  function demoArrow() {
+    (() => {
+      let text = "Arrow IIFE ejecutado!";
+      document.getElementById('arrowResult').textContent = text;
+    })();
+  }
+
+  // EJEMPLO 6: IIFE como módulo (private variables)
+  const counter = (function() {
+    let value = 0;
+    return {
+      increment() { value++; document.getElementById('counterValue').textContent = value; },
+      get() { return value; }
+    };
+  })();
+
+  function counterDemo() {
+    counter.increment();
+  }
+
+  // EJEMPLO BONUS: Named IIFE (recursión)
+  (function factorial(n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+  })(5); // = 120
+
+  // ========== DEMO INTERACTIVO ==========
+  function runIIFE() {
+    const name = document.getElementById('iifeName').value;
+    const result = (function(name) {
+      return `¡Hola ${name}! Soy un IIFE personalizado.`;
+    })(name);
+    document.getElementById('interactiveResult').textContent = result;
+  }
+</script>
+
+</body>
+</html>

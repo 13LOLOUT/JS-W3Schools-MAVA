@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Data Types - ejemplos</h2>
+
+<button onclick="primitiveTypes()">Primitivos</button>
+<button onclick="objects()">Objetos</button>
+<button onclick="dynamicTypes()">Dinámicos + typeof</button>
+
+<p id="demo"></p>
+
+<script>
+function primitiveTypes() {
+  let length = 16;           // Number
+  let weight = 7.5;          // Number
+  let big = 1234567890123456789012345n; // BigInt
+  let color = "Yellow";      // String
+  let x = true;              // Boolean
+  let undef;                 // Undefined
+  let nul = null;            // Null
+  let sym = Symbol();        // Symbol
+  
+  document.getElementById("demo").innerHTML = 
+    `Number: ${length}, ${weight}<br>
+    BigInt: ${big}<br>
+    String: "${color}"<br>
+    Boolean: ${x}<br>
+    Undefined: ${undef}<br>
+    Null: ${nul}<br>
+    Symbol: ${typeof sym}`;
+}
+
+function objects() {
+  const person = {firstName:"John", lastName:"Doe"};
+  const cars = ["Saab", "Volvo", "BMW"];
+  const date = new Date("2022-03-25");
+  
+  document.getElementById("demo").innerHTML = 
+    `Object: ${JSON.stringify(person)}<br>
+    Array: [${cars.join(', ')}]<br>
+    Date: ${date.toLocaleDateString()}`;
+}
+
+function dynamicTypes() {
+  let x;       // undefined
+  x = 5;       // number
+  x = "John";  // string
+  
+  document.getElementById("demo").innerHTML = 
+    `let x; typeof: ${typeof x}<br>
+    x=5; typeof: ${typeof (x=5)}<br>
+    x="John"; typeof: ${typeof (x="John")}<br><br>
+    
+    16 + "Volvo": "${16 + "Volvo"}"<br>
+    "Volvo" + 16: "${"Volvo" + 16}"<br>
+    16 + 4 + "Volvo": "${16 + 4 + "Volvo"}"`;
+}
+</script>
+
+</body>
+</html>

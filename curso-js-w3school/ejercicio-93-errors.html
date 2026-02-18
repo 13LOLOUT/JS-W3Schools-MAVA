@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Errors - ejemplos</h2>
+
+<button onclick="referenceError()">ReferenceError</button>
+<button onclick="typeError()">TypeError</button>
+<button onclick="rangeError()">RangeError</button>
+<button onclick="uriError()">URIError</button>
+<button onclick="syntaxDemo()">SyntaxError</button>
+
+<p id="demo"></p>
+
+<script>
+function referenceError() {
+  let x = 5;
+  try {
+    x = y + 1;  // y no existe
+  } catch(err) {
+    document.getElementById("demo").innerHTML = 
+      `ReferenceError: ${err.name}<br>${err.message}`;
+  }
+}
+
+function typeError() {
+  let num = 1;
+  try {
+    num.toUpperCase();  // number no tiene toUpperCase
+  } catch(err) {
+    document.getElementById("demo").innerHTML = 
+      `TypeError: ${err.name}<br>${err.message}`;
+  }
+}
+
+function rangeError() {
+  let num = 1;
+  try {
+    num.toPrecision(500);  // máximo 100 dígitos
+  } catch(err) {
+    document.getElementById("demo").innerHTML = 
+      `RangeError: ${err.name}<br>${err.message}`;
+  }
+}
+
+function uriError() {
+  try {
+    decodeURI("%%%");  // URI malformado
+  } catch(err) {
+    document.getElementById("demo").innerHTML = 
+      `URIError: ${err.name}<br>${err.message}`;
+  }
+}
+
+function syntaxDemo() {
+  document.getElementById("demo").innerHTML = 
+    `<strong>SyntaxError NO catchable</strong><br>
+    Math.round(4.6; → Error antes de try/catch<br>
+    <span style="color:red">Ver Console (F12)</span>`;
+  
+  // SyntaxError NO catchable - se ejecuta ANTES del try
+  try {
+    eval('Math.round(4.6;');  // Error de sintaxis
+  } catch(err) {
+    document.getElementById("demo").innerHTML += `<br>catch NO ejecutado`;
+  }
+}
+</script>
+
+</body>
+</html>

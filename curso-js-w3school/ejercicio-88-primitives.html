@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Primitives - ejemplos</h2>
+
+<button onclick="allPrimitives()">Todos los Primitivos</button>
+<button onclick="stringsNumbers()">Strings + Numbers</button>
+<button onclick="typeofDemo()">typeof operador</button>
+
+<p id="demo"></p>
+
+<script>
+function allPrimitives() {
+  let length = 16;                    // Number
+  let bigNum = 12345678901234567890n; // BigInt  
+  let color = "Yellow";               // String
+  let isActive = true;                // Boolean
+  let car;                            // Undefined
+  let empty = null;                   // Null
+  let sym = Symbol("id");             // Symbol
+  
+  document.getElementById("demo").innerHTML = 
+    `Number: ${length} (${typeof length})<br>
+    BigInt: ${bigNum} (${typeof bigNum})<br>
+    String: "${color}" (${typeof color})<br>
+    Boolean: ${isActive} (${typeof isActive})<br>
+    Undefined: ${car} (${typeof car})<br>
+    Null: ${empty} (${typeof empty})<br>
+    Symbol: ${sym.toString()} (${typeof sym})`;
+}
+
+function stringsNumbers() {
+  let carName1 = "Volvo XC60";
+  let carName2 = 'Volvo XC60';
+  let answer1 = "It's alright";
+  let answer2 = 'He is called "Johnny"';
+  let x1 = 34.00;
+  let x2 = 34;
+  let y = 123e5;     // 12300000
+  let z = 123e-5;    // 0.00123
+  
+  document.getElementById("demo").innerHTML = 
+    `String "Volvo": ${carName1}<br>
+    String 'Volvo': ${carName2}<br>
+    "It's": ${answer1}<br>
+    'Johnny': ${answer2}<br><br>
+    Number 34.00: ${x1}<br>
+    Number 34: ${x2}<br>
+    123e5: ${y}<br>
+    123e-5: ${z}`;
+}
+
+function typeofDemo() {
+  document.getElementById("demo").innerHTML = 
+    `typeof "": ${typeof ""}<br>
+    typeof 0: ${typeof 0}<br>
+    typeof 3.14: ${typeof 3.14}<br>
+    typeof true: ${typeof true}<br>
+    typeof null: ${typeof null}<br>
+    typeof undefined: ${typeof undefined}`;
+}
+</script>
+
+</body>
+</html>

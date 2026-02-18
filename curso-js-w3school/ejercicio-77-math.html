@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Math Object - ejemplos</h2>
+
+<button onclick="mathConstants()">Constantes</button>
+<button onclick="rounding()">Rounding</button>
+<button onclick="mathFunctions()">Funciones matemáticas</button>
+<button onclick="minMaxRandom()">min max random</button>
+
+<p id="demo"></p>
+
+<script>
+function mathConstants() {
+  document.getElementById("demo").innerHTML = 
+    `Math.PI: ${Math.PI}<br>
+    Math.E: ${Math.E}<br>
+    Math.SQRT2: ${Math.SQRT2}<br>
+    Math.LN2: ${Math.LN2}<br>
+    Math.LOG10E: ${Math.LOG10E}`;
+}
+
+function rounding() {
+  document.getElementById("demo").innerHTML = 
+    `Math.round(4.6): ${Math.round(4.6)}<br>
+    Math.ceil(4.2): ${Math.ceil(4.2)}<br>
+    Math.floor(4.9): ${Math.floor(4.9)}<br>
+    Math.trunc(-4.7): ${Math.trunc(-4.7)}<br>
+    Math.sign(-4): ${Math.sign(-4)}`;
+}
+
+function mathFunctions() {
+  document.getElementById("demo").innerHTML = 
+    `Math.pow(8,2): ${Math.pow(8,2)}<br>
+    Math.sqrt(64): ${Math.sqrt(64)}<br>
+    Math.abs(-4.7): ${Math.abs(-4.7)}<br>
+    Math.sin(90°): ${Math.sin(90 * Math.PI / 180)}<br>
+    Math.cos(0°): ${Math.cos(0 * Math.PI / 180)}`;
+}
+
+function minMaxRandom() {
+  const nums = [0, 150, 30, 20, -8, -200];
+  document.getElementById("demo").innerHTML = 
+    `Math.min(${nums.join(',')}): ${Math.min(...nums)}<br>
+    Math.max(${nums.join(',')}): ${Math.max(...nums)}<br>
+    Math.random(): ${Math.random().toFixed(4)}<br>
+    Math.log(10): ${Math.log(10)}<br>
+    Math.log2(8): ${Math.log2(8)}`;
+}
+</script>
+
+</body>
+</html>

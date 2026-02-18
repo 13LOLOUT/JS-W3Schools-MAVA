@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript RegExp Objects - ejemplos</h2>
+
+<button onclick="testMethod()">test()</button>
+<button onclick="execMethod()">exec()</button>
+<button onclick="escapeMethod()">RegExp.escape()</button>
+
+<p id="demo"></p>
+
+<script>
+function testMethod() {
+  const pattern = /e/;
+  const result1 = pattern.test("The best things in life are free!");
+  const result2 = /e/.test("The best things in life are free!");
+  
+  document.getElementById("demo").innerHTML = 
+    `pattern.test("..."): ${result1}<br>
+    /e/.test("..."): ${result2}`;
+}
+
+function execMethod() {
+  const result = /e/.exec("The best things in life are free!");
+  
+  document.getElementById("demo").innerHTML = 
+    `/e/.exec("..."): ${JSON.stringify(result)}`;
+}
+
+function escapeMethod() {
+  const safe = RegExp.escape("[*]");
+  const regex = new RegExp(safe);
+  const oldText = "[*] is a web school.";
+  const newText = oldText.replace(regex, "W3Schools");
+  
+  document.getElementById("demo").innerHTML = 
+    `RegExp.escape("[*]"): "${safe}"<br>
+    new RegExp(safe): OK<br>
+    "[*] is a web...".replace: "${newText}"`;
+}
+</script>
+
+</body>
+</html>

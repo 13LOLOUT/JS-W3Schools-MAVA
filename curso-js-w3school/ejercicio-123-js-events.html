@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Events - HTML DOM</h2>
+
+<button id="btn1">onclick atributo</button>
+<button id="btn2">addEventListener</button>
+<p id="demo">Click botones arriba</p>
+
+<input id="input1" type="text" placeholder="Cambiar texto..." oninput="showInput(this.value)">
+<button id="btn3" onmouseover="this.style.background='yellow'" onmouseout="this.style.background='white'">Mouse over</button>
+
+<pre id="code" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+btn.addEventListener("click", function() {});
+</pre>
+
+<script>
+// 1. onclick atributo (NO recomendado)
+function displayDate() {
+  document.getElementById("demo").innerHTML = new Date().toLocaleString();
+}
+
+// 2. addEventListener (RECOMENDADO)
+document.getElementById("btn1").onclick = displayDate;
+document.getElementById("btn2").addEventListener("click", displayDate);
+
+// 3. onchange / oninput
+function showInput(value) {
+  document.getElementById("demo").innerHTML += "<br>Input: " + value;
+}
+
+// 4. onmouseover / onmouseout
+document.getElementById("code").innerHTML = 
+`// ❌ Atributos HTML (mezcla HTML/JS)
+<button onclick="func()">
+
+// ✅ addEventListener (separado)
+btn.addEventListener("click", function() {
+  // Código aquí
+});
+
+// Eventos comunes:
+"click", "dblclick"           // Mouse
+"mouseover", "mouseout"       // Hover
+"keydown", "keyup"            // Teclado
+"change", "input"             // Formularios
+"load", "resize"              // Ventana
+"submit"                      // Form submit
+
+// Múltiples listeners
+btn.addEventListener("click", func1);
+btn.addEventListener("click", func2);
+`;
+
+console.log("Events demo listo");
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>Eventos HTML comunes:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Evento</th><th>Descripción</th></tr>
+  <tr><td>onclick</td><td>Click mouse</td></tr>
+  <tr><td>onchange</td><td>Input cambia</td></tr>
+  <tr><td>onmouseover</td><td>Mouse encima</td></tr>
+  <tr><td>onkeydown</td><td>Tecla presionada</td></tr>
+  <tr><td>onload</td><td>Página cargada</td></tr>
+</table>
+</div>
+
+</body>
+</html>

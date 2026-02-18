@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 148 - JavaScript Object Protection</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #e83e8c; }
+    button { background: #e83e8c; color: white; padding: 8px 16px; border: none; cursor: pointer; margin: 2px; }
+    button:hover { background: #d91a72; }
+    button:disabled { background: #ccc; cursor: not-allowed; }
+    #output { margin-top: 20px; padding: 15px; background: #f8d7e6; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    .status { padding: 8px; margin: 5px 0; font-family: monospace; }
+    .protected { background: #ffebee; }
+    .error-log { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Object Protection (3 Niveles)</h1>
+
+<div class="example">
+  <h3>1. const (No reasignar)</h3>
+  <div class="status">Modificar propiedad: <span id="constResult">OK</span></div>
+</div>
+
+<div class="example">
+  <h3>2. preventExtensions() → No agregar</h3>
+  <button onclick="testPrevent()">Probar agregar propiedad</button>
+  <div class="status protected">Estado: <span id="preventStatus"></span></div>
+  <div id="preventError" class="error-log"></div>
+</div>
+
+<div class="example">
+  <h3>3. seal() → No agregar/eliminar</h3>
+  <button onclick="testSeal()">Probar seal()</button>
+  <div class="status protected">isSealed(): <span id="sealStatus"></span></div>
+</div>
+
+<div class="example">
+  <h3>4. freeze() → TOTAL read-only</h3>
+  <button onclick="testFreeze()">Probar freeze()</button>
+  <div class="status protected">isFrozen(): <span id="freezeStatus"></span></div>
+  <div id="freezeError" class="error-log"></div>
+</div>
+
+<div class="example">
+  <h3>5. Arrays también</h3>
+  <button onclick="testArrayFreeze()">Freezer array</button>
+  <button onclick="testArrayPush()" id="arrayPushBtn">push("Kiwi")</button>
+  <div>Array: <span id="arrayStatus">["Banana", "Orange"]</span></div>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo - Comparador</h3>
+  <button onclick="protectAll()">Proteger TODOS los niveles</button>
+  <div id="comparison"></div>
+</div>
+
+<script>
+  "use strict"; // ← MODO STRICT (lanza errores)
+
+  // ========== 1. CONST ==========
+  const constPerson = {firstName: "John", lastName: "Doe"};
+  constPerson.firstName = "Jane"; // OK: cambiar propiedades
+  document.getElementById('constResult').textContent = constPerson.firstName;
+
+  // ========== 2. PREVENTEXTENSIONS ==========
+  const preventPerson = {firstName: "John", lastName: "Doe"};
+  Object.preventExtensions(preventPerson);
+  
+  function testPrevent() {
+    try {
+      preventPerson.nationality = "English"; // ERROR
+      document.getElementById('preventStatus').textContent = "FALLÓ SILENCIOSO";
+    } catch(e) {
+      document.getElementById('preventStatus').textContent = "¡ERROR!";
+      document.getElementById('preventError').textContent = e.message;
+    }
+    document.getElementById('preventStatus').innerHTML += ` | isExtensible: ${Object.isExtensible(preventPerson)}`;
+  }
+
+  // ========== 3. SEAL ==========
+  const sealPerson = {firstName: "John", lastName: "Doe", age: 50};
+  function testSeal() {
+    Object.seal(sealPerson);
+    try {
+      delete sealPerson.age; // ERROR
+    } catch(e) {
+      document.getElementById('sealStatus').textContent = "¡No se puede eliminar!";
+    }
+    document.getElementById('sealStatus').innerHTML += ` | isSealed: ${Object.isSealed(sealPerson)}`;
+  }
+
+  // ========== 4. FREEZE ==========
+  const freezePerson = {firstName: "John", lastName: "Doe", age: 50};
+  function testFreeze() {
+    Object.freeze(freezePerson);
+    try {
+      freezePerson.age = 51; // ERROR
+    } catch(e) {
+      document.getElementById('freezeStatus').textContent = "¡Totalmente inmutable!";
+      document.getElementById('freezeError').textContent = e.message;
+    }
+    document.getElementById('freezeStatus').innerHTML += ` | isFrozen: ${Object.isFrozen(freezePerson)}`;
+  }
+
+  // ========== 5. ARRAY PROTECTION ==========
+  let fruits = ["Banana", "Orange", "Apple", "Mango"];
+  function testArrayFreeze() {
+    Object.freeze(fruits);
+    document.getElementById('arrayPushBtn').disabled = true;
+    document.getElementById('arrayStatus').textContent = JSON.stringify(fruits);
+  }
+  function testArrayPush() {
+    fruits.push("Kiwi"); // ERROR después de freeze
+    document.getElementById('arrayStatus').textContent = JSON.stringify(fruits);
+  }
+
+  // ========== DEMO COMPARADOR ==========
+  function protectAll() {
+    const normal = {a:1, b:2};
+    const preventExt = Object.preventExtensions({...normal});
+    const sealed = Object.seal({...normal});
+    const frozen = Object.freeze({...normal});
+    
+    document.getElementById('comparison').innerHTML = `
+      <div><strong>Normal:</strong> ${JSON.stringify(normal)}</div>
+      <div><strong>preventExtensions:</strong> ${Object.isExtensible(preventExt)} | add prop: ${(()=>{try{preventExt.c=3;return 'NO';}catch{return 'ERROR';}})()}</div>
+      <div><strong>seal:</strong> ${Object.isSealed(sealed)} | delete: ${(()=>{try{delete sealed.a;return 'NO';}catch{return 'ERROR';}})()}</div>
+      <div><strong>freeze:</strong> ${Object.isFrozen(frozen)} | change: ${(()=>{try{frozen.a=9;return 'NO';}catch{return 'ERROR';}})()}</div>
+    `;
+  }
+</script>
+
+</body>
+</html>

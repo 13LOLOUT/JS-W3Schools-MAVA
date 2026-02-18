@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>La palabra clave 'this' en JavaScript</h2>
+
+<button onclick="demoThis()">Ver ejemplos 'this'</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+this en métodos = objeto dueño
+</pre>
+
+<script>
+function demoThis() {
+  document.getElementById("demo").innerHTML = 
+`// 1️⃣ OBJETO METHOD (más común)
+const person = {
+  firstName: "Juan",
+  lastName: "Pérez",
+  fullName: function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+person.fullName();  // "Juan Pérez"
+
+// 2️⃣ FUNCIÓN NORMAL (global)
+function myFunc() {
+  return this;  // window (browser)
+}
+myFunc();
+
+// 3️⃣ STRICT MODE
+"use strict";
+function strictFunc() {
+  return this;  // undefined
+}
+
+// 4️⃣ EVENT HANDLER
+<button onclick="this.style.background='yellow'">this = botón</button>
+
+// 5️⃣ ARROW FUNCTION (hereda this)
+const obj = {
+  name: "Test",
+  normal: function() {
+    return this.name;  // "Test"
+  },
+  arrow: () => this.name  // undefined (hereda del scope superior)
+};
+`;
+}
+
+// Demo interactivo
+const person = {
+  firstName: "María",
+  lastName: "García",
+  fullName: function() {
+    return "this.firstName: " + this.firstName + "<br>" +
+           "this.lastName: " + this.lastName;
+  }
+};
+
+document.write("<h3>Demo Objeto:</h3>");
+document.write("<p>" + person.fullName() + "</p>");
+
+// Event handler demo
+document.write("<button onclick=\"this.innerHTML='¡Click!'; this.style.background='lightblue'\">this = botón</button>");
+
+// Arrow vs normal
+console.log("Objeto normal:", person.fullName());  // "María García"
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Reglas 'this':</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Contexto</th><th>'this' es</th></tr>
+  <tr><td>Método objeto</td><td>Objeto dueño</td></tr>
+  <tr><td>Función normal</td><td>window/global</td></tr>
+  <tr><td>Strict mode</td><td>undefined</td></tr>
+  <tr><td>Event handler</td><td>Elemento HTML</td></tr>
+  <tr><td>Arrow function</td><td>Scope superior</td></tr>
+</table>
+
+<h4>⚠️ Errores comunes:</h4>
+<ul>
+  <li>Arrow como método objeto ❌</li>
+  <li>Olvidar strict mode (undefined)</li>
+</ul>
+</div>
+
+</body>
+</html>

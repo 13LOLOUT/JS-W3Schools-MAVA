@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2018 - Nuevas Features</h2>
+
+<button onclick="showES2018()">Ver ejemplos ES2018</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+for await (const num of numbers) {}
+myPromise.finally();
+</pre>
+
+<script>
+function showES2018() {
+  document.getElementById("demo").innerHTML = 
+`// 1. Async iteration
+async function* numbers() {
+  yield 1; yield 2; yield 3;
+}
+for await (const num of numbers()) {
+  console.log(num);
+}
+
+// 2. Promise.finally()
+fetch('/api')
+  .then(res => res.json())
+  .catch(err => console.error(err))
+  .finally(() => console.log("Done"));
+
+// 3. Array rest elements
+const [a, ...rest] = [1,2,3,4,5];  // a=1, rest=[2,3,4,5]
+
+// 4. Object rest properties
+const {type, ...rest} = {type:"Fiat", model:"500", color:"white"};
+// rest = {model:"500", color:"white"}
+
+// 5. RegExp /s flag (dotAll)
+"Line\\nLine.".match(/Line./gs);  // ✅ Coincide con \\n
+
+// 6. Unicode property escapes
+"Hello 😄".match(/\\p{RGI_Emoji}/u);  // ✅ Emoji
+
+// 7. Lookbehind
+"Hello W3Schools".match(/(?<=Hello )W3Schools/);  // ✅
+
+// 8. Named capture groups
+"John Doe".match(/(?<first>\\w+) (?<last>\\w+)/);
+match.groups.firstName;  // "John"
+`;
+}
+
+console.log("ES2018 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2018:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>Promise.finally, rest</td><td>64+</td><td>79+</td><td>78+</td></tr>
+</table>
+</div>
+
+</body>
+</html>

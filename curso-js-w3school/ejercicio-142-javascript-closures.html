@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 142 - JavaScript Closures</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #17a2b8; }
+    button { background: #17a2b8; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background: #138496; }
+    #output { margin-top: 20px; padding: 15px; background: #d1ecf1; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    .counter-btn { background: #28a745; margin: 5px; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Closures</h1>
+
+<div class="example">
+  <h3>1. Problema del Contador Global</h3>
+  <pre id="demo1">// counter modificable por cualquier código</pre>
+  <p>Contador global: <span id="globalCounter">0</span></p>
+  <button onclick="globalAdd()">+1 Global</button>
+</div>
+
+<div class="example">
+  <h3>2. Problema Contador Local (Reset)</h3>
+  <button onclick="localAdd()">+1 Local</button>
+  <p>Contador local: <span id="localCounter">0</span></p>
+</div>
+
+<div class="example">
+  <h3>3. ❌ Solución Fallida (return)</h3>
+  <p><span id="failedResult"></span></p>
+</div>
+
+<div class="example">
+  <h3>4. ✅ Closure Solution</h3>
+  <p>Contador Closure: <span id="closureCounter">0</span></p>
+  <button class="counter-btn" onclick="closureAdd()">+1 Closure</button>
+  <button class="counter-btn" onclick="closureReset()">Reset</button>
+</div>
+
+<div class="example">
+  <h3>5. Moderno: Private Class Fields</h3>
+  <button class="counter-btn" onclick="classAdd()">+1 Class</button>
+  <p>Contador Class: <span id="classCounter">0</span></p>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <p>Crea tu propio closure contador:</p>
+  <input type="number" id="initValue" placeholder="Valor inicial" value="0">
+  <button onclick="createMyCounter()">Crear Contador</button>
+  <br><br>
+  <button id="myCounterBtn" class="counter-btn" onclick="myCounterAdd()" style="display:none;">+1 Mi Contador</button>
+  <p>Mi Contador: <span id="myCounterValue">0</span></p>
+</div>
+
+<script>
+  // ========== PROBLEMAS SIN CLOSURES ==========
+
+  // 1. PROBLEMA: Contador global (cualquiera lo modifica)
+  let globalCounter = 0;
+  function globalAdd() {
+    globalCounter++;
+    document.getElementById('globalCounter').textContent = globalCounter;
+  }
+
+  // 2. PROBLEMA: Contador local se resetea
+  let localCounter = 0;
+  function localAdd() {
+    let counter = 0; // Se resetea cada vez
+    counter++;
+    localCounter = counter; // Solo llega a 1
+    document.getElementById('localCounter').textContent = localCounter;
+  }
+
+  // 3. FALLA: Return no preserva estado
+  function failedAdd() {
+    let counter = 0;
+    counter++;
+    return counter; // Siempre 1
+  }
+  let failedResult = 0;
+  for(let i = 0; i < 3; i++) {
+    failedResult = failedAdd();
+  }
+  document.getElementById('failedResult').textContent = `add() x3 = ${failedResult}`;
+
+  // ========== SOLUCIÓN: CLOSURE ==========
+  
+  // 4. CLOSURE: myCounter() retorna función con acceso a counter
+  function myCounter() {
+    let counter = 0;
+    return function() {
+      counter++;
+      return counter;
+    };
+  }
+  const closureAddFunc = myCounter();
+  let closureCounter = 0;
+  function closureAdd() {
+    closureCounter = closureAddFunc();
+    document.getElementById('closureCounter').textContent = closureCounter;
+  }
+  
+  function closureReset() {
+    const newCounter = myCounter();
+    closureCounter = 0;
+    document.getElementById('closureCounter').textContent = closureCounter;
+  }
+
+  // 5. MODERNO: Private Class Fields (#count)
+  class Counter {
+    #count = 0;
+    increment() {
+      this.#count++;
+      return this.#count;
+    }
+  }
+  const classCounter = new Counter();
+  let classCounterValue = 0;
+  function classAdd() {
+    classCounterValue = classCounter.increment();
+    document.getElementById('classCounter').textContent = classCounterValue;
+  }
+
+  // ========== DEMO INTERACTIVO ==========
+  let myCustomCounter = null;
+  function createMyCounter() {
+    const initValue = parseInt(document.getElementById('initValue').value) || 0;
+    myCustomCounter = function() {
+      this.value = (this.value || initValue) + 1;
+      return this.value;
+    };
+    document.getElementById('myCounterBtn').style.display = 'inline-block';
+    document.getElementById('myCounterValue').textContent = initValue;
+  }
+
+  function myCounterAdd() {
+    if (myCustomCounter) {
+      const result = myCustomCounter();
+      document.getElementById('myCounterValue').textContent = result;
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>DOM - Cambiar HTML Content</h2>
+
+<p id="p1">Texto original</p>
+<img id="myImage" src="https://via.placeholder.com/150x100/ff0000/ffffff?text=Smiley" alt="Smiley">
+
+<button onclick="changeDemo()">Cambiar contenido</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+document.getElementById("p1").innerHTML = "Nuevo texto";
+</pre>
+
+<script>
+function changeDemo() {
+  // 1. innerHTML - cambiar contenido
+  document.getElementById("p1").innerHTML = "<strong>¡Contenido cambiado!</strong> " + new Date().toLocaleString();
+  
+  // 2. Atributos
+  document.getElementById("myImage").src = "https://via.placeholder.com/150x100/00ff00/ffffff?text=Landscape";
+  document.getElementById("myImage").alt = "Nueva imagen";
+  
+  // 3. Más ejemplos
+  document.getElementById("demo").innerHTML = 
+`// ❌ Errores comunes:
+document.getElementById("p1").innerHTML = Nuevo texto  // ❌ Sin comillas
+document.getElementById(p1).innerHTML = "texto"        // ❌ Sin comillas ID
+
+// ✅ Correcto:
+element.innerHTML = "Texto con <strong>HTML</strong>";
+element.src = "nueva.jpg";                    // Imágenes
+element.href = "https://google.com";          // Enlaces
+element.className = "nueva-clase";            // Clases CSS
+
+// Contenido dinámico
+document.getElementById("clock").innerHTML = new Date().toLocaleTimeString();
+
+// ⚠️  AVISO document.write()
+document.write("texto");  // ❌ Sobrescribe página después del load
+`;
+}
+
+console.log("DOM change demo listo");
+</script>
+
+<div style="background:#f8d7da; padding:15px; margin:20px 0; border-left:4px solid #dc3545;">
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>innerHTML vs otros:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Propiedad</th><th>Qué hace</th></tr>
+  <tr><td>innerHTML</td><td>HTML completo + tags</td></tr>
+  <tr><td>textContent</td><td>Solo texto plano</td></tr>
+  <tr><td>innerText</td><td>Texto visible (ignora hidden)</td></tr>
+</table>
+
+<h3>⚠️ document.write() PELIGROSO:</h3>
+<p>Sobrescribe toda la página después del load</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Keyboard Events</h2>
+
+<input id="k" type="text" placeholder="Presiona cualquier tecla" style="padding:10px;font-size:16px;">
+<br><br>
+<input id="enter" type="text" placeholder="Presiona ENTER" style="padding:10px;font-size:16px;">
+<br><br>
+
+<p id="demo">Esperando tecla...</p>
+<p id="code">key: ? | code: ? | shift: ? | ctrl: ?</p>
+
+<pre id="demoCode" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+input.addEventListener("keydown", function(event) {});
+</pre>
+
+<script>
+const inputK = document.getElementById("k");
+const inputEnter = document.getElementById("enter");
+const demo = document.getElementById("demo");
+const codeInfo = document.getElementById("code");
+
+// 1. keydown - CUALQUIER tecla
+inputK.addEventListener("keydown", function(event) {
+  demo.innerHTML = `Tecla: "${event.key}"`;
+  codeInfo.innerHTML = 
+    `key: "${event.key}" | code: "${event.code}" | shift: ${event.shiftKey} | ctrl: ${event.ctrlKey}`;
+  
+  // Efecto visual
+  inputK.style.background = event.shiftKey ? "#ffeb3b" : "#e3f2fd";
+});
+
+// 2. Detectar ENTER específicamente
+inputEnter.addEventListener("keydown", function(event) {
+  if (event.code === "Enter") {
+    demo.innerHTML = "¡ENTER presionado!";
+    inputEnter.style.borderColor = "#4CAF50";
+    setTimeout(() => {
+      inputEnter.style.borderColor = "#ccc";
+    }, 500);
+  }
+});
+
+// 3. keyup - tecla soltada
+inputK.addEventListener("keyup", function(event) {
+  inputK.style.background = "#e3f2fd";
+});
+
+// 4. Combinaciones de teclas
+document.addEventListener("keydown", function(event) {
+  if (event.ctrlKey && event.key === "s") {
+    event.preventDefault();
+    demo.innerHTML += "<br>Ctrl+S detectado (Guardar)";
+  }
+});
+
+document.getElementById("demoCode").innerHTML = 
+`// Eventos teclado principales
+"keydown"    // Tecla presionada (repite)
+"keyup"      // Tecla soltada
+// "keypress" DESAPROBADO
+
+// Propiedades clave:
+event.key     // "a", "Enter", "Shift" (depende layout)
+event.code    // "KeyA", "Enter", "ShiftLeft" (fijo)
+event.shiftKey  // true si Shift presionado
+event.ctrlKey   // true si Ctrl presionado
+event.altKey    // true si Alt presionado
+
+// Detectar Enter:
+if (event.code === "Enter") { ... }
+
+// Atajos teclado:
+if (event.ctrlKey && event.key === "s") { ... }
+`;
+</script>
+
+<div style="background:#d1ecf1; padding:15px; margin:20px 0; border-left:4px solid #17a2b8;">
+<h3>key vs code:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Presionas</th><th>event.key</th><th>event.code</th></tr>
+  <tr><td>Z</td><td>"z" o "Z"</td><td>"KeyZ"</td></tr>
+  <tr><td>Enter</td><td>"Enter"</td><td>"Enter"</td></tr>
+  <tr><td>Shift</td><td>"Shift"</td><td>"ShiftLeft"</td></tr>
+</table>
+<p><strong>code:</strong> Siempre igual | <strong>key:</strong> Depende layout teclado</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ECMAScript 2020 - Nuevas Features</h2>
+
+<button onclick="showES2020()">Ver ejemplos ES2020</button>
+
+<pre id="demo" style="background:#f8f9fa; padding:15px; border-radius:5px; font-size:14px;">
+let big = 9999999999999999n;
+user?.name ?? "Guest";
+</pre>
+
+<script>
+function showES2020() {
+  document.getElementById("demo").innerHTML = 
+`// 1. BigInt - números muy grandes
+let x = 9999999999999999n;     // BigInt literal
+let y = BigInt(123456789);      // Función BigInt()
+typeof x;  // "bigint"
+
+// 2. String.matchAll()
+const iterator = "Cats cats CATS".matchAll(/cats/gi);
+console.log([...iterator]);     // Todas las coincidencias
+
+// 3. Promise.allSettled()
+Promise.allSettled([
+  Promise.resolve("Success"),
+  Promise.reject("Error")
+]).then(results => {
+  console.log(results);  // [{status:"fulfilled"}, {status:"rejected"}]
+});
+
+// 4. Operadores nuevos
+let name = null;
+name ?? "Guest";           // "Guest" (nullish coalescing)
+
+let user = {};
+user?.name;                // undefined (optional chaining)
+
+let x = true;
+x &&= 5;                   // 5 (AND assignment)
+x ||= 10;                  // 5 (OR assignment)
+x ??= 20;                  // 5 (nullish assignment)
+
+// 5. globalThis
+console.log(globalThis === window);  // true (browser)
+
+// 6. Dynamic import
+// const module = await import("./module.js");
+`;
+}
+
+console.log("ES2020 features cargadas");
+</script>
+
+<div style="background:#e2e3e5; padding:15px; margin:20px 0; border-left:4px solid #6c757d;">
+<h3>Browser Support ES2020:</h3>
+<table border="1" style="border-collapse: collapse;">
+  <tr><th>Feature</th><th>Chrome</th><th>Edge</th><th>Firefox</th></tr>
+  <tr><td>?? ?. BigInt</td><td>80+</td><td>80+</td><td>80+</td></tr>
+</table>
+</div>
+
+</body>
+</html> 

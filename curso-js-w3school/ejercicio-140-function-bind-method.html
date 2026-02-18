@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ejercicio 140 - Function bind() Method</title>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    .example { background: #f5f5f5; padding: 15px; margin: 10px 0; border-left: 4px solid #28a745; }
+    button { background: #28a745; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    button:hover { background: #218838; }
+    #output, #demo { margin-top: 20px; padding: 15px; background: #e8f4f8; border-radius: 5px; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 3px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Function bind() Method</h1>
+
+<div class="example">
+  <h3>1. Basic bind() Syntax</h3>
+  <pre id="demo1">// greetJohn = greet.bind(person1);</pre>
+  <p>Resultado: <span id="result1"></span></p>
+</div>
+
+<div class="example">
+  <h3>2. Method Borrowing</h3>
+  <pre id="demo2">// fullName = person.fullName.bind(member);</pre>
+  <p>Resultado: <span id="result2"></span></p>
+</div>
+
+<div class="example">
+  <h3>3. bind() vs call/apply</h3>
+  <p id="result3"></p>
+</div>
+
+<div class="example">
+  <h3>4. Preserve this with setTimeout</h3>
+  <button onclick="demo4()">Ejecutar setTimeout (3s)</button>
+  <p id="result4"></p>
+</div>
+
+<div class="example">
+  <h3>5. bind() with Arguments</h3>
+  <button onclick="demo5()">Probar double(5)</button>
+  <p id="result5"></p>
+</div>
+
+<div id="output">
+  <h3>Demo Interactivo</h3>
+  <input type="text" id="nameInput" placeholder="Tu nombre" value="Juan">
+  <button onclick="interactiveDemo()">Crear mi saludo bind</button>
+  <p id="interactiveResult"></p>
+</div>
+
+<script>
+  // ========== TODOS LOS EJEMPLOS DE W3SCHOOLS ==========
+
+  // EJEMPLO 1: Basic bind() syntax
+  const person1 = { name: "John" };
+  const person2 = { name: "Paul" };
+  const person3 = { name: "Ringo" };
+
+  function greet() {
+    return "Hello " + this.name;
+  }
+  
+  const greetJohn = greet.bind(person1);
+  document.getElementById('result1').textContent = greetJohn();
+
+  // EJEMPLO 2: Method borrowing
+  const person = {
+    firstName:"John",
+    lastName: "Doe",
+    fullName: function() {
+      return this.firstName + " " + this.lastName;
+    }
+  }
+
+  const member = {
+    firstName:"Hege",
+    lastName: "Nilsen",
+  }
+
+  let fullName = person.fullName.bind(member);
+  document.getElementById('result2').textContent = fullName();
+
+  // EJEMPLO 3: bind() vs call/apply
+  document.getElementById('result3').innerHTML = 
+    `call(): ${greet.call(person2)}<br>apply(): ${greet.apply(person3)}<br>bind(): ${greet.bind(person1)()}`;
+
+  // EJEMPLO 4: Preserve this with setTimeout
+  function demo4() {
+    const personTimeout = {
+      firstName:"John",
+      lastName: "Doe",
+      display: function() {
+        document.getElementById('result4').innerHTML = 
+          'Después de 3s: ' + this.firstName + " " + this.lastName;
+      }
+    }
+    
+    let display = personTimeout.display.bind(personTimeout);
+    setTimeout(display, 3000);
+    document.getElementById('result4').innerHTML = 'Esperando 3 segundos...';
+  }
+
+  // EJEMPLO 5: bind() with arguments (partial application)
+  function demo5() {
+    function multiply(a, b) {
+      return a * b;
+    }
+    const double = multiply.bind(null, 2);
+    document.getElementById('result5').textContent = `double(5) = ${double(5)}`;
+  }
+
+  // ========== DEMO INTERACTIVO ==========
+  function interactiveDemo() {
+    const userName = document.getElementById('nameInput').value;
+    const userPerson = { name: userName };
+    const userGreet = greet.bind(userPerson);
+    document.getElementById('interactiveResult').textContent = userGreet();
+  }
+
+  // Inicializar algunos demos
+  demo5();
+</script>
+
+</body>
+</html>
